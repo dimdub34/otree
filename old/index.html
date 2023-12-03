@@ -1,0 +1,1716 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/custom.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<title>oTree</title>
+	</head>
+
+    <body>
+		<div class="reveal">
+			<div class="slides">
+
+				<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				               TITLE AND MAIN CHARACTERISTICS
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<section id="title_page">
+					<section>
+						<h2>oTree</h2>
+						<h3>An open-source platform for behavioral research</h3>
+						<h4>Dimitri DUBOIS</h4>
+						<a href="mailto: dimitri.dubois@umontpellier.fr">dimitri.dubois@umontpellier.fr</a>
+					</section>
+                    <section>
+                        <h2>Table of contents</h2>
+                        <ol>
+                            <li><a href="#introduction">Introduction</a></li>
+                            <li><a href="#installation">Installation</a></li>
+                            <li><a href="#new_application">Creation of an application</a></li>
+                            <li><a href="#terminology">Terminology</a></li>
+                            <li><a href="#first_application">First application -  Demographic questionnaire</a></li>
+                            <li><a href="#second_application">Second application -  Public good game</a></li>
+                            <li><a href="#third_application">Third application - Investment game</a></li>
+                            <li><a href="#improvement">Improvement of the existing applications</a></li>
+                            <li><a href="#tests_simulations">Tests and simulations</a></li>
+                            <li><a href="#admin">Rooms, Payments and Admin Report</a></li>
+                            <li><a href="#internationalisation">Internationalisation</a></li>
+                            <li><a href="#html_css">HTML and CSS</a></li>
+                            <li><a href="#javascript">Javascript</a></li>
+                            <li><a href="#boostrap">Bootstrap</a></li>
+                            <li><a href="#sources">References</a></li>
+                        </ol>
+                    </section>
+                </section>
+
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				                   INTRODUCTION
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <section id="introduction">
+                    <section>
+                        <h2>Introduction</h2>
+                    </section>
+					<section>
+						<ul>
+							<li>licensed under the MIT open source license</li>
+							<li>website: <a href="https://www.otree.org/" target="_blank">https://www.otree.org/</a></li>
+							<li>documentation: <a hef="https://otree.readthedocs.io/en/latest/" target="_blank">https://otree.readthedocs.io/en/latest/</a></li>
+							<li>citation: <br>
+								Chen, D.L., Schonger, M. & Wickens, C., 2016,
+                                "<a href="https://www.sciencedirect.com/science/article/pii/S2214635016000101?via%3Dihub" target=_"blank">oTree—An open-source platform for laboratory,
+                                    online, and field experiments</a>", Journal of Behavioral and Experimental Finance 9, pp. 88-97</li>
+						</ul>
+					</section>
+					<section>
+						<ul>
+							<li>can run on any device that has a web browser: desktop computer, tablet or smartphone</li>
+							<li>need a configured web serveur with python and the django framework</li>
+						</ul>
+						<p>&nbsp;</p>
+						<div>
+							<img class="plain" src="img/otree_devices.png" width="500px" />
+						</div>
+					</section>
+                    <section>
+                        <p>Can be used for lab experiments</p>
+                        <img class="plain" src="img/leem.jpg" width="600px" />
+                    </section>
+                    <section>
+                        <p>Can be used for lab-in-the-field experiments</p>
+                        <img class="plain" src="img/maroc.jpg" width="600px" />
+                    </section>
+                    <section>
+                        <img class="plain" src="img/indonesie.jpg" width="600px" />
+                    </section>
+                    <section>
+                        <p>Can be used for internet experiments</p>
+                        <img class="plain" src="img/internet.jpg" width="600px" />
+                    </section>
+				</section>
+
+				<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				                    INSTALLATION
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<section id="installation">
+					<section>
+						<h2>Installation</h2>
+					</section>
+                    <section>
+                        <h3>Anaconda</h3>
+                        <ul>
+                            <li>Anaconda is a Python distribution that includes all the packages needed for data science</li>
+                            <li>easy to install and manage</li>
+                            <li><a href="https://www.anaconda.com/products/individual" target="_blank">https://www.anaconda.com/products/individual</a></li>
+                            <li>Steps of the installation process <a href="files/anaconda_install.pdf" target="_blank">here</a></li>
+                        </ul>
+                    </section>
+					<section>
+						<h3>Pycharm</h3>
+						<ul>
+							<li>Python IDE (Integrated Development Environment)</li>
+							<li><a href="https://www.jetbrains.com/pycharm/" target="_blank">https://www.jetbrains.com/pycharm/</a></li>
+                            <li>Steps of the installation process and configuration for oTree <a href="files/pycharm_install.pdf" target="_blank">here</a></li>
+						</ul>
+						<div>
+							<img class="plain" src="img/pycharm.png" width="150px" />
+						</div>
+					</section>
+				</section>
+
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                 NEW APPLICATION
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <section id="new_application">
+                    <section>
+                        <h2>Creation of an application</h2>
+                    </section>
+                    <section>
+                        <ul>
+                            <li>in pycharm's console (terminal): <code>otree startapp application_name</code></li>
+                            <li>it creates a directory <em>application_name</em> and put inside the skeleton of the application</li>
+                            <li>1 python file : __init__</li>
+                            <li>2 html files in the templates directory: MyPage et Results</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <ul>
+                            <li>__init__ file contains Python code, with several classes: some are related to the model (functions and data storage) and some to the pages (link between the classes related to the model and the html files)</li>
+                            <li>MyPages and Results are two example html files, they should be renamed</li>
+                        </ul>
+                        <img class="plain" src="img/otree_model.png" width="600px" />
+                    </section>
+                    <section>
+                        <h3>Practice</h3>
+                        <p>create a new application called demographics</p>
+                    </section>
+                    <section>
+                        <h3>The settings file</h3>
+                        <ul>
+                            <li>contains the configuration parameters</li>
+                            <li>SESSION_CONFIGS contains the list of applications</li>
+                            <li>creation of a dictionnary for each application (or set of applications if the experiment is composed of several applications)</li>
+                            <li>minimum keys : name, display_name, app_sequence, num_demo_participants</li>
+                            <li>app_sequence is a list of application names<br>
+                                example : app_sequence=["public_good", "demographics"]<br>
+                                <em>means that the application public_good starts first and once finished the
+                                application demographics starts</em></li>
+                        </ul>
+                        <pre><code data-trim>
+                            dict(
+                                name="demographics",
+                                display_name="Demographics",
+                                app_sequence=["demographics"],
+                                num_demo_participants=1
+                            )
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Practice</h3>
+                        <p>add the dict for demographics in the settings file</p>
+                    </section>
+                </section>
+
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				                        TERMINOLOGY
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <section id="terminology">
+                    <section>
+                        <h2>Terminology</h2>
+                    </section>
+                    <section>
+                        <h3>Session</h3>
+                        <ul class="with_space">
+                            <li>in experimental economics terminoly a session begins when the participants are seated in the laboratory and ends when they leave the laboratory</li>
+                            <li>in otree terminology a session begins when the experimenter starts the program of the experiment and ends when he/she closes this program</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Participant</h3>
+                        <ul>
+                            <li>refers to the subjet</li>
+                            <li>one participant for each connection to the server in a session</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Round</h3>
+                        <ul>
+                            <li>a repetition in a repeated game</li>
+                            <li>if one-shot game there is only one round</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Subsession</h3>
+                        <ul>
+                            <li>as a session can include several applications, each application is considered as a subsession</li>
+                            <li>contains all the participants of the application</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Group</h3>
+                        <ul>
+                            <li>inside the subsession it is possible to form groups of participants</li>
+                            <li>the group class manages the participants that are grouped</li>
+                            <li>groups can be (re)formed at the beginning of each round</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Player</h3>
+                        <ul>
+                            <li>each participant is a player in a subsession / application</li>
+                            <li>a participant can participate to several applications - in each application he/she is a player</li>
+                            <li>the player takes decisions and sees informations through the html pages</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Summary</h3>
+                        <ul>
+                            <li>a session contains one or several applications, each application is considered as a subsession</li>
+                            <li>each subsession / application contains all the participants of the session</li>
+                            <li>an application contains one or several rounds</li>
+                            <li>players in an application can be grouped if needed</li>
+                        </ul>
+                    </section>
+                </section>
+
+				<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	                        FIRST APPLICATION : DEMOGRAPHIC QUESTIONNAIRE
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<section id="first_application">
+					<section>
+						<h2>First application<br>Demographic questionnaire</h2>
+					</section>
+                    <section id="fa_models">
+                        <h3>The models file</h3>
+                        <ul class="with_space">
+                            <li>Contains four classes: Constants, Subsession, Group and Player</li>
+                            <li>Constants class is the place to set parameters (num_rounds, players_per_group etc.)</li>
+                            <li>Subsession, Group and Player can store data (fields in the database)</li>
+                            <li>in theses classes, it is also possible to define functions that manipulate these data</li>
+                        </ul>
+                    </section>
+                    <section id="fa_player">
+						<h4>The Player class</h4>
+						<ul class="with_space">
+							<li>store players' fields : gender, year_of_birth, nationality etc.</li>
+                            <li>fields are stored in the database</li>
+							<li>types of fields: IntegerField(), FloatField(), StringField(), LongStringField(), BooleanField(), CurrencyField()</li>
+                            <li>fields are classes of the models module, that's why the field creation starts with <code>models.</code></li>
+                        </ul>
+                        <p>Creation of a field</p>
+                        <pre><code data-trim>
+                            year_of_birth = models.IntegerField()
+                        </code></pre>
+	                </section>
+                    <section>
+                        <p>
+                            <strong>Field creation can be completed with arguments</strong><br>
+                            that will be used in the web browser to display the field
+                        </p>
+                        <ul class="with_space">
+                            <li><code>min=, max=</code> : for FloatField and IntegerField</li>
+                            <li><code>label=</code> : the text that will be displayed beside the field on the screen</li>
+                            <li><code>initial=</code> : to set the initial value</li>
+                            <li><code>blank=True</code> : if the field is not mandatory</li>
+                            <li><code>choices=[list_of_choices]</code> : to set a list of possible answers</li>
+                            <li><code>widget=Widgets.___</code> : to set the kind of widget that will be displayed on the screen to represent the field</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p><strong>Choices</strong></p>
+                        <ul>
+                            <li>a list of elements<br>
+                            <pre><code data-trim>
+                                gender = models.StringField(
+                                    choices=["Female", "Male"], label="Select your gender")
+                            </code></pre>
+                            </li>
+                            <li style="margin-top: 20px;">can also be a list of tuples : the first element is stored in the database and the second is displayed<br>
+                                <pre><code data-trim>
+                                    gender = models.IntegerField(
+                                        choices=[(0, "Female"), (1, "Male")], label="Select your gender")
+                                </code></pre>
+                            </li>
+                            <li style="margin-top: 20px;">good pratice to use list of tuples for coding variables, mandatory if multi-languages application</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p><strong>Widgets</strong></p>
+                        <ul class="with_space">
+                            <li>graphical objects that display the fields</li>
+                            <li>IntegerField, FloatField, CurrencyField, StringField and LongStringField : automatic area</li>
+                            <li>BooleanField: vertical RadioButton</li>
+                            <li>Choices : by default dropdown list</li>
+                            <li>possible to set RadioSelect (vertical) or RadioSelectHorizontal for choices</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Practice - Create the fields of the demographic questionnaire</h4>
+                        <ul class="with_space">
+                            <li>year of birth</li>
+                            <li>gender</li>
+                            <li>Marital status (Single, Married, Divorced, Widowed)</li>
+                            <li>Student (Yes / No)</li>
+                            <li>Level of study (Bac, Bac+1, Bac+2, ..., Bac+8)</li>
+                            <li>Field of study ("Biology", "Economy", "Law", "Management", "Mathematics", "Medecine", "Physics", "Psychology", "Other")</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>The Pages file</h3>
+                        <ul class="with_space">
+                            <li>between the model and the templates (html files)</li>
+                            <li>each class represents a web page</li>
+                            <li>two kinds of pages : Page and WaitPage</li>
+                            <li>Page : either to display an information or to get a decision</li>
+                            <li>WaitPage : to wait for the other players (group members or all the players of the subsession)</li>
+                            <li>each class inherits either of Page or WaitPage</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Page with a decision</h4>
+                        <ul class="with_space">
+                            <li>the class name refers to an html file with the same name : class Decision for the Decision.html file</li>
+                            <li>must specify the model (group or player) and the fields</li>
+                            <li><code>form_model = "___"</code> : player (99% of the time, but can be group)</li>
+                            <li><code>form_fields = []</code> : must be a list even if only one field</li>
+                            <li>fields given in form_fields must have the same names than in the models file</li>
+                        </ul>
+                        <pre style="margin-top: 30px;"><code data-trim>
+                            form_model = "player"
+                            form_fields = ["year_of_birth", "gender", ...]
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h4>Page without a decision (only information)</h4>
+                        <ul>
+                            <li>let <code>pass</code> after the class declaration</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Practice</h4>
+                        <ul class="with_space">
+                            <li>rename MyPage.html to Questionnaire.html in the templates directory</li>
+                            <li>rename class MyPage to class Questionnaire in the pages.py</li>
+                            <li>set the attributes of class Questionnaire : form_model and form_fields</li>
+                            <li>the page_sequence list at the bottom of pages.py file provides the sequence the pages will be displayed each round of the subsession</li>
+                            <li>in page_sequence remove ResultsWaitPage (not necessary in this application)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>The html files (templates)</h3>
+                        <ul class="with_space">
+                            <li>html tags can be used (p, ul, li, table, etc.)</li>
+                            <li>css and javascript too</li>
+                            <li>Constants, Subsession, Group and Player are loaded in the templates</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <ul class="with_space">
+                            <li><strong>to display a field the subject has to fill in</strong>
+                                <ul>
+                                    <li><code>{% formfields %}</code> to display all the fields given in the <i>form_fields</i> list of the corresponding class in pages.py file</li>
+                                    <li><code>{% formfield player.the_field %}</code> to display only the form field <i>the_field</i> from class player</li>
+                                    <li><code>{% formfield player.the_field label="the label" %}</code> to set the label (if not defined in models.py)</li>
+                                </ul>
+                            </li>
+                            <li><strong>to display a field as an information (not a field to fill in)</strong>
+                                <ul>
+                                    <li><code>{{ player.the_field }}</code></li>
+                                </ul>
+                            </li>
+                            <li>the <code>{% next_button %}</code> boutton submits the form</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Practice</h4>
+                        <ul>
+                            <li>fill in the Questionnaire.html file to display the fields - use <code>{% formfields %}</code></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Test the questionnaire</h3>
+                        <ul>
+                            <li>in pycharm's terminal : otree devserver</li>
+                            <li>it starts a local web server</li>
+                            <li>in the web browser : <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a></li>
+                        </ul>
+                    </section>
+                </section>
+
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                          SECOND APPLICATION : PUBLIC GOOD GAME
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <section id="second_application">
+                    <section>
+                        <h2>Second application: a Public good game</h2>
+                    </section>
+                    <section>
+                        <h3>The public goods game</h3>
+                        <ul class="with_space">
+                            <li>Fixed groups of size 4 (randomly formed in the first round, then fixed for the rest of the rounds)</li>
+                            <li>Endowment of 20 tokens</li>
+                            <li>Two accounts : private (1 token = 1 ECU), public (1 token = 0.50 ECU for each group member)</li>
+                            <li>10 rounds</li>
+                            <li>Two screens per round : Decision and Results</li>
+                            <li>Results screen : player's investment in both accounts, total in the public account by the group and round payoff</li>
+                            <li>A final screen (End) that displays the final payoff (cumulative payoff) in euros</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>The classes in the models file</h3>
+                        <ul class="with_space">
+                            <li>Constants: game's parameters that are the same for all participants and don't change over time (rounds)</li>
+                            <li>Subsession: fields/data shared by all participants in a specific round (so may change from one round to the other)</li>
+                            <li>Group: fields/data shared by all members of one group in a specific round</li>
+                            <li>Player: fields/data that are unique for each player in a specific round</li>
+                            <li>Each round oTree creates a new record in the tables subsession, group and player</li>
+                        </ul>
+                    </section>
+					<section>
+						<h3>The Constants class</h3>
+						<ul>
+							<li>store the variables that are the same for all players and all rounds</li>
+							<li>variables are not stored in the database</li>
+                            <li>by default 3 attributes: name_in_url, players_per_group and num_rounds</li>
+                            <li>name_in_url : the name that will be displayed in the url for this application. It can be changed</li>
+                            <li>players_per_group : number of players per group. None for only one group (no group)<br>
+                                oTree calculates automatically the number of groups (number of participants / players_per_group)<br>&nbsp;</li>
+                            <li>for a public good game application, this is the right place to store some variables like
+                                <pre><code data-trim>
+                                    endowment = 20
+                                    private_account_return = 1
+                                    public_account_return = 0.5
+                                </code></pre>
+                            </li>
+						</ul>
+					</section>
+					<section>
+						<h3>The Subsession class</h3>
+						<ul>
+                            <li>by default nothing in the class (pass)</li>
+                            <li>possible to create fields that will be shared by all participants</li>
+                            <li>
+                                in the subsession class, possible to refer to the session and the current round with <code>self.session</code> and <code>self.round_number</code>
+                            </li>
+                            <li>
+                                several methods can be called
+                                <ul>
+                                    <li><code>self.get_groups()</code>: returns the groups of the subsession (list)</li>
+                                    <li><code>self.get_players()</code> : returns the players of the subsession (list)</li>
+                                    <li><code>self.group_randomly()</code> : form random groups</li>
+                                    <li><code>self.group_like_round(round_number)</code> : set the same groups than in round round_number</li>
+                                    <li>if something must be done at the creation of the session the function <code>creating_session()</code> must be (over)written</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p>Example : Random group formation in the first round, after that groups stay unchanged</p>
+                        <pre><code data-trim>
+                            class Subsession(BaseSubsession):
+                                def creating_session():
+                                    if self.round_number == 1:
+                                        self.group_randomly()
+                                    else:
+                                        self.group_like_round(1)
+                        </code></pre>
+                        <p><code>creating_session()</code> is called when the session is created, and is called once for each round</p>
+					</section>
+					<section>
+						<h3>The Group class</h3>
+						<ul>
+							<li>fields for the group</li>
+                            <li>Main existing methods
+                                <ul>
+                                    <li><code>self.get_players()</code></li>
+                                    <li><code>self.in_round(round_number)</code>, <code>self.in_previous_rounds()</code>, <code>self.in_all_rounds()</code></li>
+                                </ul>
+                            </li>
+                            <li>possible to create new methods</li>
+						</ul>
+                        <p><strong>Example</strong></p>
+                        <pre><code data-trim>
+                            class Group(BaseGroup):
+                                total_public_account = models.IntegerField()
+
+                                def compute_total_public_account(self):
+                            	   self.total_public_account = sum(
+                                        [p.public_account for p in self.get_players()])
+                        </code></pre>
+                        <p style="font-size: 0.6em;">
+                            public_account must be a field in the player class
+                        </p>
+					</section>
+                    <section>
+                        <h3>The Player class</h3>
+                        <ul>
+                            <li>Fields and methods at the player level</li>
+                            <li><code>self.group</code> to access to the fields of player's group</li>
+                            <li><code>self.get_others_in_group()</code> to get the list of the other players in the group</li>
+                            <li>field <code>self.payoff</code> (CurrencyField) already created, do not create a new one</li>
+                        </ul>
+                        <pre style="margin-top: 30px;"><code data-trim>
+                            private_account = models.IntegerField()
+                            public_account = models.IntegerField(
+                                min=0, max=Constants.endownment,
+                                label="Enter the number of tokens you place in the public account")
+
+                            def compute_payoff(self):
+                                self.payoff = (self.private_account *
+                                    Constants.private_account_return +
+                                    self.group.total_public_account *
+                                    Constants.public_account_return)
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>The Page class (and classes that inherit from it)</h3>
+                        <p><strong>Method <code>is_displayed(self)</code></strong></p>
+                        <ul>
+                            <li>return True or False</li>
+                            <li>if True the corresponding web page is displayed</li>
+                            <li>if False the corresponding web page is not displayed</li>
+                        </ul>
+                        <pre style="margin-top: 30px;"><code data-trim>
+                            class End(Page):
+                                def is_displayed(self):
+                                    return self.round_number == Constants.num_rounds
+                        </code></pre>
+                        <p>the page is displayed only if the current round is the last one</p>
+                    </section>
+                    <section>
+                        <p><strong>Method <code>vars_for_template(self)</code></strong></p>
+                        <ul>
+                            <li>return a dictionnary</li>
+                            <li>the dictionnary can be used in the template corresponding to the page</li>
+                        </ul>
+                        <pre><code data-trim>
+                            class Results(Page):
+                                def vars_for_template(self):
+                                    return dict(
+                                        contribution_of_others=sum(
+                                            [p.public_account for p in
+                                            self.player.get_others_in_group()]))
+                        </code></pre>
+                        <p>
+                            in the template it is now possible to display the total number of tokens placed by the other group members in the public account : <br>
+                            <pre><code data-trim>
+                                The other members of your group placed
+                                {{ contribution_of_others }} tokens in the public account.
+                            </code></pre>
+                        </p>
+                    </section>
+                    <section>
+                        <p><strong>Method before_next_page(self)</strong></p>
+                        <p>execute the instructions in the method before loading the next page</p>
+                        <p>Example : if we only ask to the player how many tokens he places in the public account</p>
+                        <pre style="margin-top: 30px;"><code data-trim>
+                            class Decision(Page):
+                                form_model = "player"
+                                form_fields = ["public_account"]
+
+                                def before_next_page(self):
+                                    self.player.private_account = (Constants.endowment -
+                                        self.player.public_account)
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Template files</h3>
+                        <ul>
+                            <li>Constants, subsession, group and player are loaded</li>
+                            <li><code>{% formfield player.field %}</code> to display a field</li>
+                            <li><code>{% formfield player.field label="the text to display" %}</code> if the label is not defined in the field declaration (models file)</li>
+                        </ul>
+                        <pre style="margin-top: 30px;"><code data-trim>
+                            {% block title %}
+                                Decision - Round {{ player.round_number }}
+                            {% endblock %}
+
+                            {% block content %}
+                                <p>
+                                    You are endowed with {{ Constants.endowment }} tokens.
+                                    {% formfield player.public_account label="Enter the number
+                                        of tokens you place in the public account" %}
+                                </p>
+
+                                {% next_button %}
+                            {% endblock %}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>WaitPage</h3>
+                        <ul class="with_space">
+                            <li>to wait the other participants, either all participants of the subsession (<code>wait_for_all_groups = True</code>) or only members of the group (default)</li>
+                            <li><code>title_text = ""</code> and <code>body_text = ""</code> to override default text</li>
+                            <li>if a method must be called after all group members arrive : <br>
+                                <pre><code data-trim>
+                                    after_all_players_arrive = "compute_total_public_account"
+                                </code></pre>
+                                here <code>"compute_total_public_account"</code> refers to the method in the group class, because by default <code>wait_for_all_groups = False</code>, so it concerns only the players in the (same) group
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <pre><code data-trim>
+                            class DecisionWaitForGroup(WaitPage):
+                                title_text = "Please wait ..."
+                                body_text = "We are waiting for the other participants"
+                                after_all_players_arrive = "compute_total_public_account"
+                        </code></pre>
+                        <p style="text-align: justify;">By (personal) convention, I add "WaitForGroup" to the Page class name if we wait only the group members and "WaitForAll" if we wait for all the participants in the subsession (with <code>wait_for_all_groups = True</code>)
+                        </p>
+                    </section>
+                    <section>
+                        <h4>Manual WaitPage</h4>
+                        <ul class="with_space">
+                            <li>necessary, for example, if the experimenter wants to read the instructions aloud after the participants have already read them once in silence</li>
+                            <li>create a Page without any button, so that participants are forced to wait</li>
+                            <li>use "Advance slowest user" (server web interface in the "Monitor tab") to move to the next step</li>
+                            <li>by personal convention the name of this kind of page ends with "WaitMonitor"</li>
+                    </section>
+                    <section>
+                        <h3>Settings file</h3>
+                        <ul class="with_space">
+                            <li><code>REAL_WORLD_CURRENCY_CODE = 'EUR'</code></li>
+                            <li><code>USE_POINTS = True</code></li>
+                            <li><code>POINTS_CUSTOM_NAME = "ECU"</code>&nbsp;</li>
+                            <li>CurrencyField is in ECU if <code>USE_POINTS = True</code> else in Euros</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Pratice - A public good game application</h3>
+                        <ul>
+                            <li>Fixed groups of size 4 (randomly formed in the first round)</li>
+                            <li>Endowment of 20 tokens</li>
+                            <li>Two accounts : private (1 token = 1 ECU), public (1 token = 0.50 ECU for each group member)</li>
+                            <li>10 rounds</li>
+                            <li>Two screens per round : Decision and Results</li>
+                            <li>Results screen : player's choice, total in the public account by the group and round payoff</li>
+                            <li>A final screen (End) that displays the final payoff (cumulative payoff) in euros</li>
+                            <li>Add the demographic questionnaire at the end of the public good game</li>
+                        </ul>
+                    </section>
+				</section>
+
+				<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            				 THIRD APPLICATION : Investment game
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<section id="third_application">
+					<section>
+						<h2>Third application : the Investment game</h2>
+					</section>
+                    <section>
+                        <h3>The investment game</h3>
+                        <ul class="with_space">
+                            <li>pairs of players</li>
+                            <li>2 roles : trustor and trustee, 1 trustor and 1 trustee in each pair</li>
+                            <li>both roles endowed with 10 Euros (or ECUs)</li>
+                            <li>trustor chooses how many Euros/Ecus he/she sends to the trustee</li>
+                            <li>each amount sent by the trustor is tripled by the experimenter, i.e. the trustee receives 3 times the amount sent by the trustor</li>
+                            <li>the trustee sends back how many Euros/Ecus he/she wants, between zero and the receveid amount</li>
+                            <li>Trustor's payoff : 10 - amount sent + amount returned by the trustee</li>
+                            <li>Trustee's payoff : 10 + 3 x amount sent by the trustor - amount sent back to the trustor</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Role</h3>
+                        <ul class="with_space">
+                            <li>define the roles in the Constants class, with variables starting with <code>role_</code>
+                                <pre><code data-trim>
+                                    role_trustor = "trustor"
+                                    role_trustee = "trustee"
+                                </code></pre>
+                            </li>
+                            <li>
+                                in each group otree will give the player with id_in_group == 1 the trustor role and the player with id_in_group == 2 the trustee role
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p>Role can be used as a condition to display a page</p>
+                        <pre><code data-trim>
+                            class TrustDecision(Page):
+                                def is_displayed(self):
+                                    return self.role == Constants.role_trustor
+
+                            class ReciprocityDecision(Page):
+                                def is_displayed(self):
+                                    return self.role == Constants.role_trustee
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Conditional structure in the templates</h3>
+                        <p>
+                            <code style="font-size: 0.6em;">{% if condition %} ... {% elif other_condition %} ... {% else %} ... {% endif %}</code>
+                        </p>
+                        <pre><code data-trim>
+                            <p>
+                                {% if player.role == Constants.role_trustor %}
+                                    You are the trustor in the game.
+                                {% else %}
+                                    You are the trustee in the game.
+                                {% endif %}
+                            </p>
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Currency filter in the template</h3>
+                        <ul class="with_space">
+                            <li>to display an Integer or a Float as a currency</li>
+                            <li><code>{{ 10|c }}</code> will be displayed 10.00 € if USE_POINTS = False</li>
+                            <li><code>{{ 10|c }}</code> will be displayed 10.00 ECU if USE_POINTS = True</li>
+                            <li>can be a variable : <code>{{ player.amount_sent|c }}</code>
+                                <pre><code data-trim>
+                                    <p>
+                                        You sent {{ player.amount_sent|c }} to the trustee and
+                                        he/she sent you back {{ player.amount_returned|c }}.
+                                    </p>
+                                </code></pre>
+                            </li>
+                            <!--
+                            <li>to display ECUs in EUROS, method <code>.to_real_world_currency(self.session)</code>
+                                <div class="code">
+                                    <code>
+                                        def vars_for_template(self): <br>
+                                        &nbsp;&nbsp;return dict(<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;final_payoff=self.participant.payoff.to_real_world_currency(<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;self.session))
+                                    </code>
+                                </div>
+                            -->
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Set min, max or choices of a field dynamically</h3>
+                        <ul class="with_space">
+                            <li>in the investment game the trustee can only sends back an amount lower or equal to the amount he/she received. This maximum cannot be set before the decision of the trustor.</li>
+                            <li>possible to define the min, the max or the choices of a field after its declaration in the player class</li>
+                            <li>in the player class, create a method with the field name and min, max or choices after an underscore</li>
+                        </ul>
+                        <pre><code data-trim>
+                            class Player(BasePlayer):
+                                ...
+                                amount_sent_back = models.IntegerField(
+                                    min=0, label="Enter the amount you send back to the trustor")
+
+                                def amount_sent_back_max(self):
+                                    return self.amount_received
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Practice</h3>
+                        <p>
+                            Write the code of the application corresponding to the investment game
+                        </p>
+                    </section>
+				</section>
+
+				<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				            IMPROVEMENT OF THE EXISTING APPLICATIONS
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<section id="improvement">
+					<section>
+						<h2>Tricks and tips to improve the existing applications</h2>
+					</section>
+                    <section>
+                        <h3>Demographics questionnaire : fields in a table</h3>
+                        <ul>
+                            <li>create an html table, with tags table, tr and td</li>
+                            <li>use a for loop in the template to, for each field, add the label of the field in the first column and the widget of the field in the second column</li>
+                            <li>for loop in the template, over the form fields</li>
+                        </ul>
+                        <pre style="margin-top: 50px;"><code data-trim>
+                                &lt;table class="table"&gt;
+                                    {% for field in form %}
+                                    &lt;tr&gt;
+                                        &lt;td&gt;{{ field.label }}&lt;/td&gt;
+                                        &lt;td&gt;{{ field }}&lt;/td&gt;
+                                    &lt;/tr&gt;
+                                    {% endfor %}
+                                &lt;/table&gt;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>History in the public good game</h3>
+                        <ul>
+                            <li>a table in the results html file that displays what appened in the previous rounds</li>
+                            <li>write a for loop to display the field values for the previous rounds</li>
+                            <li><code>player.in_previous_rounds</code> to access to the player's fields in the previous rounds</li>
+                            <li><code>player.in_all_rounds</code> to access to the player's fields in the previous rounds and the current one</li>
+                        </ul>
+                        <pre style="margin-top: 30px;"><code data-trim>
+                            &lt;table class="table"&gt;
+                                {% for p in player.in_all_rounds %}
+                                &lt;tr&gt;
+                                    &lt;td&gt;{{ p.round_number }}&lt;/td&gt;
+                                    &lt;td&gt;{{ p.private_account }}&lt;/td&gt;
+                                    &lt;td&gt;{{ p.public_account }}&lt;/td&gt;
+                                    ...
+                                &lt;/tr&gt;
+                                {% endfor %}
+                            &lt;/table&gt;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Set parameters in the session configs and get them in the application.</h3>
+                        <ul>
+                            <li>for example, if we want to run some public goods games sessions with differents values of the marginal per capita return for the public good (variable public_account_return)</li>
+                            <li>if we set the parameter in the session configs then it is possible to run the sessions without changing the code in the application</li>
+                            <li>add a key / value in the SESSION_CONFIGS dict corresponding to the application
+                                <pre><code data-trim>
+                                    dict(
+                                        name="public_good",
+                                        display_name="Public Good Game",
+                                        app_sequence=["public_good"],
+                                        num_demo_participants=4,
+                                        public_account_return=0.6
+                                    ),
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <ul>
+                            <li>get the value in the Subsession class with <code>self.session.config["key"]</code></li>
+                        </ul>
+                        <pre><code data-trim>
+                            class Subsession(BaseSubsession):
+                                public_account_return = models.FloatField()
+
+                                def creating_session(self):
+                                    self.public_account_return = \
+                                        self.session.config.["public_account_return"]
+                        </code></pre>
+                        <p style="text-align: left;">Remove the public_account_return parameter in the Constants class and replace in the code
+                            <code>Constants.public_account_return</code> by <code>self.subsession.public_account_return</code><br>
+                            <em>(in the calculation of the round payoff)</em>
+                        </p>
+                    </section>
+                    <section>
+                        <h3>Add the instructions in the public good game application</h3>
+                        <ul class="with_space">
+                            <li>create an InstructionsTemplate.html file and write the instructions of the game (<a href="files/pgg_instructions.html" target="_blank">dowload the instructions</a>)</li>
+                            <li>use variables from class Constants (group size, num_rounds etc.), and subsession (public_account_return)</li>
+                            <li>include this file in an Instructions.html page (<code>{% include "project_name/InstructionsTemplate.html" %}</code>)</li>
+                            <li>create an Instructions class in the pages file (add is_displayed function)</li>
+                            <li>add a wait page InstructionsWaitForAll(WaitPage) or InstructionsWaitForMonitor(Page)</li>
+                            <li>add both pages in the app_sequence of the application</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Add a button to display the instructions</h3>
+                        <ul>
+                            <li>download the <a href="files/TemplateModal.html">TemplateModal.html</a> store the file in the <code>_template/global directory</code></li>
+                            <li>in the page you want to add a button to, write the following code:
+                                <pre><code data-trim>
+                                    <button type="button" class="btn btn-light"
+                                    data-toggle="modal" data-target="#modal_content">
+                                        Instructions
+                                    </button>
+                                </code></pre>
+                            </li>
+                            <li>add the bottom of this page, before <code>{% endblock %}</code>, write:
+                                <pre><code data-trim>
+                                    {% include "global/TemplateModal.html" with title="Instructions"
+                                    content="project_name/InstructionsTemplate.html" %}
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Create a welcome page with the logo of your lab</h3>
+                        <p>Add an image in a template</p>
+                        <ul class="with_space">
+                            <li>create a "static" directory inside the project directory</li>
+                            <li>inside this directory create a subdirectory with the name of the project (as in the template directory)</li>
+                            <li>add the picture inside this directory</li>
+                            <li>in the terminal enter <code>otree collectstatic</code></li>
+                            <li>create a Welcome page (pages.py and Welcome.html in the template directory)</li>
+                            <li>in the template <br>
+                                <code style="font-size:0.8em;">&lt;img src="{% static 'projet_name/picture_name.png' %}" /&gt;</code></li>
+                            <li>add the welcome page in the app_sequence</li>
+                        </ul>
+                    </section>
+				</section>
+
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				            TESTS AND SIMULATIONS
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <section id="tests_simulations">
+                    <section>
+                        <h2>Tests and simulations</h2>
+                    </section>
+                    <section>
+                        <h3>Tests</h3>
+                        <ul>
+                            <li>in the tests file</li>
+                            <li>inside the function play_round of the class PlayerBot</li>
+                            <li>this function is called every round (in test mode)</li>
+                            <li><code>yield (the_page)</code> if the page contains only informations and a button</li>
+                            <li><code>yield (the_page, dict(field=field_value))</code> if the page contains fields to fill in</li>
+                        </ul>
+                        <pre style="margin-top: 30px;"><code data-trim>
+                            if self.round_number == 1:
+                                yield (pages.Instructions)
+
+                            yield (pages.Decision,
+                                dict(public_account=random.randint(0, Constants.endowment)))
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>if the page doesn't contain a button use Submission with check_html=False</p>
+                        <pre><code data-trim>
+                            from otree.api import ..., Submission
+
+                            if self.round_number == 1:
+                                yield (pages.Instructions)
+                                yield (Submission(page.InstructionsWaitMonitor, check_html=False))
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p><strong>to run the test</strong></p>
+                        <ul>
+                            <li><code>otree test application_name</code></li>
+                            <li>application_name must be an entry in the SESSION_CONFIGS list</li>
+                            <li>by default test for num_demo_participants participants</li>
+                            <li><code>otree test application_name number_of_participants</code> to test with number_of_participants participants</li>
+                        </ul>
+                        <pre><code data-trim>
+                            otree test public_good 20
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p><strong>to run the test with the browser</strong></p>
+                        <ul>
+                            <li>add <code>use_browser_bots=True</code> in the application entry in the SESSION_CONFIGS</li>
+                            <li>run otree devserver</li>
+                            <li>in the demo page click on the application</li>
+                            <li>each link will open a new tab and play automatically</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Practice</h3>
+                        <ul>
+                            <li>write the tests file of the public good game application and the demographic questionnaire</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Simulations</h3>
+                        <ul>
+                            <li>export the data from the test in a csv file to check the fields values and write in advance the statistical analysis</li>
+                            <li>add <code>--export directory</code> after the test command</li>
+                        </ul>
+                        <pre><code data-trim>
+                                otree test public_good 100 --export /tmp/public_good_simul
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Practice</h3>
+                        <ul>
+                            <li>create simulated data for the public good game with 100 participants (and export the data)</li>
+                            <li>in the corresponding entry in the settings file, set app_sequence = ["public_good", "demographics"]</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Merge data of several applications</h3>
+                        <ul class="with_space">
+                            <li>data preparation is the first step after data collection</li>
+                            <li>participant.code can be used to merge data</li>
+                            <li>open the simulated data in a jupyter notebook</li>
+                            <li>best practices:
+                                <ul>
+                                    <li>remove the unnecessary columns</li>
+                                    <li>rename the columns that have long names</li>
+                                    <li>remove the columns that will be duplicated if files are merged (session.code, session.label, subsession.round_number etc.) - let theses columns in the main dataframe (the one with higher number of rounds)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Python code with pandas</h4>
+                        <pre><code data-trim>
+                            df_pgg = pd.read_csv("...")
+
+                            df_pgg = df_pgg[[columns we keep]].copy()
+
+                            df_pgg.rename(
+                                columns={"participant.code": "participant",
+                                    "session.code": "session"}, inplace=True)
+                            df_pgg.rename(
+                                columns={c: c.split(".")[1] for c in df_pgg.columns if "." in c},
+                                inplace=True)
+
+                            df = pd.merge(df_pgg, df_demog, on=["participant"], how="left")
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Practice</h3>
+                            <ul>
+                                <li>merge the simulated data of the public good game and the demographic questionnaire</li>
+                            </ul>
+                    </section>
+                </section>
+
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				            ROOMS AND ADMIN REPORT
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <section id="admin">
+                    <section>
+                        <h2>Rooms, Payments and Admin Report</h2>
+                    </section>
+                    <section>
+                        <h3>Rooms</h3>
+                        <ul>
+                            <li>creates a kind of virtual lab</li>
+                            <li>this is a text file with a list of participant labels</li>
+                            <li>only participants with label inside the room file are allowed to connect to the room</li>
+                            <li>if a participant is disconnected and reconnected with the same label he continues the experiment where he stopped</li>
+                            <li>in a lab it allows to identify each computer (the room file contains the names of the lab's computers)</li>
+                            <li>on internet it avoids multiple connections by the same person</li>
+                            <li>participants' labels are displayed in the Payments tab on the admin interface</li>
+                            <li>once created, the room must be added in the settings file</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p>text file in _room/lab_room.txt</p>
+                        <pre><code data-trim>
+                            lab_client_1
+                            lab_client_2
+                            ...
+                            lab_client_40
+                        </code></pre>
+                        <p>in the settings file, in the rooms list</p>
+                        <pre><code data-trim>
+                            dict(
+                                name="lab_room",
+                                display_name="Lab Room",
+                                participant_label_file="_rooms/lab_room.txt"
+                            )
+                        </code></pre>
+                    </section>
+                    <section>
+                        <ul>
+                            <li>in the admin webpage, tab "Rooms"</li>
+                            <li>click on the room Lab Room</li>
+                            <li>clients connect to the room at <a href="http://127.0.0.1:8000/rooms/lab_room" target="_blank">http://127.0.0.1:8000/rooms/lab_room</a></li>
+                            <li>the client enters a label (one among the list of labels)</li>
+                            <li>inside a lab or on internet, the participant label can be written directly in the url<br>
+                                <a href="http://127.0.0.1:8000/rooms/lab_room/?participant_label=lab_client_1" target="_blank">http://127.0.0.1:8000/rooms/lab_room/?participant_label=lab_client_1</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <ul>
+                            <li>in an experimental lab, wait for the number of participants to reach the desired one, and then start the session</li>
+                            <li>for an internet experiment, start a session with the maximum number of participants</li>
+                            <li>once the session is started go to active room and manage the session</li>
+                            <li>close the room once the experiment is over, it closes the session and the room is no more reachable</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Practice</h3>
+                        <ul>
+                            <li>create a room</li>
+                            <li>create a public good game session in this room</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Payments</h3>
+                        <ul>
+                            <li>in the Payments tab, a table with the participant code, participant label and the payoff</li>
+                            <li>the payoff comes form <code>participant.payoff</code> variable</li>
+                            <li><code>participant.payoff</code> is the cumulative payoff since the beginning of the session (sum of player.payoff of each round and each application inside the session)</li>
+                            <li><code>participant.payoff</code> can be overriden if needed, examples :
+                                <ul>
+                                    <li>if only one round in an application is paid</li>
+                                    <li>if only one application is paid</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>if only one round of the application is paid</h4>
+                        <ul>
+                            <li>create a function <code>compute_final_payoff</code> in the player class</li>
+                            <li>in this function draw the paid round and store the payoff for that round in participant.payoff</li>
+                            <li>call this function at the end of the last round of the application<br>
+                                <span style="font-size:0.75em;">typically in the before_next_page method of the summary page, with a condition on the round_number</span>
+                            </li>
+                        </ul>
+                        <p>In the pages.py file</p>
+                        <pre><code data-trim>
+                            class Summary(Page):
+                                def before_next_page(self):
+                                    if self.round_number == Constants.num_rounds:
+                                        self.player.compute_final_payoff()
+                        </code></pre>
+                        <p>In the player class</p>
+                        <pre><code data-trim>
+                            def compute_final_payoff(self):
+                                paid_round = random.randint(1, Constants.num_rounds)
+                                self.participant.payoff = self.in_round(paid_round).payoff
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h4>if only one application is paid</h4>
+                        <ul>
+                            <li>store the payoff of each application in <code>participant.vars["application_name"]</code> through a function in the player class called at the end of the application</li>
+                            <li>before the end of the experiment randomly draw one application and set <code>participant.payoff = participant.vars["the_application"]</code></li>
+                        </ul>
+                        <p>in each application of the experiment (call this function at the end of the last round of the application)</p>
+                        <pre><code data-trim>
+                            def store_application_payoff(self):
+                                self.participant.vars["public_good"] = self.payoff
+                        </code></pre>
+                        <p>in the last application of the experiment (often a dedicated one), write a function like the following</p>
+                        <pre><code data-trim>
+                            def set_final_payoff(self):
+                                paid_application = random.choice(["public_good", "investment_game"])
+                                self.participant.payoff = self.participant.vars["paid_application"]
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Practice</h3>
+                        <ul>
+                            <li>pay only one round of the repeated public good game</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Admin Report</h3>
+                        <ul>
+                            <li>add a customized tab to the admin interface - tab name is report</li>
+                            <li>useful to create a customized payments admin page (if several application for example)</li>
+                            <li>useful to display live statistics, in a table or in a graph (needs js graphic library)</li>
+                            <li>create a function <code>vars_for_admin_report</code> in the Subsession class</li>
+                            <li>create an admin_report.html file</li>
+                            <li>admin_report.html file has access to the variables returned by <code>vars_for_admin_report</code></li>
+                            <li>in the admin_report.html file only add <code>{% load otree %}</code>, blocks are unnecessary</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <pre><code data-trim>
+                            class Subsession(BaseSubsession):
+                                def vars_for_admin_report(self):
+                                    infos_participants = list()
+                                    for p in self.get_players():
+                                        infos_participants.append(
+                                            dict(
+                                                participant=p.participant.code,
+                                                participant_label=p.participant.label,
+                                                participant_public_account=
+                                                p.public_account,
+                                                group_public_account=p.group.total_public_account,
+                                                participant_payoff=p.payoff
+                                            )
+                                        )
+                                return dict(infos_participants=infos_participants)
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h4>admin_report.html</h4>
+                        <img src="img/screenshot_admin_report.png"  class="plain" alt=""/>
+                    </section>
+                    <section>
+                        <h3>Practice</h3>
+                        <ul>
+                            <li>create an admin report in the public goods game application with the informations given in the previous slides</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				            INTERNATIONALISATION
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <section id="internationalisation">
+                    <section>
+                        <h2>Internationalisation</h2>
+                    </section>
+                    <section>
+                        <h3>In the models or pages files</h3>
+                        <ul>
+                            <li><code>from django.utils.translation import ugettext as _</code></li>
+                            <li>add <code>_()</code> around the text to translate</li>
+                        </ul>
+                        <pre><code data-trim>
+                            year_of_birth = models.IntegerField(label=_("Year of birth"))
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>In the templates</h3>
+                        <ul>
+                            <li>at the top of the file, add <code>{% load i18n %}</code></li>
+                            <li><code>{% trans "the text to translate" %}</code></li>
+                            <li>if some variables are needed, use <code style="font-size:0.6em;">{% blocktrans trimmed %} ... {% endblocktrans %}</code></li>
+                        </ul>
+                        <pre style="margin-top: 30px;"><code data-trim>
+                            {% blocktrans trimmed with num_rounds=Constants.num_rounds %}
+                                The game is repeated {{ num_rounds }} rounds.
+                            {% endblocktrans %}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Locale directory and the instruction to create the translation file</h3>
+                        <ul class="with_space">
+                            <li>in the application directory, create a directory named locale</li>
+                            <li>in the terminal move to the application directory</li>
+                            <li>write the code <code>otree makemessages -l fr</code> for a french translation</li>
+                            <li>the command creates a fr directory in the locale directory, and inside a LC_MESSAGES directory and a django.po file</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Poedit</h3>
+                        <ul class="with_space">
+                            <li>free software for translation</li>
+                            <li>download and install <a href="https://poedit.net/" target="_blank">poedit</a></li>
+                            <li>open poedit and inside poedit open the django.po file</li>
+                            <li>write the translations and save</li>
+                            <li>in the settings file change the language code</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Pratice</h3>
+                        <p>
+                            Translate the investment game in french (or english)
+                        </p>
+                    </section>
+                </section>
+
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				                    HTML asnd CSS
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <section id="htm_css">
+                    <section>
+                        <h2>HTML and CSS</h2>
+                    </section>
+                    <section>
+                        <h3>HTML</h3>
+                        <ul>
+                            <li>set of tags that are interpreted by the browser</li>
+                            <li>h1 to h6, p, img, table, ul, ol, div and span are the most useful tags for otree webpages</li>
+                            <li>ul is a list environment (li for each item)</li>
+                            <li>ol is also a list environment but ordered with numbers (li for each item)</li>
+                            <li>div is a block</li>
+                            <li>span is an inline block<br></li>
+                            <li><a href="files/html_tags.html" target="_blank">a file with these tags</a></li>
+                            <li>right click to see the source code</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>CSS</h3>
+                        <ul>
+                            <li>CSS = Cascading Style Sheet</li>
+                            <li>created in 1996</li>
+                            <li>set the style of the html tags</li>
+                            <li>current version : CSS3</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p>in the "style" attribute of an html element</p>
+                        <pre><code data-trim>
+                            &lt;p style="font-size: 0.8em; color="brown;"&gt;
+                                the sentences
+                            &lt;/p&gt;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Main style properties</h3>
+                        <ul>
+                            <li>font-family, font-size, font-weight, font-style</li>
+                            <li>color, background-color</li>
+                            <li>text-align, text-decoration</li>
+                            <li>height, width, margin, padding</li>
+                            <li>and so on ...<br></li>
+                            <li><a href="http://www.css-faciles.com/proprietes-css-liste-alphabetique.php" target="_blank">List of all CSS properties</a></li>
+                            <li><a href="https://html-css-js.com/css/generator/" target="_blank">online CSS generator</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Attributes id and class</h3>
+                        <ul>
+                            <li>both attributes can be added to an html tag</li>
+                            <li>id must be unique
+                                <pre><code data-trim>
+                                    &lt;p id="my_particular_paragraph"&gt;
+                                        the sentences
+                                    &lt;/p&gt;
+                                </code></pre>
+                            </li>
+                            <li>several tags can have the same class
+                                <pre><code data-trim>
+                                    &lt;p class="my_important_paragraphs"&gt;
+                                        the sentences
+                                    &lt;/p&gt;
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Style section</h3>
+                        <ul style="font-size: 0.8em;">
+                            <li>class and id can be used to set the style of an html tag</li>
+                            <li>in that case, creation of a style section in the head of the html file</li>
+                            <li>access to the tags by their names (p, ul ...)</li>
+                            <li>access to the id with #id_name and to the class with .class_name</li>
+                        </ul>
+                        <pre><code style="font-size:0.6em;" data-trim>
+                            &lt;style&gt;
+                                #my_particular_paragraph {color: blue;}
+                                .my_importants_paragraphs {
+                                    font-size: 1.2em;
+                                    color: red;
+                                }
+                            &lt;/style&gt;
+                            ...
+                            &lt;body&gt;
+                                &lt;p id="my_particular_paragraph"&gt;my particular paragraph&lt;/p&gt;
+                                &lt;p class="my_importants_paragraphs"&gt;one paragraph among the important ones&lt;/p&gt;
+                                &lt;p class="my_importants_paragraphs"&gt;a second paragrah that is important to me&lt;/p&gt;
+                            &lt;/body&gt;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Style section in otree</h3>
+                        <ul>
+                            <li>the style section must be inside a block, outside (above) the block content
+                                <pre><code data-trim>
+                                        {% block styles %}
+                                        &lt;style&gt;
+                                            #my_particular_paragraph {
+                                                color: blue;
+                                            }
+                                            .my_importants_paragraphs {
+                                                font-size: 1.2em;
+                                                color: red;
+                                            }
+                                        &lt;/style&gt;
+                                        {% endblock %}
+                                </code></pre>
+                            </li>
+                            <li>better to write a style section than to add a style attribute to each tag, it is easier to maintain</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Bootstrap</h2>
+                        <ul>
+                            <li>oTree style is handled by Bootstrap</li>
+                            <li>library that defines a lot of css properties (grids, colors etc.)</li>
+                            <li>web-responsive</li>
+                            <li><a href="https://getbootstrap.com/docs/4.4/getting-started/introduction/" target="_blank">website</a></li>
+                            <li>to change the style often it is sufficient to add a class to the html tag</li>
+                            <li>main useful classes
+                                <ul>
+                                    <li>table: table, table-sm, table-stripped</li>
+                                    <li>text alignement: text-justify, text-center, text-right</li>
+                                    <li>text-color: text-danger, text-warning, text-info etc.</li>
+                                    <li>margin: mt-1 to mt-5 for margin-top, mb-1 to mb-5 for margin-bottom, mx-1 to mx-5 for magin left and right, m-auto for margin-auto</li>
+                                    <li>padding: pt-1 to pt-5 for padding-top, pb-1 to pb-5 for padding-bottom</li>
+                                    <li><a href="https://getbootstrap.com/docs/5.0/utilities/api/" target="_blank">https://getbootstrap.com/docs/5.0/utilities/api/</a></li>
+                                </ul>
+                        </ul>
+                    </section>
+                </section>
+
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				                    JAVASCRIPT
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <section id="javascript">
+                    <section>
+                        <h2>Javascript</h2>
+                    </section>
+                    <section>
+                        <ul>
+                            <li>created in 1995 by Brendan Eich</li>
+                            <li>executed on the client side, by the browser</li>
+                            <li>interpreted language</li>
+                            <li>can dynamically access and change the css properties of html tags</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <ul>
+                            <li>js can be added with a &lt;script&gt;...&lt;/script&gt; tag at any place in the document</li>
+                            <li>also in event attributes of some html tags, like "onclick=" for example</li>
+                            <li>a script section at the end of the document is a good place to declare functions and most of the js instructions</li>
+                            <li>in otree the script section must be in a block outside (below) the content block
+                                <pre><code data-trim>
+                                    {% block scripts %}
+                                    &lt;script&gt;
+                                        js functions and instructions
+                                    &lt;/script&gt;
+                                    {% endblock %}
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Main js rules</h3>
+                        <ul>
+                            <li>";" at the end of each instruction</li>
+                            <li>// for one line comments and /* ... */ for multiple lines comments</li>
+                            <li>main types: Number, String, Boolean, Array and Dictionnary</li>
+                            <li>Array is like a python list, can store different types of objects</li>
+                            <li><code>let my_array = [1, false, "welcome"];</code></li>
+                            <li>Dictionnary is like in python: <code>let my_dict = {"key": "value"};</code> and you can access to the value with <code>my_dict["key"]</code></li>
+                            <li>let and const to declare a variable. With const a value must be assigned</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <ul>
+                            <li><code>if (cond1) {...} else if (...) {...} else {...}</code></li>
+                            <li>for loop
+                                <pre><code data-trim>
+                                    for (let i=0; i&lt;my_array.length; i++) {
+                                        console.log(my_array[i]);
+                                    }
+                                </code></pre>
+                            </li>
+                            <li><code>while (cond) {...}</code></li>
+                            <li>function
+                                <pre><code data-trim>
+                                    function do_something(args) {
+                                        instructions;
+                                    }
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>The Document Object Model (DOM)</h3>
+                        <ul>
+                            <li>created by the browser once the web page is loaded</li>
+                            <li>list all the tags and their attributes</li>
+                            <li>f12 in Chrome opens the developer tools' window, it allows to inspect the code and see the elements of the webpage</li>
+                            <li>main object that represents the web page : document<br></li>
+                        </ul>
+                        <img class="plain" src="img/dom.svg" height="300px" />
+                    </section>
+                    <section>
+                        <h3>The document object of the DOM</h3>
+                        <ul>
+                            <li>can be called with js</li>
+                            <li><code>document.title</code> : display or change the title (visible in the tab name)</li>
+                            <li><code>document.write(txt);</code> : write the txt in the document where the function is called</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>document.querySelector() and document.querySelectorAll()</h3>
+                        <ul class="with_space">
+                            <li>to select the elements of the DOM</li>
+                            <li>querySelector returns the first element that matches the request</li>
+                            <li>querySelectorAll returns an array with all the elements that match the request</li>
+                            <li>the request can be an html tag, an id, a class and so on</li>
+                            <li>but also a tag inside an id/class, or an id/class inside a tag ...</li>
+                            <li><a href="https://www.w3.org/Style/css3-selectors-updates/WD-css3-selectors-20010126.fr.html#selectors" target="_blank">list of selectors</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Access to the value of a widget in otree</h3>
+                        <ul class="with_space">
+                            <li>otree sets the id of an input as "id_field_name"; e.g. with field "year_of_birth", the id will be "id_year_of_birth"</li>
+                            <li>input type=number or text : input.value, e.g. <code>document.querySelector("#id_year_of_birth").value;</code> to get the value entered by the participant in the widget for the <em>year of birth</em> field</li>
+                            <li>dropdown menu: input.value too. The value is equal to "" if the subjet let the "---" option</li>
+                            <li>radio buttons: <code>document.querySelector('input[name=field_name]:checked').value;</code> returns the value of the checked button</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Events</h3>
+                        <p>
+                            button has event <em>onclick</em>, possible to associate an action to the event
+                        </p>
+                        <pre><code data-trim>
+                            <p class="text-danger" id="error_message" style="visibility: hidden;">
+                                Please fill in all the fields
+                            </p>
+                        </pre></code>
+                        <pre><code data-trim>
+                            <button type="button" class="btn btn-primary" onclick="validate();">
+                                Next
+                            </button>
+                        </code></pre>
+                        <pre><code data-trim>
+                            <script>
+                            function validate() {
+                                let input_value = document.querySelector("#id_study_discipline").value;
+                                if (input_value == "") {
+                                    let p_error = document.querySelector("#error_message");
+                                    p_error.style.visibility = "visible";
+                                }
+                            }
+                            </script>
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>
+                            inputs have events <em>onchange</em> and <em>oninput</em><br>
+                            <span style="font-size: 0.75em;"><em>oninput</em> triggers the event as soon as the participant enters something in the widget<br>
+                            <em>onchange</em> is when the widget losts the focus</span><br>
+                            for radiobuttons and dropdown menus <em>onchange</em> must be used<br>
+                            for sliders it is <em>oninput</em>
+                        </p>
+                        <pre><code data-trim>
+                            window.onload = function() {
+                                let student = document.querySelector("#id_student");
+                                let student_discipline = document.querySelector("#id_study_discipline");
+                                student.onchange = function() {
+                                    if (student.value == "" | student.value == "0") {
+                                        student_discipline.disabled = true;
+                                    } else {
+                                        student_discipline.disabled = false;
+                                    }
+                                }
+                            }
+                        </code></pre>
+                        <p>
+                            <code>window.onload</code> is an event triggered when the load of the window is over
+                        </p>
+                    </section>
+                    <section>
+                        <h3>Useful functions and properties</h3>
+                        <ul class="with_space">
+                            <li><code>window.onload = function(){};</code> executes the instructions inside the functions when the page is loaded</li>
+                            <li><code>object.style.visibility = visible / hidden;</code> to hide or display an object</li>
+                            <li><code>object.disabled = true / false;</code> to enable or disable an object</li>
+                            <li><code>object.innerHTML = "text"</code> to display or set the text inside an html tag (typically a paragraph)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>error_message(self, values)</h3>
+                        <ul>
+                            <li>in the pages.py file, inside a class</li>
+                            <li>allows to check the values returned by the html page and to display an error message if needed</li>
+                        </ul>
+                        <pre style="margin-top:30px;"><code data-trim>
+                            def error_message(self, values):
+                                if values["student"] == 1 and values["study_discipline"] is None:
+                                    return "Please select the discipline your are currently studying"
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Pratice</h3>
+                        <ul class="with_space">
+                            <li>start the demographic questionnaire</li>
+                            <li>answer to some of the questions</li>
+                            <li>in the javascript console of the browser display the value of the corresponding widgets (<code>console.log(text)</code> to write <em>text</em> in the console)</li>
+                            <li>if the participant is not a student disable the study level and study discipline widget. Note that
+                                <ul>
+                                    <li>these widgets must be non-mandatory (blank=True in models.py)</li>
+                                    <li>you must handle an error message if the participant is a student but doesn't answer to these fields</li>
+                                </ul>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>js_vars()</h3>
+                        <ul>
+                            <li>to send a python dictionnary to javascript</li>
+                            <li>in the pages.py, inside a class</li>
+                            <li>in the template, in a &lt;script&gt; section the value are accesible with <code>js_vars["the key"]</code></li>
+                        </ul>
+                        <pre style="margin-top: 30px;"><code data-trim>
+                            class MyPage(Page):
+                                form_model ...
+                                form_fields ...
+
+                                def js_vars(self):
+                                    return dict(test="I'm a test sentence")
+                        </code></pre>
+                        <pre style="margin-top: 30px;"><code data-trim>
+                            console.log(js_vars["test"]);
+                        </code></pre>
+                    </section>
+                </section>
+
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~->
+                LIVESEND method
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <section id="live_send">
+                    <section>
+                        <h2>liveSend and liveRecv methods</h2>
+                    </section>
+                    <section>
+                        <ul class="with_space">
+                            <li>to send and receive data to/from the serveur without submitting the page</li>
+                            <li>useful for experiment with market auctions, chat communication or dynamic games</li>
+                            <li>a live method must be defined in the player class (in models.py)</li>
+                            <li>the live method has to be set in the page class (in pages.py)</li>
+                            <li>liveSend and liveRecv are defined in a javascript section in the template</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Example: chat communication in the group</h3>
+                        <p>in models.py</p>
+                        <pre><code data-trim>
+                            def live_chat(self, message):
+                                chat_content = dict(sender=self.player.id_in_group, msg=message)
+                                return {0: chat_content}
+                        </code></pre>
+                        <ul>
+                            <li>the live method must return a dictionary (or nothing if nothing to return)</li>
+                            <li>the key of the dict is the player (id_in_group) to whom to send the content<br>
+                            <span style="font-size:0.75em;"><code>return {2: chat_content}</code> would send chat_content only to the member whose player.id_in_group is equal to 2</span></li>
+                            <li>0 is a special case, it sends the content to all the group members</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p>in pages.py</p>
+                        <pre><code data-trim>
+                            class Decision(Page):
+                                live_method = "live_chat"
+
+                                def js_vars(self):
+                                    return dict(player_id=self.player.id_in_group)
+                        </code></pre>
+                        <ul class="with_space" style="margin-top: 20px;">
+                            <li><code>live_method = "live_chat"</code> is necessary to associate the template to the live method defined in the model</li>
+                            <li><code>js_vars</code>: will be useful in the template</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p>Decision.html</p>
+                        <p>in the <em>block content</em>, the input in which the participant writes his/her message and the button that sends the message</p>
+                        <pre><code data-trim>
+                            <input type="text" class="form-control" id="msend" />
+                            <button type="button" onclick="send();">Send</button>
+                        </code></pre>
+                        <p><em>in the script section</em>, to send the message to the server</p>
+                        <pre><code data-trim>
+                            let input_send = document.querySelector("#msend");
+
+                            function send() {
+                                let content = input_send.value;
+                                liveSend(content);
+                                input_send.value = "";
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>in the <em>block content</em>, an area to write the messages</p>
+                        <pre><code data-trim>
+                            <p id="msg_received"></p>
+                        </code></pre>
+                        <p>in the script section, the method that receives the message from the server</p>
+                        <pre><code data-trim>
+                            let area_recv = document.querySelector("#msg_received");
+                            let my_id = js_vars["player_id"];
+
+                            function liveRecv(content){
+                                let sender = content["sender"] === my_id ? "Me": "Player " + content["sender"];
+                                area_recv.innerHTML += sender + ": " + content["content"] + "<br>";
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Practice</h3>
+                        <p>Create an application that uses the live method: a chat session for example</p>
+                    </section>
+                </section>
+
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				            SOURCES
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <section id="sources">
+                    <section>
+                        <h2>References</h2>
+                        <ul>
+                            <li><a href="https://otree.readthedocs.io/en/latest/" target="_blank">oTree documentation</a></li>
+                            <li>Philipp Chapkovski's slides (2018), available <a href="https://chapkovski.github.io/teaching/zurich_2018/zurich_nov_6_2018_otree_workshop.pdf" target="_blank">here</a></li>
+                            <li>Chen, D.L., Schonger, M. & Wickens, C., 2016,
+                                "<a href="https://www.sciencedirect.com/science/article/pii/S2214635016000101?via%3Dihub" target=_"blank">oTree—An open-source platform for laboratory,
+                                online, and field experiments</a>", Journal of Behavioral and Experimental Finance 9, pp. 88-97</li>
+                        </ul>
+                    </section>
+                </section>
+            </div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+                hash:  true,
+                history: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/math/math.js', async: true },
+				],
+				math: {
+	                   mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+	                    config: 'TeX-AMS_HTML',
+	                },
+			});
+			Reveal.configure({
+				slideNumber: 'c/t',
+			});
+		</script>
+	</body>
+</html>
