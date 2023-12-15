@@ -15190,10 +15190,10 @@ div.jp-OutputPrompt {
 <li><a href="#/3">Terminology</a></li>
 <li><a href="#/4">Creation of an application, declaration of fields and creation of web pages</a></li>
 <li><a href="#/5">Formation of groups, use of existing methods and creation of new methods</a></li>
-<li><a href="#/6">Role assignment, asymmetric web page sequencing and use of conditional structure in web pages</a></li>
-<li><a href="#/7">Tips to improve the existing applications</a></li>
 <li><a href="#/8">Tests and simulations</a></li>
 <li><a href="#/9">Data preprocessing</a></li>
+<li><a href="#/6">Role assignment, asymmetric web page sequencing and use of conditional structure in web pages</a></li>
+<li><a href="#/7">Tips to improve the existing applications</a></li>
 <li><a href="#/10">The admin side: rooms, payments and admin report</a></li>
 <li><a href="#/11">HTML, CSS and Bootstrap</a></li>
 <li><a href="#/12">Javascript</a></li>
@@ -15395,8 +15395,8 @@ div.jp-OutputPrompt {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>once done, click on &quot;new project&quot;, and in the location select the directory of your oTree project</li>
-<li>for the python interpreter, select &quot;Custom environment&quot;, then &quot;Conda environment&quot; and click on the <em>browse</em> button to get the environment created with anaconda navigator : it's located in the anaconda folder/envs/otree_course/python.exe (or python if Linux or Mac)</li>
+<li>once done, click on &quot;new project&quot;, and in the location select the directory of your oTree project (otree_proj)</li>
+<li>for the python interpreter, select &quot;Custom environment&quot;, then &quot;Conda environment&quot; and click on the <em>browse</em> button to get the environment created with anaconda navigator (otree_course) : it's located in the anaconda folder/envs/otree_course/python.exe (or python if Linux or Mac)</li>
 </ul>
 
 </div>
@@ -15420,10 +15420,11 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Session">Session<a class="anchor-link" href="#Session">&#182;</a></h2><ul>
+<p><strong>Session</strong></p>
+<ul>
 <li>in experimental economics terminology a session begins when the participants are seated in the laboratory and ends when they leave the laboratory</li>
 <li>in otree terminology a session begins when the experimenter starts the program of the experiment and ends when he ends this program</li>
-<li>a session can be composed of several parts. In oTree each part will be an application</li>
+<li>a session can be composed of several parts. In oTree each part will be an application.</li>
 </ul>
 <p><em>If the experiment is composed of 2 parts, a public good game and a socio-demographic questionnaire, then in oTree there will be 2 applications that will be launched successively.</em></p>
 
@@ -15457,7 +15458,8 @@ one participant = one connection to the server</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="To-sum-up">To sum up<a class="anchor-link" href="#To-sum-up">&#182;</a></h2><pre><code>Session (several applications). In each application : 
+<p><strong>To sum up</strong></p>
+<pre><code>Session (several applications). In each application : 
     Subsession
         Group
             Player
@@ -15505,9 +15507,6 @@ one participant = one connection to the server</p>
 cd otree_project  
 otree startapp demographics
 
-</code></pre>
-<p>or in pycharm's terminal:</p>
-<pre><code>otree startapp demographics
 
 
 </code></pre>
@@ -15550,7 +15549,7 @@ a list at the bottom of the file, called <code>page_sequence</code> set the orde
 Each class is a table in the database. Attributes of these classes are fields in corresponding tables</p>
 <ul>
 <li><strong>Subsession</strong>: fields that are shared by all the players</li>
-<li><strong>Group</strong>: fields that are shared by the members of the group, i.e. group decisions or group values</li>
+<li><strong>Group</strong>: fields that are shared by the players of a group, i.e. group decisions or group values</li>
 <li><strong>Player</strong>: individual fields, to store individual decisions</li>
 </ul>
 
@@ -15708,7 +15707,7 @@ Each class is a table in the database. Attributes of these classes are fields in
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h3><ul>
+<h2 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h2><ul>
 <li>create a new application called demographics</li>
 <li>create the fields of the demographic questionnaire:<ul>
 <li>gender: woman / man</li>
@@ -15749,9 +15748,9 @@ Each class is a table in the database. Attributes of these classes are fields in
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Page-that-collects-data">Page that collects data<a class="anchor-link" href="#Page-that-collects-data">&#182;</a></h3><ul>
+<h3 id="Page-with-data-collection">Page with data collection<a class="anchor-link" href="#Page-with-data-collection">&#182;</a></h3><ul>
 <li>after the class declaration, one must specify the <code>form_model</code> (99% of the time it's &quot;player&quot;) and the <code>form_fields</code> (list of fields to display and for which to collect a value)</li>
-<li>fields put in form_fields must have the same name than the fields created in the class specified in <code>form_model</code></li>
+<li>fields in form_fields must have the same name than the fields created in the class</li>
 </ul>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Questionnaire</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
     <span class="n">form_model</span> <span class="o">=</span> <span class="s1">&#39;player&#39;</span>
@@ -15792,8 +15791,9 @@ Each class is a table in the database. Attributes of these classes are fields in
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="The-settings-file">The settings file<a class="anchor-link" href="#The-settings-file">&#182;</a></h2><ul>
-<li>once the application is created, necessary to add some information in the <code>SESSION_CONFIGS</code> list</li>
-<li>this list contains the list of the sessions that can be started; each item of the list is a dictionnary</li>
+<li>file to configure the server : language, currency etc.</li>
+<li><code>SESSION_CONFIGS</code> list contains the sessions that can be started</li>
+<li>each item of the list is a dictionnary</li>
 <li>the mandatory keys are: <em>name, display_name, app_sequence and num_demo_participants</em><ul>
 <li><strong>name</strong> is used internally, it can be whatever you want, but must be unique</li>
 <li><strong>display_name</strong> is what is displayed in the admin interface</li>
@@ -15813,14 +15813,14 @@ Each class is a table in the database. Attributes of these classes are fields in
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h3><ul>
+<h2 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h2><ul>
 <li>rename MyPage.html to Questionnaire.html, and rename the corresponding class</li>
 <li>add <code>form_model</code> and <code>form_fields</code> as attributes of the Questionnaire class</li>
 <li>add the dict for the demographics application in the SESSION_CONFIGS list of the settings file</li>
 </ul>
 <p><strong>To test the application</strong></p>
 <ul>
-<li>in the pycharm terminal, write otree devserver</li>
+<li>in the terminal (with the otree conda environment and inside the otree project) write otree devserver</li>
 <li>it starts a local web server</li>
 <li>in your web browser: <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a></li>
 </ul>
@@ -15835,7 +15835,7 @@ Each class is a table in the database. Attributes of these classes are fields in
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Group-formation,-use-of-existing-methods-and-creation-of-new-ones"><a name="public_goods">Group formation, use of existing methods and creation of new ones</a><a class="anchor-link" href="#Group-formation,-use-of-existing-methods-and-creation-of-new-ones">&#182;</a></h1><p><em>Practical example: the public goods game</em></p>
+<h1 id="Group-formation,-use-of-existing-methods-and-creation-of-new-methods"><a name="public_goods">Group formation, use of existing methods and creation of new methods</a><a class="anchor-link" href="#Group-formation,-use-of-existing-methods-and-creation-of-new-methods">&#182;</a></h1><p><em>Practical example: the public goods game</em></p>
 
 </div>
 </div>
@@ -15886,7 +15886,7 @@ Each class is a table in the database. Attributes of these classes are fields in
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="The-C-class">The C class<a class="anchor-link" href="#The-C-class">&#182;</a></h2><ul>
+<h2 id="Classes">Classes<a class="anchor-link" href="#Classes">&#182;</a></h2><h3 id="The-C-class">The C class<a class="anchor-link" href="#The-C-class">&#182;</a></h3><ul>
 <li>values that are identical for all the players and that won't be modified</li>
 <li>attributes in this class are not stored in the database</li>
 </ul>
@@ -15899,52 +15899,15 @@ Each class is a table in the database. Attributes of these classes are fields in
 </div>
 </div>
 </div></section><section >
-<div id="cell-id=environmental-aruba" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="The-Subsession-class">The Subsession class<a class="anchor-link" href="#The-Subsession-class">&#182;</a></h2><ul>
-<li>fields that are the same for all the players</li>
-<li>declared fields are stored in the database</li>
-<li>two useful attributes: subsession.session and subsession.round_number (current round)</li>
-</ul>
-<p><em>For the public goods game, no field in this class</em></p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=elementary-resistance" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="The-Group-class">The Group class<a class="anchor-link" href="#The-Group-class">&#182;</a></h2><ul>
-<li>fields that are the same for all the group members</li>
-<li>declared fields are stored in the database</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Group</span><span class="p">(</span><span class="n">BaseGroup</span><span class="p">):</span>
-    <span class="n">total_public_account</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
 <div id="cell-id=boxed-contents" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="The-Player-class">The Player class<a class="anchor-link" href="#The-Player-class">&#182;</a></h2><ul>
-<li>individual fields, stored in the database</li>
-<li>useful attributes: subsession, group, round_number</li>
-<li>already created field: payoff (which is a CurrencyField)</li>
-</ul>
+<h3 id="The-Player-class">The Player class<a class="anchor-link" href="#The-Player-class">&#182;</a></h3><p>One object of class Player for each player.<br />
+If 8 players then 8 Player objects, each one with the attributes declared in the class Player.<br />
+Already existing attributes: subsession, group, round_number, payoff</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="n">BasePlayer</span><span class="p">):</span>
     <span class="n">private_account</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
     <span class="n">public_account</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span>
@@ -15957,13 +15920,45 @@ Each class is a table in the database. Attributes of these classes are fields in
 </div>
 </div>
 </div></section><section >
+<div id="cell-id=elementary-resistance" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="The-Group-class">The Group class<a class="anchor-link" href="#The-Group-class">&#182;</a></h3><p>A Group object is created for each group of the subsession.<br />
+So if there are 8 players and PLAYERS_PER_GROUP is equal to 4, then otree creates 2 Group objects.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Group</span><span class="p">(</span><span class="n">BaseGroup</span><span class="p">):</span>
+    <span class="n">total_public_account</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=environmental-aruba" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="The-Subsession-class">The Subsession class<a class="anchor-link" href="#The-Subsession-class">&#182;</a></h3><ul>
+<li>only one Subsession object</li>
+<li>two useful attributes: subsession.session and subsession.round_number (current round)</li>
+</ul>
+<p><em>For the public goods game, no field in this class</em></p>
+
+</div>
+</div>
+</div>
+</div></section><section >
 <div id="cell-id=2965368b-5f3f-4ba9-9ddf-58340b79c600" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Existing-methods">Existing methods<a class="anchor-link" href="#Existing-methods">&#182;</a></h2><p><strong>Subsession</strong></p>
+<h2 id="Methods">Methods<a class="anchor-link" href="#Methods">&#182;</a></h2><h3 id="Existing-methods">Existing methods<a class="anchor-link" href="#Existing-methods">&#182;</a></h3><p><strong>Subsession</strong></p>
 <ul>
 <li>get_groups(): return the list of the groups</li>
 <li>get_players(): return the list of the players</li>
@@ -16003,12 +15998,8 @@ Each class is a table in the database. Attributes of these classes are fields in
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="the-creating_session-method">the <em>creating_session</em> method<a class="anchor-link" href="#the-creating_session-method">&#182;</a></h2><ul>
-<li>this method is called by oTree for each application in the app_sequence of the session (defined in the SESSION_CONFIGS list), and inside each application, for each round (cf. C.NUM_ROUNDS) :<ul>
-<li>once in a one-shot application (demographics questionnaire for example)</li>
-<li>num_rounds times in an application with more than one round (repeated public goods game for example)</li>
-</ul>
-</li>
+<h3 id="the-creating_session-method">the <em>creating_session</em> method<a class="anchor-link" href="#the-creating_session-method">&#182;</a></h3><ul>
+<li>this method is called by oTree for each application in the app_sequence of the session (defined in the SESSION_CONFIGS list), and inside each application, for each round (cf. C.NUM_ROUNDS) :</li>
 <li>useful to do things when the session starts (form group or set attributes)</li>
 <li>the methods needs an object from the class Subsession as argument</li>
 </ul>
@@ -16029,13 +16020,12 @@ Each class is a table in the database. Attributes of these classes are fields in
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Creation-of-a-new-method">Creation of a new method<a class="anchor-link" href="#Creation-of-a-new-method">&#182;</a></h2><p>To calculate the total invested by the group members in the public account, and once done, to calculate the payoff of each group members</p>
+<h3 id="Creation-of-a-new-method">Creation of a new method<a class="anchor-link" href="#Creation-of-a-new-method">&#182;</a></h3><p>Methods should set an object from the class Subsession, Group or Player as parameter<br />
+For example, to calculate the total invested by the group members in the public account we could define the following method</p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_total_public_account</span><span class="p">(</span><span class="n">group</span><span class="p">:</span> <span class="n">Group</span><span class="p">):</span>
     <span class="n">group</span><span class="o">.</span><span class="n">total_public_account</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
         <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">public_account</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">get_players</span><span class="p">()]</span>
     <span class="p">)</span>
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">get_players</span><span class="p">():</span>
-        <span class="n">p</span><span class="o">.</span><span class="n">payoff</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">private_account</span> <span class="o">+</span> <span class="n">group</span><span class="o">.</span><span class="n">total_public_account</span> <span class="o">*</span> <span class="n">C</span><span class="o">.</span><span class="n">MPCR</span>
 </pre></div>
 <p><em>we'll see later how/when to call this method</em></p>
 
@@ -16065,17 +16055,18 @@ Each class is a table in the database. Attributes of these classes are fields in
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Management-of-the-html-pages-in-the-__init__-file">Management of the html pages in the __init__ file<a class="anchor-link" href="#Management-of-the-html-pages-in-the-__init__-file">&#182;</a></h2><ul>
+<h2 id="html-pages-in-the-__init__-file">html pages in the __init__ file<a class="anchor-link" href="#html-pages-in-the-__init__-file">&#182;</a></h2><ul>
 <li>a class that inherits from Page inherits of the attributes and methods of the mother class</li>
-<li>three useful methods: <code>is_displayed(), vars_for_template() and before_next_page()</code></li>
+<li>new methods or new attributes can not be defined for these classes, because there is a direct link between a Page object and an html webpage</li>
+<li>three useful existing methods: <code>is_displayed(), vars_for_template() and before_next_page()</code></li>
 </ul>
 <h3 id="is_displayed">is_displayed<a class="anchor-link" href="#is_displayed">&#182;</a></h3><ul>
 <li>to define the condition under which the page is displayed.</li>
-<li>for example if we want to display a final page that informs the participant about the end of the game and his payoff</li>
+<li>for example if we want to display a page with the instructions of the experiment, only in the first round of the application, we would proceed like below</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Final</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Instructions</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">is_displayed</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">player</span><span class="o">.</span><span class="n">round_number</span> <span class="o">==</span> <span class="n">C</span><span class="o">.</span><span class="n">NUM_ROUNDS</span>
+        <span class="k">return</span> <span class="n">player</span><span class="o">.</span><span class="n">round_number</span> <span class="o">==</span> <span class="mi">1</span>
 </pre></div>
 
 </div>
@@ -16088,9 +16079,7 @@ Each class is a table in the database. Attributes of these classes are fields in
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="before_next_page()">before_next_page()<a class="anchor-link" href="#before_next_page()">&#182;</a></h3><ul>
-<li>executes the instructions before loading the next_page</li>
-</ul>
+<h3 id="before_next_page()">before_next_page()<a class="anchor-link" href="#before_next_page()">&#182;</a></h3><p>this method is called by otree after the validation of the webpage by the subject, and before the display of the next page in the page_sequence</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Decision</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
     <span class="n">form_model</span> <span class="o">=</span> <span class="s2">&quot;player&quot;</span>
     <span class="n">form_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;public_account&quot;</span><span class="p">]</span>
@@ -16158,16 +16147,190 @@ Each class is a table in the database. Attributes of these classes are fields in
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Pratice">Pratice<a class="anchor-link" href="#Pratice">&#182;</a></h3><ul>
-<li><p>write the code of the public goods game (description <a href="#/5/1">here</a>)</p>
-</li>
-<li><p>once the application works, add the demographics questionnaire at the end of the game (add it to the app_sequence in the settings file)</p>
-</li>
-<li><p>to create an html paragraph the tag is</p>
-</li>
+<h2 id="Pratice">Pratice<a class="anchor-link" href="#Pratice">&#182;</a></h2><ul>
+<li>write the code of the public goods game (description <a href="#/5/1">here</a>)</li>
+<li>once the application works, add the demographics questionnaire at the end of the game (add it to the app_sequence in the settings file)</li>
+<li>to create an html paragraph the tag is</li>
 </ul>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Here the text<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 </pre></div>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div id="cell-id=4000212b-061a-46af-bfd6-26f87a295a85" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Automatic-execution-and-simulations"><a name="simulations">Automatic execution and simulations</a><a class="anchor-link" href="#Automatic-execution-and-simulations">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=6dbe104b-81a3-478f-8ad4-c85613705c67" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="before_next_page">before_next_page<a class="anchor-link" href="#before_next_page">&#182;</a></h2><ul>
+<li>Based on <code>before_next_page</code> method and the <code>timeout_happened</code> parameter</li>
+<li>timeout_happened is triggered when the experimenter click on <code>advance slowest users</code> in the admin web interface (Monitor tab)</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">before_next_page</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">timeout_happened</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">timeout_happened</span><span class="p">:</span>
+        <span class="n">player</span><span class="o">.</span><span class="n">public_account</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">ENDOWMENT</span><span class="p">)</span>
+    <span class="n">player</span><span class="o">.</span><span class="n">private_account</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">ENDOWMENT</span> <span class="o">-</span> <span class="n">player</span><span class="o">.</span><span class="n">public_account</span>
+</pre></div>
+<p>If timeout_happened is triggered, the amount placed by the player in the public account is programmatically set with a random value.<br />
+For pages without data collection there is nothing to do, the <code>advance slowest users</code> button moves the players to the next page.<br />
+Once done, start a demo, open a link and go to the Monitor tab, and then <code>advance slowest users</code>. It allows to check wether the webpage are displayed without raising errors, and also to check the data generated (data tab) .</p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=bc498d76-b7f5-4ef6-af16-fddf90798585" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="tests.py-file">tests.py file<a class="anchor-link" href="#tests.py-file">&#182;</a></h2><ul>
+<li>run the session in the terminal, with data programmatically generated.</li>
+<li>possibility to start a great number of players.</li>
+<li>possibility to export the generated data.</li>
+</ul>
+<p>In the folder of the application, create a new python file, called <code>tests.py</code>.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">random</span>
+</pre></div>
+<ul>
+<li>create a class PlayerBot(Bot) and add a method play_round()</li>
+<li>right now with the current version of oTree 5, it is necessary to use <code>self</code> (OOP paradigm)</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PlayerBot</span><span class="p">(</span><span class="n">Bot</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">play_round</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">round_number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">Instructions</span>
+        <span class="k">yield</span> <span class="n">Submission</span><span class="p">(</span><span class="n">Decision</span><span class="p">,</span> <span class="n">timeout_happened</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+<p><code>yield</code> for each page of the page_sequence, Submission if it's a page with data collection, in order to trigger the timeout_happened event<br />
+No need for WaitPage</p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=07a7f9bf-4976-487c-9a5b-b64ceb44fa6a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Once done for each page of the page_sequence, in the terminal <code>otree test public_goods</code><br />
+By default starts with num_demo_participants<br />
+For more players just add the number at the end of the command : <code>otree test public_goods 20</code> 
+To export the csv files after the simulation add <code>--export path</code> where path is the absolute path to the location :<br />
+<code>otree test public_goods 20 -- export C:\Users\John_Doe\Desktop\public_goods</code></p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=ff7c56d5-260d-4236-aaaa-53553f2f5371" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Pratice">Pratice<a class="anchor-link" href="#Pratice">&#182;</a></h2><ul>
+<li>write the test files for the public goods game and the socio-demographic questionnaire</li>
+<li>create and export simulated data</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div id="cell-id=342bc467-88f4-4d83-807a-7fec5159619e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Data-preprocessing"><a name="preprocessing">Data preprocessing</a><a class="anchor-link" href="#Data-preprocessing">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=27e209b6-14f7-48e7-824c-02f4086304e8" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The csv files generated by otree need to be cleaned and prepared for data analysis :</p>
+<ul>
+<li>remove unnecessary columns</li>
+<li>rename some columns</li>
+<li>check the series' type</li>
+<li>sometimes create new variables</li>
+<li>merge the tables</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=b80c41be-bc69-4984-9dcf-e3a159b6cf7d" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Can be done either with R or Python (pandas module in a jupyter-notebook *)</p>
+<div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;public_goods.csv&quot;</span><span class="p">)</span>  <span class="c1"># load the csv file</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># nb rows, nb columns</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
+
+<span class="c1"># keeps only some columns</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="n">columns_kept</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  
+
+<span class="c1"># rename the kept variables to facilitate the manipulation</span>
+<span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;participant.code&quot;</span><span class="p">:</span> <span class="s2">&quot;participant&quot;</span><span class="p">,</span> <span class="s2">&quot;session.code&quot;</span><span class="p">:</span> <span class="s2">&quot;session&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+<span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;player.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># the same with the socio-demographics data frame</span>
+<span class="n">demog</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;demographics.csv&quot;</span><span class="p">)</span>
+<span class="n">demog</span> <span class="o">=</span> <span class="n">demog</span><span class="p">[[</span><span class="n">columns_kept</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  
+<span class="n">demog</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;participant.code&quot;</span><span class="p">:</span> <span class="s2">&quot;participant&quot;</span><span class="p">,</span> <span class="s2">&quot;session.code&quot;</span><span class="p">:</span> <span class="s2">&quot;session&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+<span class="n">demog</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;player.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">demog</span><span class="o">.</span><span class="n">columns</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="c1"># merge the df and the demog dataframes, with the participant as the key</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">demog</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;participant&quot;</span><span class="p">])</span>
+</pre></div>
+<p>* pandas is already installed in the <em>base</em> anaconda environment</p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=25252331-15ae-4105-832e-49530b192963" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Practice</strong></p>
+<ul>
+<li>open a jupyter-notebook, load the csv files, keep the needed columns, rename the columns and merge the files</li>
+<li>if you prefer, you can prepare the data with R</li>
+</ul>
 
 </div>
 </div>
@@ -16296,7 +16459,7 @@ If in the group several players must have the same role, for example 2 buyers an
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h3><ul>
+<h2 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h2><ul>
 <li>write the code of the (one-shot) investment game (description <a href="#/6/1">here</a>)</li>
 </ul>
 <p><strong>Help</strong></p>
@@ -16329,7 +16492,7 @@ If in the group several players must have the same role, for example 2 buyers an
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="1.-Put-the-fields-in-a-table-with-a-for-loop-in-the-html-file">1. Put the fields in a table with a for loop in the html file<a class="anchor-link" href="#1.-Put-the-fields-in-a-table-with-a-for-loop-in-the-html-file">&#182;</a></h2><p>By default, if we let <code>{{ formfields }}</code> in the web page and there are several fields, the labels and fields are one below the other, as in the demographic application for example. To change that we can put the labels and fields in a table.</p>
+<h2 id="Put-the-fields-in-a-table-with-a-for-loop-in-the-html-file">Put the fields in a table with a for loop in the html file<a class="anchor-link" href="#Put-the-fields-in-a-table-with-a-for-loop-in-the-html-file">&#182;</a></h2><p>By default, if we let <code>{{ formfields }}</code> in the web page and there are several fields, the labels and fields are one below the other, as in the demographic application for example. To change that we can put the labels and fields in a table.</p>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;table&quot;</span><span class="p">&gt;</span>
     {{ for field in form }}
     <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
@@ -16351,7 +16514,7 @@ If in the group several players must have the same role, for example 2 buyers an
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="2.-Create-a-history">2. Create a history<a class="anchor-link" href="#2.-Create-a-history">&#182;</a></h2><ul>
+<h2 id="Create-a-history">Create a history<a class="anchor-link" href="#Create-a-history">&#182;</a></h2><ul>
 <li>in repeated games, like the public good game, it is a good practice to let the players consult the history of the game, i.e. the value of the variables in the past rounds</li>
 <li>use of a <em>for loop</em> and an html table</li>
 <li>two useful methods of the player class: player.in_all_rounds and player.in_previous_rounds can be called in the web page</li>
@@ -16395,13 +16558,33 @@ If in the group several players must have the same role, for example 2 buyers an
 </div>
 </div>
 </div></section><section >
+<div id="cell-id=interior-detective" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Include-an-image-in-the-web-page">Include an image in the web page<a class="anchor-link" href="#Include-an-image-in-the-web-page">&#182;</a></h2><ul>
+<li>create a subfolder in the <code>_static</code> directory with the name of your application</li>
+<li>in the html file, inside the img tag, add static in the src attribute</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ static &#39;application_name/picture_name.png&#39; }}&quot;</span> <span class="p">/&gt;</span>
+</pre></div>
+<ul>
+<li>works the same way for video files and audio files, but it is better to put this kind of file elsewhere on the web and to just add the link in the src attribute</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section >
 <div id="cell-id=satisfied-zimbabwe" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="3.-Set-a-parameter-in-the-SESSION_CONFIGS-dictionnary-and-get-it-in-the-application">3. Set a parameter in the SESSION_CONFIGS dictionnary and get it in the application<a class="anchor-link" href="#3.-Set-a-parameter-in-the-SESSION_CONFIGS-dictionnary-and-get-it-in-the-application">&#182;</a></h2><ul>
+<h2 id="Set-a-parameter-in-the-SESSION_CONFIGS-dictionnary-and-get-it-in-the-application">Set a parameter in the SESSION_CONFIGS dictionnary and get it in the application<a class="anchor-link" href="#Set-a-parameter-in-the-SESSION_CONFIGS-dictionnary-and-get-it-in-the-application">&#182;</a></h2><ul>
 <li>useful when you plan to have several treatments</li>
 <li>for example if you want to run the public good game with a different MPCR</li>
 <li>either you change the value in the C class</li>
@@ -16443,214 +16626,17 @@ If in the group several players must have the same role, for example 2 buyers an
 </div>
 </div>
 </div></section><section >
-<div id="cell-id=interior-detective" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="4.-Include-an-image-in-the-web-page">4. Include an image in the web page<a class="anchor-link" href="#4.-Include-an-image-in-the-web-page">&#182;</a></h2><ul>
-<li>create a subfolder in the <code>_static</code> directory with the name of your application</li>
-<li>in the html file, inside the img tag, add static in the src attribute</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ static &#39;application_name/picture_name.png&#39; }}&quot;</span> <span class="p">/&gt;</span>
-</pre></div>
-<ul>
-<li>works the same way for video files and audio files, but it is better to put this kind of file elsewhere on the web and to just add the link in the src attribute</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section><section >
 <div id="cell-id=pharmaceutical-affiliate" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h3><ul>
+<h2 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h2><ul>
 <li>put the fields of the socio-demographic questionnaire in a table</li>
 <li>create an history in the public goods game application</li>
 <li>export the mpcr parameter in the settings file</li>
 <li>create a welcome application with the picture of your lab and add it in the app_sequence of the public good game</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section></section><section ><section >
-<div id="cell-id=electoral-middle" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Tests-and-simulations"><a name="simulations">Tests and simulations</a><a class="anchor-link" href="#Tests-and-simulations">&#182;</a></h1>
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=manual-engagement" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>useful to test the code and generate data to check that everything works fine (values of the variables, calculations etc.)</li>
-<li>create a tests.py file</li>
-<li>add the import</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">otree.api</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">random</span>
-</pre></div>
-<ul>
-<li>create a class PlayerBot(Bot) and add a method play_round()</li>
-<li>right now with the current version of oTree 5, it is necessary to use <code>self</code> (OOP paradigm)</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PlayerBot</span><span class="p">(</span><span class="n">Bot</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">play_round</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">yield</span> <span class="n">Welcome</span>
-</pre></div>
-<ul>
-<li>yield each page of the page_sequence</li>
-<li>in the console, write <code>otree test welcome</code></li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=colonial-donna" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>If the page has some fields, provide a dictionnary with the field name as key and a value</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PlayerBot</span><span class="p">(</span><span class="n">Bot</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">play_round</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">yield</span> <span class="n">Decision</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">public_account</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">ENDOWMENT</span><span class="p">))</span>
-        <span class="k">yield</span> <span class="n">Results</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">round_number</span> <span class="o">==</span> <span class="n">C</span><span class="o">.</span><span class="n">NUM_ROUNDS</span><span class="p">:</span>
-            <span class="k">yield</span> <span class="n">Final</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=stylish-deadline" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>by default, run the test with <code>num_demo_participants</code> participants, but it's possible to set a different value by adding a number at the end of the command</li>
-</ul>
-<p><code>otree test welcome 10</code> starts the test with 10 participants</p>
-<ul>
-<li>add <code>--export path</code> to export the simulated data in the <em>path</em> folder</li>
-</ul>
-<p><code>otree test public_goods 20 --export /tmp</code> to export the simulated data in the <em>/tmp</em> folder</p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=pending-stockholm" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Pratice">Pratice<a class="anchor-link" href="#Pratice">&#182;</a></h3><ul>
-<li>write the test files for the public goods game and the socio-demographic questionnaire</li>
-<li>in SESSION_CONFIGS add a new dictionnary to run a session with the app_sequence=[&quot;public_goods&quot;, &quot;demographics&quot;]</li>
-<li>create simulated data of the session with 20 participants, and export the data</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section></section><section ><section >
-<div id="cell-id=functional-flooring" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Data-preprocessing"><a name="preprocessing">Data preprocessing</a><a class="anchor-link" href="#Data-preprocessing">&#182;</a></h1>
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=complete-builder" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The csv files generated by otree need to be cleaned and prepared for data analysis :</p>
-<ul>
-<li>remove unnecessary columns</li>
-<li>rename some columns</li>
-<li>check the series' type</li>
-<li>sometimes create new variables</li>
-<li>merge the tables</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=breathing-hebrew" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Can be done either with R or Python (pandas module in a jupyter-notebook *)</p>
-<div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;public_goods.csv&quot;</span><span class="p">)</span>  <span class="c1"># load the csv file</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># nb rows, nb columns</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
-
-<span class="c1"># keeps only some columns</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="n">columns_kept</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  
-
-<span class="c1"># rename the kept variables to facilitate the manipulation</span>
-<span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;participant.code&quot;</span><span class="p">:</span> <span class="s2">&quot;participant&quot;</span><span class="p">,</span> <span class="s2">&quot;session.code&quot;</span><span class="p">:</span> <span class="s2">&quot;session&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
-<span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;player.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># the same with the socio-demographics data frame</span>
-<span class="n">demog</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;demographics.csv&quot;</span><span class="p">)</span>
-<span class="n">demog</span> <span class="o">=</span> <span class="n">demog</span><span class="p">[[</span><span class="n">columns_kept</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  
-<span class="n">demog</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;participant.code&quot;</span><span class="p">:</span> <span class="s2">&quot;participant&quot;</span><span class="p">,</span> <span class="s2">&quot;session.code&quot;</span><span class="p">:</span> <span class="s2">&quot;session&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
-<span class="n">demog</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;player.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">demog</span><span class="o">.</span><span class="n">columns</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-
-<span class="c1"># merge the df and the demog dataframes, with the participant as the key</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">demog</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;participant&quot;</span><span class="p">])</span>
-</pre></div>
-<p>* either install pandas in the anaconda environment dedicated to oTree or create an new environment and install pandas inside</p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=facial-parcel" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h3><ul>
-<li>open a jupyter-notebook and prepare the data for analysis</li>
-<li>if you prefer, you can prepare the data with R</li>
 </ul>
 
 </div>
@@ -16774,7 +16760,8 @@ lab_004
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h3><ul>
+<p><strong>Practice</strong></p>
+<ul>
 <li>create a room</li>
 <li>start a session in this room</li>
 </ul>
@@ -16995,9 +16982,8 @@ lab_004
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h3><ul>
-<li>create the admin report for the investment game</li>
-</ul>
+<p><strong>Practice</strong></p>
+<p>create the admin report for the investment game</p>
 
 </div>
 </div>
@@ -17187,7 +17173,7 @@ lab_004
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Pratice">Pratice<a class="anchor-link" href="#Pratice">&#182;</a></h3><ul>
+<h2 id="Pratice">Pratice<a class="anchor-link" href="#Pratice">&#182;</a></h2><ul>
 <li>improve the web interfaces of the public goods game, by using the card div in the decision and results web pages</li>
 </ul>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card bg-light mb-3&quot;</span><span class="p">&gt;</span>
@@ -17551,20 +17537,7 @@ To avoid this, we can add <code>blank=True</code> in the field declaration (init
         <span class="k">if</span> <span class="n">values</span><span class="p">[</span><span class="s2">&quot;student&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">values</span><span class="p">[</span><span class="s2">&quot;level_of_study&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;You declared to be student, so you have to select your level of study.&quot;</span>
 </pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=b03c9068" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h3><ul>
-<li>make the changes in the field declaration and the class associated to the web page.</li>
-</ul>
+<p>make the changes in the field declaration and the class associated to the web page.</p>
 
 </div>
 </div>
