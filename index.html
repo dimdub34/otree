@@ -16800,7 +16800,7 @@ lab_004
 <li>inside this method, select the paid round and set the value of this round's payoff to participant.payoff</li>
 </ul>
 <div class="highlight"><pre><span></span><span class="c1"># ADDITIONAL METHODS</span>
-<span class="k">def</span> <span class="nf">set_final_payoff</span><span class="p">(</span><span class="n">player</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">set_final_payoff</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
     <span class="n">paid_round</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">NUM_ROUNDS</span><span class="p">)</span>
     <span class="n">player</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">payoff</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">in_round</span><span class="p">(</span><span class="n">paid_round</span><span class="p">)</span><span class="o">.</span><span class="n">payoff</span>
 
@@ -16841,7 +16841,7 @@ lab_004
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>In each application of the experiment</strong> :</p>
 <div class="highlight"><pre><span></span><span class="c1"># ADDITIONAL METHODS</span>
-<span class="k">def</span> <span class="nf">set_final_payoff</span><span class="p">(</span><span class="n">player</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">set_final_payoff</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
     <span class="n">paid_round</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">NUM_ROUNDS</span><span class="p">)</span>
     <span class="n">txt_final</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Round </span><span class="si">{</span><span class="n">paid_round</span><span class="si">}</span><span class="s2"> has been randomly selected to be paid&quot;</span>
     <span class="n">player</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">vars</span><span class="p">[</span><span class="s2">&quot;app_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
