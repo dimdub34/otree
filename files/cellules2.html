@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+        .table, td{
+            border: 1px solid lightgray;
+        }
+        .table td {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <table class="table" id="my_table">
+    </table>
+    
+    <p>
+        Number of checked cells: <span id="checked_cell">0</span>
+    </p>
+    <button type="button" id="btn_validate" onclick="validate()" style="height: 30px; width: 50px">Ok</button>
+    <p id="result"></p>
+</body>
+    
+<script>
+    
+    let my_table = document.querySelector("#my_table");
+    let checked_cell_text = document.querySelector("#checked_cell");
+    let list_checked_cells = []
+    
+    for (let i=0; i<10; i++) {
+        let new_row = document.createElement("tr");
+        for (let j=0; j<10; j++) {
+            let new_cell = document.createElement("td");
+            new_cell.style.backgroundColor = "lightgray";
+            new_cell.id = `${i}, ${j}`;
+            new_cell.addEventListener("click", () => {check_cell(new_cell)});
+            new_row.appendChild(new_cell);        
+        }
+        my_table.appendChild(new_row);
+    }
+    
+    function check_cell(cell) {
+        if (document.querySelector("#btn_validate").disabled == true)
+            return
+        if (cell.style.backgroundColor === "lightgray") {
+            cell.style.backgroundColor = "black";
+            list_checked_cells.push(cell);
+        } else {
+            cell.style.backgroundColor = "lightgray";
+            list_checked_cells.splice(cell, 1);
+        }
+        checked_cell_text.innerText = list_checked_cells.length;;
+    }
+    
+    function validate() {
+        if (list_checked_cells.length == 0) {
+            window.alert("You must select at leat one cell !");
+            return;
+        }
+        document.querySelector("#btn_validate").disabled = true;
+        // we delete the event listener
+        for (row of my_table.rows) {
+            for (cell of row.cells)
+                cell.removeEventListener("click", check_cell, cell);
+        }
+        
+        let bomb_row = Math.floor(Math.random() * my_table.rows.length);
+        let bomb_col = Math.floor(Math.random() * my_table.rows[0].cells.length);
+        let bomb_id = `${bomb_row}, ${bomb_col}`;
+        for (let cell of list_checked_cells) {
+            if (cell.id === bomb_id) {
+                cell.style.backgroundImage = "url(bomb.png)";
+                document.querySelector("#result").innerText = "You returned the bomb !!!";
+                document.querySelector("#result").style.color = "red";
+            }
+            else
+                cell.style.backgroundImage = "url(check.png)";
+            cell.style.backgroundRepeat = "no-repeat";
+            cell.style.backgroundColor = "";
+            if (document.querySelector("#result").innerText === "") {
+                document.querySelector("#result").innerText = "Congratulations, you didn't return the bomb !!!";
+                document.querySelector("#result").style.color = "green";
+            }
+        }
+    }
+
+</script>
+</html>
