@@ -1,26 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>otree</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
-<title>otree slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
-<!-- General and theme style sheets -->
-<link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/reveal.css">
-
-<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-<script>
-if( window.location.search.match( /print-pdf/gi ) ) {
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
-}
-</script>
 
 <style type="text/css">
     pre { line-height: 125%; }
@@ -14982,145 +14968,103 @@ all of MD as it is not optimized for dense, information rich UIs.
 </style>
 
 <style type="text/css">
+/* Force rendering true colors when outputing to pdf */
+* {
+  -webkit-print-color-adjust: exact;
+}
+
+/* Misc */
 a.anchor-link {
-   display: none;
-}
-.highlight  {
-    margin: 0.4em;
-}
-.jp-Notebook {
-    padding: 0;
-}
-:root {
-    --jp-ui-font-size1: 20px;       /* instead of 14px */
-    --jp-content-font-size1: 20px;  /* instead of 14px */
-    --jp-code-font-size: 19px;      /* instead of 13px */
-    --jp-cell-prompt-width: 110px;  /* instead of 64px */
-}
-@media print {
-  body {
-    margin: 0;
-  }
-}
-</style>
-
-<style type="text/css">
-/* Overrides of notebook CSS for static HTML export */
-.reveal {
-  font-size: 160%;
-}
-.reveal table {
-  font-size: var(--jp-ui-font-size1);
-}
-.reveal pre {
-  width: inherit;
-  padding: 0.4em;
-  margin: 0px;
-  font-family: monospace, sans-serif;
-  font-size: 80%;
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-}
-.reveal pre code {
-  padding: 0px;
-}
-.reveal section img {
-  border: 0px solid black;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
-}
-.reveal .slides {
-  text-align: left;
-}
-.reveal.fade {
-  opacity: 1;
-}
-.reveal .progress {
-  position: static;
+  display: none;
 }
 
-div.jp-InputArea-editor {
-  padding: 0.06em;
+/* Input area styling */
+.jp-InputArea {
+  overflow: hidden;
 }
 
-div.code_cell {
-  background-color: transparent;
+.jp-InputArea-editor {
+  overflow: hidden;
 }
 
-div.output_area pre {
-  font-family: monospace, sans-serif;
-  font-size: 80%;
-}
-
-div.jp-OutputPrompt {
-  /* 5px right shift to account for margin in parent container */
-  margin: 5px 5px 0 0;
-}
-
-.reveal div.highlight {
+.CodeMirror.cm-s-jupyter .highlight pre {
+/* weird, but --jp-code-padding defined to be 5px but 4px horizontal padding is hardcoded for pre.CodeMirror-line */
+  padding: var(--jp-code-padding) 4px;
   margin: 0;
+
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+
 }
 
-.reveal div.highlight > pre {
-  margin: 0;
+.jp-OutputArea-output pre {
+  line-height: inherit;
+  font-family: inherit;
+}
+
+.jp-RenderedText pre {
+  color: var(--jp-content-font-color1);
+  font-size: var(--jp-code-font-size);
+}
+
+/* Using table instead of flexbox so that we can use break-inside property */
+/* CSS rules under this comment should not be required anymore after we move to the JupyterLab 4.0 CSS */
+
+
+.jp-CodeCell.jp-mod-outputsScrolled .jp-OutputArea-prompt {
+  min-width: calc(
+    var(--jp-cell-prompt-width) - var(--jp-private-cell-scrolling-output-offset)
+  );
+}
+
+.jp-OutputArea-child {
+  display: table;
   width: 100%;
-  font-size: var(--jp-code-font-size);
 }
 
-.reveal div.jp-OutputArea-output > pre {
-  margin: 0;
-  width: 90%;
-  font-size: var(--jp-code-font-size);
-  box-shadow: none;
+.jp-OutputPrompt {
+  display: table-cell;
+  vertical-align: top;
+  min-width: var(--jp-cell-prompt-width);
 }
 
-/* Reveal navigation controls */
-
-.reveal .controls .navigate-left,
-.reveal .controls .navigate-left.enabled {
-  border-right-color: #727272;
-}
-.reveal .controls .navigate-left.enabled:hover,
-.reveal .controls .navigate-left.enabled.enabled:hover {
-  border-right-color: #dfdfdf;
-}
-.reveal .controls .navigate-right,
-.reveal .controls .navigate-right.enabled {
-  border-left-color: #727272;
-}
-.reveal .controls .navigate-right.enabled:hover,
-.reveal .controls .navigate-right.enabled.enabled:hover {
-  border-left-color: #dfdfdf;
-}
-.reveal .controls .navigate-up,
-.reveal .controls .navigate-up.enabled {
-  border-bottom-color: #727272;
-}
-.reveal .controls .navigate-up.enabled:hover,
-.reveal .controls .navigate-up.enabled.enabled:hover {
-  border-bottom-color: #dfdfdf;
-}
-.reveal .controls .navigate-down,
-.reveal .controls .navigate-down.enabled {
-  border-top-color: #727272;
-}
-.reveal .controls .navigate-down.enabled:hover,
-.reveal .controls .navigate-down.enabled.enabled:hover {
-  border-top-color: #dfdfdf;
-}
-.reveal .progress span {
-  background: #727272;
+body[data-format='mobile'] .jp-OutputPrompt {
+  display: table-row;
 }
 
-/* Scrollbars */
+.jp-OutputArea-output {
+  display: table-cell;
+  width: 100%;
+}
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
+  display: table-row;
 }
-::-webkit-scrollbar * {
-  background: transparent;
+
+.jp-OutputArea-output.jp-OutputArea-executeResult {
+  width: 100%;
 }
-::-webkit-scrollbar-thumb {
-  background: #727272 !important;
+
+/* Hiding the collapser by default */
+.jp-Collapser {
+  display: none;
+}
+
+@page {
+    margin: 0.5in; /* Margin for each printed piece of paper */
+}
+
+@media print {
+  .jp-Cell-inputWrapper,
+  .jp-Cell-outputWrapper {
+    display: block;
+  }
+
+  .jp-OutputArea-child {
+    break-inside: avoid-page;
+  }
 }
 </style>
 
@@ -15157,15 +15101,9 @@ div.jp-OutputPrompt {
     }
     init_mathjax();
     </script>
-    <!-- End of mathjax configuration --><!-- Reveal Theme -->
-<link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/theme/simple.css" id="theme">
-
-</head>
-
+    <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 
-<div class="reveal">
-<div class="slides"><section ><section >
 <div id="cell-id=lonely-wisdom" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15178,7 +15116,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=broadband-appraisal" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15196,12 +15134,11 @@ div.jp-OutputPrompt {
 <li><a href="#/8">Group and multiplayer interaction</a></li>
 <li><a href="#/9">Automatic Execution and Simulations</a></li>
 <li><a href="#/10">Exporting Data and Data Wrangling</a></li>
-<li><a href="#/6">Role assignment, asymmetric web page sequencing and use of conditional structure in web pages</a></li>
-<li><a href="#/7">Tips to improve the existing applications</a></li>
-<li><a href="#/10">The admin side: rooms, payments and admin report</a></li>
-<li><a href="#/11">HTML, CSS and Bootstrap</a></li>
-<li><a href="#/12">Javascript</a></li>
-<li><a href="#/13">Live Method</a></li>
+<li><a href="#/11">Role, Sequentiel Games, and Conditional Structures</a></li>
+<li><a href="#/12">Tips to Improve Existing Applications</a></li>
+<li><a href="#/13">Admin Side of oTree - Rooms and Admin Report</a></li>
+<li><a href="#/14">Real-Time Interfaction with live_method</a></li>
+<li><a href="#/15">Bootstrap</a></li>
 <li><a href="#/14">Highcharts</a></li>
 <li><a href="#/15">Internationalisation</a></li>
 <li><a href="#/16">Tips &amp; Tricks</a></li>
@@ -15210,7 +15147,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=located-algebra" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15221,7 +15158,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=3e6e424a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15246,7 +15183,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=0921fa27-73a3-4a3f-bf54-53fa941db52e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15261,7 +15198,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=1c587838-f398-4a91-b8b2-e2dcbddf3973" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15276,7 +15213,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=fd5e0eb4-8e60-4d14-9ee4-71b14615a8f1" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15291,7 +15228,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=448f96ee" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15310,7 +15247,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=ffda5a43" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15329,7 +15266,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=awful-charge" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15346,7 +15283,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=2c25ec4c-2f88-4838-88b5-25b83d87e2b4" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15357,7 +15294,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=0154d0ce-f924-45f8-b43f-f14a835a79ba" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15375,7 +15312,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=1f0fa392-fdfd-46be-aa2b-f37427d48507" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15395,7 +15332,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=dc0cf5dd-1fd5-4f3c-84bb-b405c8b7f8e3" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15411,7 +15348,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=f3ccc5b5-9000-41e5-846b-b8431e682996" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15431,7 +15368,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=03e5fba9-bdec-4321-98d3-a01c9a296a33" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15449,7 +15386,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=6ade9b3a-2d05-4e8b-93be-18a1f117f404" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15473,7 +15410,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=ec483e5b-e2f1-4499-b6e5-585f61b7e6b5" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15501,7 +15438,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=d8bf5add-6585-4dff-972e-b18fcf0241f6" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15522,7 +15459,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=5c1da756-a6a5-4cbc-a73d-df77fb4e5012" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15542,7 +15479,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=58775cec-20d9-4200-99df-aef38eda27e7" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15563,7 +15500,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=41f0c47a-43f1-4393-ba11-031056975c38" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15581,7 +15518,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=315d091e-e587-41fa-8de8-930d12de7957" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15598,7 +15535,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=dda03cec-d61e-4ba8-97c2-0a34819f8513" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15634,7 +15571,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=9ed26fee-11f8-41c6-9895-5ed2b226fd68" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15651,7 +15588,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=459b7531-fadf-4d56-b5bb-969d91e1f8ed" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15679,7 +15616,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=103039bd-3484-4341-87c9-82976d86b241" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15707,7 +15644,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=7eada20f-0a8d-41dc-8e4b-f424cd744713" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15733,7 +15670,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=07b30ba2-4ad5-4cb7-af08-813332d636b3" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15761,7 +15698,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=5304d7cc-6001-4984-aada-65c6cfbd8dc4" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15784,7 +15721,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=ca250533-4921-48e0-96c7-3c7f3148cc0d" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15810,7 +15747,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=90b6a83e-44c1-401a-b1c9-9daff80d51b6" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15838,7 +15775,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=29ba1502-8fe6-41fd-a912-90100fc8ab9f" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15866,7 +15803,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=0ff9e1e2-860d-40b4-8e2f-79e56840995a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15887,7 +15824,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=1149dbc7-e319-4504-8abb-5f14de39ef10" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15899,7 +15836,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=fe600158-8db2-4746-b7a7-795875cd4761" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15916,7 +15853,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=7db462ff-0696-446d-9ce5-88fe01e57d9c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15934,7 +15871,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=ccab387d-54fa-49c1-9360-df3b697ffbd4" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15955,7 +15892,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=0d636907-b7a7-4e10-a12c-ba69121a5c1d" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15970,7 +15907,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=d00fd56b-b353-43ac-851f-00422ef60511" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15986,7 +15923,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=2b758f63-b617-4728-8cce-fcc4df56796e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16006,7 +15943,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=8fcfc1cb-b9f3-4232-ae92-a4f076ef864b" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16022,7 +15959,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=a92659e9-d5da-41a1-9f39-a8cf7074734b" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16039,7 +15976,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=34faa8b2-c3b7-4b54-8ee7-6fee83ec594e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16057,7 +15994,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=83f4e70e-3ac8-466c-b88d-a3efd88af7f0" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16079,7 +16016,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=494e55d7-4645-418b-a54e-f70e81632752" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16100,7 +16037,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=53f35a66-f2c1-49d4-b7fe-a97b9131e859" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16124,7 +16061,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=4b043617-c11b-4182-bd8b-87702283e8f8" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16147,7 +16084,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=cd00f80a-e4a4-4765-b773-6147cd7bc8e1" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16173,7 +16110,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=61b50fed-5f6a-46cd-9f44-443932fba2de" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16194,7 +16131,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=1cdbb6b9-5c83-4a01-838d-dd8879fae5ed" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16205,7 +16142,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=0bb9cdcd-d62f-4b4c-a9b8-824f239fdca5" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16234,7 +16171,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=211a5aa2-c26b-4235-b34f-70f3b6b69192" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16266,7 +16203,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=2cc04b8e-2745-4e15-8061-68be78c4c22e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16293,7 +16230,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=fc9a698f-03a7-4308-969a-9f9c9b60b862" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16325,7 +16262,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=6267b416-a307-4402-986c-8863c3e8d476" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16351,7 +16288,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=381a34c0-c0c0-4994-a537-af352a2da256" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16379,7 +16316,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=233053ee-6224-4e19-94d7-04a03d060fc2" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16400,7 +16337,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=5ab07189-0a1c-44fe-b769-ca2215229847" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16433,7 +16370,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=9b79b739-0c79-4a19-918d-05325aba3ec1" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16463,7 +16400,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=f538512d-cdd0-4014-ad54-657bc7cddbdb" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16484,7 +16421,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=5972cd55-ea07-4254-8f43-29782ef2331c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16503,7 +16440,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=816fdc1b-9d57-4dcc-83a2-51538f838934" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16519,7 +16456,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=3e357935-65c3-4cce-a0d2-7e0376dc4bde" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16545,7 +16482,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=75681bd3-37a4-447b-9891-75e6e81db9f7" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16570,7 +16507,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=bb52684d-59d0-47e9-8b01-e3d7fe15565e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16586,7 +16523,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=ef57a848-f8c2-47d2-8f1c-6b3c49a696b1" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16609,7 +16546,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=cbcec2ff-1d1d-46a0-a968-0d3217dc2add" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16632,7 +16569,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=1b44325e-7e6e-4a39-b7c6-677d6b70d6d4" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16649,7 +16586,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=74bb3800-ed6d-4e96-b4d5-1d86ec836174" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16683,7 +16620,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=f87818e4-021c-4ca8-ad34-a837ecbb6db4" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16710,7 +16647,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=a1c49814-55ae-49c9-ae7b-dc572091e21c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16732,7 +16669,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=atomic-criterion" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16743,7 +16680,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=9c8aec56-1e03-49e3-a3fe-e99afe0b6def" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16769,7 +16706,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=b57917a4-0b70-47d8-b9e1-cc0baff2b99b" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16790,7 +16727,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=c169e5bf-3cae-420b-a477-100a2163aa93" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16811,7 +16748,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=5abe36fc-9bb2-4558-86c8-fee1121f4f7e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16828,7 +16765,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=63db9b5d-c13b-4809-9119-c3a917996054" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16846,7 +16783,7 @@ Element Selector: Targets HTML elements.</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=643c0542-9b5c-46d4-9be9-1ff99dfb618c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16868,7 +16805,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=6d678833-f5eb-4f8e-a435-17812c4daa61" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16886,7 +16823,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=awful-canberra" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16897,7 +16834,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=afacb70a-ff5a-4920-a942-6b3b78a0a22f" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16921,7 +16858,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=282655c3-436d-4b2d-a748-b35539864309" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16954,7 +16891,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=5bc18481-9b79-4bb4-a804-320a311bca0a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16986,7 +16923,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=c04ab427-b7ec-4142-abb8-aa31b06292bf" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17014,7 +16951,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=f6f796fc-5ed7-4885-a34e-b286dc4e978e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17037,7 +16974,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=52b1c6d1-8f45-42bc-a023-f2b02961e5a8" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17062,7 +16999,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=f18ae332-c29f-4fed-90ab-5b01e6c69519" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17083,7 +17020,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=documented-antibody" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17094,7 +17031,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=a28a4d83-f03b-4712-b664-d5fd1d123d33" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17117,7 +17054,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=442449f5-c37b-44fe-99af-3fd28cbdbf94" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17147,7 +17084,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=7816303a-d6ae-45ed-a994-14baf3fd6552" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17168,7 +17105,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=ae96210e-402a-4ba4-8ab7-be7b2837daaf" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17194,7 +17131,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=3255f684-7a33-4c1c-862a-2665073f758d" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17213,7 +17150,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=125ce036-1983-4ecd-83b2-d521da582a76" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17235,7 +17172,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=visible-respondent" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17258,7 +17195,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=e3ec4412-0a91-40af-bffd-f9439c854759" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17269,7 +17206,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=89d881d1-19da-40e3-be55-743caf5b89a2" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17295,7 +17232,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=fe4bb20e-1f7c-4474-9c4c-fb92e22f3711" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17327,7 +17264,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=eb923956-b634-4931-8b2a-6344e95179e8" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17350,7 +17287,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=59c07d16-9a2c-4120-af86-d1b9b698aaed" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17375,7 +17312,7 @@ With the development server running, you can now start building apps in your oTr
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=fd0d0e22-6c6e-4838-89fe-fb8271868915" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17399,7 +17336,7 @@ This is useful in experiments where group actions affect each other, or you want
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=57e6fcf7-d44a-4590-98e3-9bd2b2e4eb09" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17423,7 +17360,7 @@ This is useful in experiments where group actions affect each other, or you want
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=00c03da3-11a0-4958-bc81-1846b659e87c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17444,7 +17381,7 @@ This is useful in experiments where group actions affect each other, or you want
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=f7e9e17a-15aa-4e1e-a2fe-b9a88a47cb8e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17466,7 +17403,7 @@ This is useful in experiments where group actions affect each other, or you want
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=d7619171-aa5f-4714-8eab-7fe090dbe5f1" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17484,7 +17421,7 @@ This is useful in experiments where group actions affect each other, or you want
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=cb41bb72-6ec5-439d-acb4-5e15bcce2585" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17496,7 +17433,7 @@ This is useful in experiments where group actions affect each other, or you want
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=1d58c3b8-5f5b-402b-aa67-cceafe6c0492" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17527,7 +17464,7 @@ This is useful in experiments where group actions affect each other, or you want
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=eb6e5f65-2fc3-4736-9a2f-c6a165964bb6" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17554,7 +17491,7 @@ This is useful in experiments where group actions affect each other, or you want
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=9eab3036-6109-48d2-aa49-17d52d3527cb" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17586,7 +17523,7 @@ Results
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=agreed-hours" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17597,7 +17534,7 @@ Results
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=5dbc77bf-41f6-4063-bfe0-d35799a4c8da" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17614,7 +17551,7 @@ Results
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=5c5f0e14-83f5-4da2-9c92-2ac1905ac418" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17644,7 +17581,7 @@ Results
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=9c0dd3e6-f11c-4eac-ae03-7966b5216a03" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17671,7 +17608,7 @@ Results
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=89da3a9e-0922-4a3e-9c05-c13921e554ef" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17696,7 +17633,7 @@ Results
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=b51eb312-90a6-4f64-92c5-2843758d7526" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17738,7 +17675,7 @@ Results
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=e241e6d9-7408-42e7-869a-1416c1a979c2" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17763,7 +17700,7 @@ Results
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=09d50b87-0a46-4911-8a38-aa3d82800ffe" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17790,7 +17727,7 @@ Results
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=decent-package" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17802,7 +17739,7 @@ Results
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=4000212b-061a-46af-bfd6-26f87a295a85" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17813,7 +17750,7 @@ Results
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=6dbe104b-81a3-478f-8ad4-c85613705c67" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17838,7 +17775,7 @@ Results
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=7b386395-be0a-4284-aaa8-dd04351d8fa2" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17856,7 +17793,7 @@ Results
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=bc498d76-b7f5-4ef6-af16-fddf90798585" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17876,7 +17813,7 @@ In the folder of your oTree app (e.g., public_goods), create a new Python file c
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=ebf8d644-76e2-4b3b-b97a-1a8a493af000" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17903,7 +17840,7 @@ In the folder of your oTree app (e.g., public_goods), create a new Python file c
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=5420fa8f-2d16-4c6f-92b3-37bfb190da34" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17925,7 +17862,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=ff7c56d5-260d-4236-aaaa-53553f2f5371" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17937,7 +17874,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=342bc467-88f4-4d83-807a-7fec5159619e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17948,7 +17885,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=1b6459dd-8f8e-47a3-af8e-f95ad431d1b1" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17965,7 +17902,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=aed38d86-672f-4369-bd2d-d19e4d055ee9" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18060,7 +17997,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=5d74e646-d3d9-4c99-918c-ccd655ac1918" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18087,7 +18024,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=be09a804-a6a3-4ba0-b4ac-2fd51fb9f64c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18131,7 +18068,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=4e7bbdde-e025-4e8e-95fe-bf9318d477e1" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18149,7 +18086,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=25252331-15ae-4105-832e-49530b192963" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18164,91 +18101,107 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=national-parking" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Roles,-sequential-game-and-conditional-structure-in-web-pages"><a name="roles">Roles, sequential game and conditional structure in web pages</a><a class="anchor-link" href="#Roles,-sequential-game-and-conditional-structure-in-web-pages">&#182;</a></h1><p><em>Practical example : the investment game</em></p>
-
+<h1 id="Roles,-Sequential-Games,-and-Conditional-Structures">Roles, Sequential Games, and Conditional Structures<a class="anchor-link" href="#Roles,-Sequential-Games,-and-Conditional-Structures">&#182;</a></h1>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=hairy-cleaners" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="The-investment-game"><a name="invest_game_description">The investment game</a><a class="anchor-link" href="#The-investment-game">&#182;</a></h2><ul>
-<li>pairs of players</li>
-<li>2 roles : trustor and trustee, 1 trustor and 1 trustee in each pair</li>
-<li>both roles endowed with 10 Euros (or ECUs)</li>
-<li>trustor chooses how many Euros/Ecus he/she sends to the trustee</li>
-<li>each amount sent by the trustor is tripled by the experimenter, i.e. the trustee receives 3 times the amount sent by the trustor</li>
-<li>the trustee sends back how many Euros/Ecus he/she wants, between zero and the receveid amount</li>
-<li>Trustor's payoff : 10 - amount sent + amount returned by the trustee</li>
-<li>Trustee's payoff : 10 + 3 x amount sent by the trustor - amount sent back to the trustor</li>
+<p><strong>Illustrated with the investment game</strong></p>
+<ul>
+<li>In the Investment Game:<ul>
+<li>Players are paired, with 2 roles: <strong>trustor</strong> and <strong>trustee</strong>.</li>
+<li><strong>Both players</strong> start with 10 Euros.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Game Flow</strong>:</p>
+<ol>
+<li><strong>Trustor</strong> decides how many Euros to send to the trustee (0 to 10).</li>
+<li>The amount sent is <strong>tripled</strong> by the experimenter, so the trustee receives 3 times the amount.</li>
+<li><strong>Trustee</strong> then decides how much to send back to the trustor (between 0 and the received amount).</li>
+</ol>
+<p><strong>Payoff Calculations</strong>:</p>
+<ul>
+<li><strong>Trustor's payoff</strong>: 10 - amount sent + amount returned by the trustee.</li>
+<li><strong>Trustee's payoff</strong>: 10 + 3 × amount sent by the trustor - amount sent back.</li>
 </ul>
 
 </div>
 </div>
 </div>
-</div></section><section >
-<div id="cell-id=surrounded-assistant" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+<div id="cell-id=3c2a1ad1-f6e9-4d9a-97a2-7b5903ffd844" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Roles">Roles<a class="anchor-link" href="#Roles">&#182;</a></h2><p>roles can be defined in the C class, it must end with <code>_ROLE</code></p>
+<h2 id="Defining-Roles-in-oTree">Defining Roles in oTree<a class="anchor-link" href="#Defining-Roles-in-oTree">&#182;</a></h2><ul>
+<li>Roles in oTree can be defined in the <strong><code>C</code> class</strong> as constants.</li>
+</ul>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">BaseConstants</span><span class="p">):</span>
-    <span class="n">PLAYERS_PER_GROUP</span> <span class="o">=</span> <span class="mi">2</span>
-
+    <span class="n">PLAYERS_PER_GROUP</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Pair of trustor and trustee</span>
     <span class="n">TRUSTOR_ROLE</span> <span class="o">=</span> <span class="s2">&quot;trustor&quot;</span>
-    <span class="n">TRUSTEE_ROLE</span> <span class="o">=</span> <span class="s2">&quot;trustee</span>
+    <span class="n">TRUSTEE_ROLE</span> <span class="o">=</span> <span class="s2">&quot;trustee&quot;</span>
 </pre></div>
-<p>Roles are automatically attributed in the group: the first player in the group (<code>id_in_group = 1</code>) will have the role of trustor and the second one (<code>id_in_group = 2</code>) the role of trustee.<br />
-The role is stored in the field &quot;player.role&quot; automatically created in the player class.</p>
-<p><em>Remark</em><br />
-If in the group several players must have the same role, for example 2 buyers and 2 sellers in a group of 4, this doesn't work. In that case it is necessary to assign roles with a dedicated method.</p>
+<ul>
+<li>The first player in the group (id_in_group = 1) is assigned the trustor role.</li>
+<li>The second player in the group (id_in_group = 2) is assigned the trustee role.</li>
+</ul>
+<p><strong>Role Storage</strong>: The role is automatically stored in the player.role field.</p>
+<p><em>Note: If multiple players in the group need the same role (e.g., 2 buyers and 2 sellers in a 4-player group), you'll need to manually assign roles.</em></p>
 
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=conditional-rachel" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>player.role can be used as a condition to display a page</p>
+<h2 id="Role-Based-Page-Display">Role-Based Page Display<a class="anchor-link" href="#Role-Based-Page-Display">&#182;</a></h2><ul>
+<li>Pages in oTree can be displayed conditionally based on the player's role.</li>
+</ul>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DecisionTrustor</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">is_displayed</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">player</span><span class="o">.</span><span class="n">role</span> <span class="o">==</span> <span class="n">C</span><span class="o">.</span><span class="n">TRUSTOR_ROLE</span>
 
-
 <span class="k">class</span> <span class="nc">DecisionTrustee</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">is_displayed</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">player</span><span class="o">.</span><span class="n">role</span> <span class="o">==</span> <span class="n">C</span><span class="o">.</span><span class="n">TRUTEE_ROLE</span>
+        <span class="k">return</span> <span class="n">player</span><span class="o">.</span><span class="n">role</span> <span class="o">==</span> <span class="n">C</span><span class="o">.</span><span class="n">TRUSTEE_ROLE</span>
 </pre></div>
+<p>Only the trustor sees the DecisionTrustor page, and only the trustee sees the DecisionTrustee page.</p>
 
 </div>
 </div>
 </div>
-</div></section><section >
-<div id="cell-id=occasional-extraction" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+<div id="cell-id=b26991a4-5f56-410b-b400-2373e0767654" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Conditional-structure-in-the-html-file">Conditional structure in the html file<a class="anchor-link" href="#Conditional-structure-in-the-html-file">&#182;</a></h2><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
-    You have the role of
+<h2 id="Conditional-Structures-in-HTML">Conditional Structures in HTML<a class="anchor-link" href="#Conditional-Structures-in-HTML">&#182;</a></h2><ul>
+<li>You can also display different content on the same HTML page based on the player's role.</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+    You have the role of 
     {{ if player.role == C.TRUSTOR_ROLE }}
         trustor.
     {{ else }}
@@ -18256,72 +18209,97 @@ If in the group several players must have the same role, for example 2 buyers an
     {{ endif }}
 <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 </pre></div>
-<ul>
-<li>exists also <code>{{ elif }}</code> if needed</li>
-</ul>
+<p>You can also use elif for more complex conditions.</p>
 
 </div>
 </div>
 </div>
-</div></section><section >
-<div id="cell-id=mounted-potter" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+<div id="cell-id=6ec9e097-d9c0-4d17-8325-c06bd37efb9b" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Set-min,-max-or-choices-of-a-field-dynamically">Set min, max or choices of a field dynamically<a class="anchor-link" href="#Set-min,-max-or-choices-of-a-field-dynamically">&#182;</a></h2><ul>
-<li>in the investment game, the maximum the trustee can send back to the trustor is the amount she received. But this value is not known before the trustor makes her decision</li>
-<li>possible to set the maximum value of a field after its creation with <code>def field_name_max()</code></li>
+<h2 id="Dynamic-Field-Constraints">Dynamic Field Constraints<a class="anchor-link" href="#Dynamic-Field-Constraints">&#182;</a></h2><ul>
+<li>In sequential games, the value a player can input may depend on previous decisions.</li>
+<li>In the Investment Game, the maximum amount the trustee can send back depends on how much the trustee received.</li>
+</ul>
+<p><strong>Setting Dynamic Constraints</strong>:</p>
+<ul>
+<li>You can dynamically set the maximum value of a field using a <strong>field_name_max</strong> method.</li>
 </ul>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">amount_sent_back_max</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
+    <span class="c1"># Trustee cannot send back more than what was received</span>
     <span class="k">return</span> <span class="n">player</span><span class="o">.</span><span class="n">amount_received</span>
 </pre></div>
+<p>This ensures that the input field for <code>amount_sent_back</code> dynamically adjusts based on the trustee's received amount.</p>
 
 </div>
 </div>
 </div>
-</div></section><section >
-<div id="cell-id=dimensional-letter" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+<div id="cell-id=935c54b6-14ba-4391-965a-f2de1bb514b0" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h2><ul>
-<li>write the code of the (one-shot) investment game (description <a href="#/6/1">here</a>)</li>
-</ul>
-<p><strong>Help</strong></p>
+<h2 id="Exercice:-Write-the-Investment-Game">Exercice: Write the Investment Game<a class="anchor-link" href="#Exercice:-Write-the-Investment-Game">&#182;</a></h2><p><strong>Instructions</strong>:</p>
 <ul>
-<li>fields : amount_sent, amount_received, amount_sent_back, amount_returned</li>
-<li>amount_sent and amount_returned is for the trustor</li>
-<li>amount_received and amount_sent_back is for the trustee</li>
-<li>the page_sequence : [DecisionTrustor, DecisionTrustorWaitForGroup, DecisionTrustee, DecisionTrusteeWaitForGroup, Results]</li>
-<li>methods to create : set_amount_received, set_amount_returned, amount_sent_back_max</li>
+<li>Write the code for the <strong>one-shot Investment Game</strong> as described in previous slides.</li>
+</ul>
+<p><strong>Help with Key Fields</strong>:</p>
+<ul>
+<li><p><strong>Trustor</strong>:</p>
+<ul>
+<li><code>amount_sent</code>: How much the trustor sends to the trustee.</li>
+<li><code>amount_returned</code>: How much the trustor receives back.</li>
+</ul>
+</li>
+<li><p><strong>Trustee</strong>:</p>
+<ul>
+<li><code>amount_received</code>: The amount the trustee receives (3× amount sent).</li>
+<li><code>amount_sent_back</code>: How much the trustee sends back to the trustor.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Page Sequence</strong>:</p>
+<ul>
+<li><code>[DecisionTrustor, DecisionTrustorWaitForGroup, DecisionTrustee, DecisionTrusteeWaitForGroup, Results]</code></li>
+</ul>
+<p><strong>Methods to Implement</strong>:</p>
+<ul>
+<li><strong>set_amount_received</strong>: Calculate and set the amount the trustee receives.</li>
+<li><strong>set_amount_returned</strong>: Calculate and set the amount returned to the trustor.</li>
+<li><strong>amount_sent_back_max</strong>: Set the maximum amount the trustee can send back.</li>
 </ul>
 
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=coated-nebraska" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Tips-to-improve-existing-applications"><a name="tricks">Tips to improve existing applications</a><a class="anchor-link" href="#Tips-to-improve-existing-applications">&#182;</a></h1>
+<h1 id="Tips-to-Improve-Existing-Applications">Tips to Improve Existing Applications<a class="anchor-link" href="#Tips-to-Improve-Existing-Applications">&#182;</a></h1>
 </div>
 </div>
 </div>
-</div></section><section >
-<div id="cell-id=collect-flavor" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+<div id="cell-id=c31fe7cf-8e1f-42f4-bb69-8a0c21d8162f" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Put-the-fields-in-a-table-with-a-for-loop-in-the-html-file">Put the fields in a table with a for loop in the html file<a class="anchor-link" href="#Put-the-fields-in-a-table-with-a-for-loop-in-the-html-file">&#182;</a></h2><p>By default, if we let <code>{{ formfields }}</code> in the web page and there are several fields, the labels and fields are one below the other, as in the demographic application for example. To change that we can put the labels and fields in a table.</p>
+<h2 id="Displaying-Form-Fields-in-a-Table">Displaying Form Fields in a Table<a class="anchor-link" href="#Displaying-Form-Fields-in-a-Table">&#182;</a></h2><ul>
+<li>By default, when using <strong><code>{{ formfields }}</code></strong> in oTree, the fields and labels are displayed one below the other.</li>
+<li>To change this layout, you can use an HTML table to align the labels and input fields in a more structured way.</li>
+</ul>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;table&quot;</span><span class="p">&gt;</span>
     {{ for field in form }}
     <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
@@ -18331,29 +18309,33 @@ If in the group several players must have the same role, for example 2 buyers an
     {{ endfor }}
 <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
 </pre></div>
-<p>Nb: <code>class='table'</code> is a css attribute, see chapter <a href="#/11">HTML, CSS, bootstrap</a></p>
+<p>The class='table' attribute adds basic styling using Bootstrap.</p>
 
 </div>
 </div>
 </div>
-</div></section><section >
-<div id="cell-id=returning-observer" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+<div id="cell-id=90c5b73d-3a3e-46cd-b04a-e850d7e4f586" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Create-a-history">Create a history<a class="anchor-link" href="#Create-a-history">&#182;</a></h2><ul>
-<li>in repeated games, like the public good game, it is a good practice to let the players consult the history of the game, i.e. the value of the variables in the past rounds</li>
-<li>use of a <em>for loop</em> and an html table</li>
-<li>two useful methods of the player class: player.in_all_rounds and player.in_previous_rounds can be called in the web page</li>
+<h2 id="Creating-a-Game-History-for-Repeated-Games">Creating a Game History for Repeated Games<a class="anchor-link" href="#Creating-a-Game-History-for-Repeated-Games">&#182;</a></h2><ul>
+<li>In repeated games (e.g., Public Goods Game), it is helpful to display the <strong>history</strong> of decisions and payoffs from previous rounds.</li>
+<li>You can use a <strong>for loop</strong> in the HTML to iterate through past rounds and display the data in a table.</li>
+</ul>
+<p><strong>Useful Methods</strong>:</p>
+<ul>
+<li><strong><code>player.in_all_rounds</code></strong>: Accesses the data for all rounds.</li>
+<li><strong><code>player.in_previous_rounds</code></strong>: Accesses the data for previous rounds only.</li>
 </ul>
 
 </div>
 </div>
 </div>
-</div></section><section >
-<div id="cell-id=twenty-naples" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+<div id="cell-id=229d41f9-311c-47f8-ab0a-2ba9aae378ee" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -18363,9 +18345,9 @@ If in the group several players must have the same role, for example 2 buyers an
     <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Round<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Private account<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Public account<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Total public account<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Keep<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Contribution<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Group Total Contribution<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Payoff<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
@@ -18373,9 +18355,9 @@ If in the group several players must have the same role, for example 2 buyers an
         {{ for p in player.in_all_rounds }}
         <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ p.round_number }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ p.private_account }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ p.public_account }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ p.group.total_public_account }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ keep }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ contribution }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ p.group.total_contribution }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ p.payoff }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
          <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
         {{ endfor }}
@@ -18386,39 +18368,38 @@ If in the group several players must have the same role, for example 2 buyers an
 </div>
 </div>
 </div>
-</div></section><section >
-<div id="cell-id=interior-detective" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+<div id="cell-id=73d7048c-db5d-4613-ac7d-edaaf4e4916f" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Include-an-image-in-the-web-page">Include an image in the web page<a class="anchor-link" href="#Include-an-image-in-the-web-page">&#182;</a></h2><ul>
-<li>create a subfolder in the <code>_static</code> directory with the name of your application</li>
-<li>in the html file, inside the img tag, add static in the src attribute</li>
+<h2 id="Including-Images-in-Your-Web-Pages">Including Images in Your Web Pages<a class="anchor-link" href="#Including-Images-in-Your-Web-Pages">&#182;</a></h2><ul>
+<li>To add an image to your oTree application, first create a subfolder <code>static/application_name</code> in your app folder, and put the image inside.</li>
+<li>Then, include the image in your HTML file using the <strong><code>img</code></strong> tag.</li>
 </ul>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ static &#39;application_name/picture_name.png&#39; }}&quot;</span> <span class="p">/&gt;</span>
 </pre></div>
-<ul>
-<li>works the same way for video files and audio files, but it is better to put this kind of file elsewhere on the web and to just add the link in the src attribute</li>
-</ul>
+<p>You can also use this method for videos and audio files, but it’s generally better to host large media files externally and link to them in the src attribute.</p>
 
 </div>
 </div>
 </div>
-</div></section><section >
-<div id="cell-id=satisfied-zimbabwe" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+<div id="cell-id=07e729b0-9830-4d41-a5da-c561cf454aa8" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Set-a-parameter-in-the-SESSION_CONFIGS-dictionnary-and-get-it-in-the-application">Set a parameter in the SESSION_CONFIGS dictionnary and get it in the application<a class="anchor-link" href="#Set-a-parameter-in-the-SESSION_CONFIGS-dictionnary-and-get-it-in-the-application">&#182;</a></h2><ul>
-<li>useful when you plan to have several treatments</li>
-<li>for example if you want to run the public good game with a different MPCR</li>
-<li>either you change the value in the C class</li>
-<li>or you export this parameter and put it in the session configs. In that case, if you want to change the value of the MPCR, you do it in the session configs, not in the code of the application</li>
-<li>the change in the session configs can be done on the admin interface when creating a session</li>
+<h2 id="Exporting-Parameters-via-SESSION_CONFIGS">Exporting Parameters via <code>SESSION_CONFIGS</code><a class="anchor-link" href="#Exporting-Parameters-via-SESSION_CONFIGS">&#182;</a></h2><ul>
+<li>If you plan to run multiple treatments, it’s a good idea to set certain parameters in <strong><code>SESSION_CONFIGS</code></strong>, rather than hard-coding them in the app.</li>
+<li>This allows for flexibility when configuring different sessions with varying parameters.</li>
+</ul>
+<p><strong>Example: MPCR in the Public Goods Game</strong></p>
+<ul>
+<li>Instead of setting <strong>MPCR</strong> directly in the <code>C</code> class, you can define it in <code>SESSION_CONFIGS</code>:</li>
 </ul>
 <div class="highlight"><pre><span></span><span class="n">SESSION_CONFIGS</span> <span class="o">=</span> <span class="p">[</span>
     <span class="nb">dict</span><span class="p">(</span>
@@ -18426,7 +18407,7 @@ If in the group several players must have the same role, for example 2 buyers an
         <span class="n">display_name</span><span class="o">=</span><span class="s2">&quot;Public Goods Game&quot;</span><span class="p">,</span>
         <span class="n">app_sequence</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;public_goods&quot;</span><span class="p">],</span>
         <span class="n">num_demo_participants</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-        <span class="n">mpcr</span><span class="o">=</span><span class="mf">0.5</span>
+        <span class="n">mpcr</span><span class="o">=</span><span class="mf">0.5</span>  <span class="c1"># MPCR is configurable here</span>
     <span class="p">),</span>
 <span class="p">]</span>
 </pre></div>
@@ -18434,55 +18415,57 @@ If in the group several players must have the same role, for example 2 buyers an
 </div>
 </div>
 </div>
-</div></section><section >
-<div id="cell-id=generous-capitol" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+<div id="cell-id=6a74a097-76b3-4878-b80d-ae4f50ea470e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Then, in the creating_session method</p>
+<p>In the <strong><code>creating_session method</code></strong>, retrieve the parameter like this:</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Subsession</span><span class="p">(</span><span class="n">BaseSubsession</span><span class="p">):</span>
     <span class="n">mpcr</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
 
-<span class="c1"># ADDITIONAL METHODS</span>
 <span class="k">def</span> <span class="nf">creating_session</span><span class="p">(</span><span class="n">subsession</span><span class="p">:</span> <span class="n">Subsession</span><span class="p">):</span>
-    <span class="n">subsession</span><span class="o">.</span><span class="n">mpcr</span> <span class="o">=</span> <span class="n">subsession</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mpcr&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">subsession</span><span class="o">.</span><span class="n">mpcr</span> <span class="o">=</span> <span class="n">subsession</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;mpcr&quot;</span><span class="p">]</span>
 </pre></div>
-<p>Whenever you used C.MPCR in the application, replace it with subsession.mpcr.</p>
 
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=pharmaceutical-affiliate" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h2><ul>
-<li>put the fields of the socio-demographic questionnaire in a table</li>
-<li>create an history in the public goods game application</li>
-<li>export the mpcr parameter in the settings file</li>
-<li>create a welcome application with the picture of your lab and add it in the app_sequence of the public good game</li>
-</ul>
+<h2 id="Exercice">Exercice<a class="anchor-link" href="#Exercice">&#182;</a></h2><ol>
+<li><p><strong>Socio-Demographic Questionnaire</strong>: Display the fields in a table using a for loop in the HTML file.</p>
+</li>
+<li><p><strong>Public Goods Game</strong>: Create a <strong>history</strong> page where participants can view the history of decisions from all rounds.</p>
+</li>
+<li><p><strong>Parameter Flexibility</strong>: Export the <strong>MPCR parameter</strong> in the <strong><code>SESSION_CONFIGS</code></strong> and update the Public Goods Game to use this configuration.</p>
+</li>
+<li><p><strong>Welcome Application</strong>: Create a simple welcome app with an image of your lab, and include this app in the app sequence of the Public Goods Game.</p>
+</li>
+</ol>
 
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=norwegian-implement" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="The-admin-side:-rooms,-payments-and-admin-report"><a name="rooms">The admin side: rooms, payments and admin report</a><a class="anchor-link" href="#The-admin-side:-rooms,-payments-and-admin-report">&#182;</a></h1>
+<h1 id="Admin-Side-of-oTree---Rooms-and-Admin-Report">Admin Side of oTree - Rooms and Admin Report<a class="anchor-link" href="#Admin-Side-of-oTree---Rooms-and-Admin-Report">&#182;</a></h1>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=illegal-demand" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18508,7 +18491,7 @@ An item for each room (each item is a dictionnary)</p>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=08fd9f26" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18537,7 +18520,7 @@ lab_004
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=satisfactory-crowd" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18557,7 +18540,7 @@ lab_004
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=gothic-shark" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18582,7 +18565,7 @@ lab_004
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=applicable-celtic" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18599,139 +18582,7 @@ lab_004
 </div>
 </div>
 </div>
-</div></section><section >
-<div id="cell-id=confident-purpose" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Payments">Payments<a class="anchor-link" href="#Payments">&#182;</a></h2><ul>
-<li>the tab &quot;Payments&quot; displays the payoff of each participant</li>
-<li>the value displayed is given by the variable <strong>participant.payoff</strong></li>
-<li>it is equal to the cumulative payoff since the beginning of the session, i.e. the cumulative value of <strong>player.payoff</strong> (for each round of each application)</li>
-<li>the value can be overriden by setting player.participant.payoff = new_value</li>
-<li>it is the case for example if we want to pay only one round or only one application</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=complete-modern" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Pay-only-one-round-of-the-repeated-game">Pay only one round of the repeated game<a class="anchor-link" href="#Pay-only-one-round-of-the-repeated-game">&#182;</a></h3><ul>
-<li>create a method and call this method just before the end of the application</li>
-<li>inside this method, select the paid round and set the value of this round's payoff to participant.payoff</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="c1"># ADDITIONAL METHODS</span>
-<span class="k">def</span> <span class="nf">set_final_payoff</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
-    <span class="n">paid_round</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">NUM_ROUNDS</span><span class="p">)</span>
-    <span class="n">player</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">payoff</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">in_round</span><span class="p">(</span><span class="n">paid_round</span><span class="p">)</span><span class="o">.</span><span class="n">payoff</span>
-
-<span class="c1"># PAGES</span>
-<span class="k">class</span> <span class="nc">Results</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">before_next_page</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">,</span> <span class="n">timeout_happened</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">player</span><span class="o">.</span><span class="n">round_number</span> <span class="o">==</span> <span class="n">C</span><span class="o">.</span><span class="n">NUM_ROUNDS</span><span class="p">:</span>
-            <span class="n">set_final_payoff</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=previous-blues" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Pay-one-application-among-several">Pay one application among several<a class="anchor-link" href="#Pay-one-application-among-several">&#182;</a></h3><ul>
-<li>there exists an attribute in the participant class, called vars, which is a dictionnary, and in which you can store whatever you want</li>
-<li>the participant is the same in the different applications of the session, so you can access this &quot;vars&quot; dictionary from any application of the session</li>
-<li>so, in a method called at the end of each application you store the player's payoff for this application in the participant.vars dictionnary</li>
-<li>create a final application that displays the payoff of each application (with an explanation text)</li>
-<li>within this &quot;final&quot; application, you randomly select the application that will actually be paid</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=constitutional-seeking" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>In each application of the experiment</strong> :</p>
-<div class="highlight"><pre><span></span><span class="c1"># ADDITIONAL METHODS</span>
-<span class="k">def</span> <span class="nf">set_final_payoff</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
-    <span class="n">paid_round</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">NUM_ROUNDS</span><span class="p">)</span>
-    <span class="n">txt_final</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Round </span><span class="si">{</span><span class="n">paid_round</span><span class="si">}</span><span class="s2"> has been randomly selected to be paid&quot;</span>
-    <span class="n">player</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">vars</span><span class="p">[</span><span class="s2">&quot;app_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-        <span class="n">payoff</span><span class="o">=</span><span class="n">player</span><span class="o">.</span><span class="n">in_round</span><span class="p">(</span><span class="n">paid_round</span><span class="p">)</span><span class="o">.</span><span class="n">payoff</span><span class="p">,</span> 
-        <span class="n">txt_final</span><span class="o">=</span><span class="n">txt_final</span>
-    <span class="p">)</span>
-
-<span class="c1"># PAGES</span>
-<span class="k">class</span> <span class="nc">Results</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">before_next_page</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">,</span> <span class="n">timeout_happened</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">player</span><span class="o">.</span><span class="n">round_number</span> <span class="o">==</span> <span class="n">C</span><span class="o">.</span><span class="n">NUM_ROUNDS</span><span class="p">:</span>
-            <span class="n">set_final_payoff</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=unexpected-surrey" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>In a final application</strong> (app_sequence=[&quot;welcome&quot;, &quot;public_goods&quot;, &quot;investment_game&quot;, demographics&quot;, &quot;final&quot;]):</p>
-<div class="highlight"><pre><span></span><span class="c1"># ADDITIONAL METHODS</span>
-<span class="k">def</span> <span class="nf">select_paid_app</span><span class="p">(</span><span class="n">subsession</span><span class="p">:</span> <span class="n">Subsession</span><span class="p">):</span>
-    <span class="n">apps</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;public_goods&quot;</span><span class="p">,</span> <span class="s2">&quot;investment_game&quot;</span><span class="p">]</span>  <span class="c1"># the list of potentially paid applications</span>
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">subsession</span><span class="o">.</span><span class="n">get_players</span><span class="p">():</span>
-        <span class="n">paid_app</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">apps</span><span class="p">)</span>
-        <span class="n">p</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">payoff</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">vars</span><span class="p">[</span><span class="n">paid_app</span><span class="p">][</span><span class="s2">&quot;payoff&quot;</span><span class="p">]</span>
-
-<span class="c1"># PAGES</span>
-<span class="k">class</span> <span class="nc">BeforeFinalPage</span><span class="p">(</span><span class="n">WaitPage</span><span class="p">):</span>
-    <span class="n">wait_for_all_groups</span> <span class="o">=</span> <span class="kc">True</span>
-
-    <span class="k">def</span> <span class="nf">after_all_players_arrive</span><span class="p">(</span><span class="n">subsession</span><span class="p">):</span>
-        <span class="n">select_paid_app</span><span class="p">(</span><span class="n">subsession</span><span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">Final</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
-    <span class="k">pass</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=heard-oakland" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Pratice">Pratice<a class="anchor-link" href="#Pratice">&#182;</a></h3><ul>
-<li>use the procedure to pay only one round in the public goods game application</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section><section >
 <div id="cell-id=neutral-xerox" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18765,7 +18616,7 @@ lab_004
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=understanding-velvet" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18804,7 +18655,7 @@ lab_004
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=hazardous-immune" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18817,146 +18668,277 @@ lab_004
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
+<div id="cell-id=fd0bbdb5-dec8-4e4e-9c39-3a6ec1f81180" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Real-Time-Interaction-with-%60live_method%60%60">Real-Time Interaction with `live_method``<a class="anchor-link" href="#Real-Time-Interaction-with-%60live_method%60%60">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=f67ffaa1-3810-4cd6-86ae-5996ffc8182c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Many experiments require participants to interact with each other in real-time or to see immediate feedback based on their or others' actions.</p>
+<p><strong><em>Use Cases</em></strong></p>
+<ol>
+<li><strong>Live decision-making</strong>: Where participants' choices immediately affect other participants.</li>
+<li><strong>Real-time feedback</strong>: Displaying immediate updates or feedback based on group contributions, payoffs, or other variables.</li>
+<li><strong>Dynamic updates</strong>: Changing experiment parameters (e.g., payoffs, group composition) based on participants’ actions.</li>
+</ol>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=bc068e1e-870c-4e36-88b7-382d553c5634" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="The-live_method">The <code>live_method</code><a class="anchor-link" href="#The-live_method">&#182;</a></h2><ul>
+<li>The <strong><code>live_method</code></strong> allows for <strong>live communication</strong> between the web page and the server during the experiment.</li>
+</ul>
+<p><strong><em>Common Use Cases</em></strong>:</p>
+<ul>
+<li>Chat applications</li>
+<li>Auction markets</li>
+<li>Real-time feedback during games</li>
+</ul>
+<p><strong><em>How it Works</em></strong>:</p>
+<ul>
+<li><p><strong>JavaScript on the web page</strong>:</p>
+<ul>
+<li><strong><code>liveSend(data)</code></strong>: Sends data (usually a dictionary) to the server.</li>
+<li><strong><code>liveRecv(data)</code></strong>: Receives data from the server and updates the web page.</li>
+</ul>
+</li>
+<li><p><strong>Python method</strong>:</p>
+<ul>
+<li>The server-side method <strong><code>live_method(player: Player, data)</code></strong> receives the data, processes it, and sends a response.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=0709ae3e-6225-4a43-aaec-6e066d76cd58" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="How-the-live_method-works">How the <code>live_method</code> works<a class="anchor-link" href="#How-the-live_method-works">&#182;</a></h2><ul>
+<li>The <strong><code>live_method</code></strong> in the corresponding page class processes live data sent from the web page.</li>
+</ul>
+<p><strong><code>live_method(player: Player, data)</code></strong>:</p>
+<ul>
+<li>Handles incoming data from the web page.</li>
+<li>Processes the data.</li>
+<li>Returns a dictionary where:<ul>
+<li>The <strong>key</strong> is the recipient player's <code>id_in_group</code> (or <code>0</code> for all players).</li>
+<li>The <strong>value</strong> is the data to be sent back to the player(s).</li>
+</ul>
+</li>
+</ul>
+<p><strong><em>Communication Flow</em></strong>:</p>
+<ol>
+<li><strong>HTML page (JavaScript)</strong>: <code>liveSend(data)</code></li>
+<li><strong>Python page class</strong>: <code>live_method(player, data)</code></li>
+<li><strong>HTML page (JavaScript)</strong>: <code>liveRecv(data)</code></li>
+</ol>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=6c01b746-8ce7-4ee8-bbaf-5d100b8e366a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Practical-Example:-Sending-a-Random-Value">Practical Example: Sending a Random Value<a class="anchor-link" href="#Practical-Example:-Sending-a-Random-Value">&#182;</a></h2><p><strong><em>Scenario</em></strong>:<br />
+Each player sends a random value to all other players in their group.</p>
+<p><strong>Step 1</strong>: in the <code>__init__.py</code> file</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Decision</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">live_method</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># Debugging: check the data received</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;sender&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">id_in_group</span>  <span class="c1"># Add sender information</span>
+        <span class="k">return</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="n">data</span><span class="p">}</span>  <span class="c1"># Send data to all players in the group</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=b2ae0b7d-05b7-4935-b932-c6a902a99f7d" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Step 2</strong>: in Decision.html</p>
+<div class="highlight"><pre><span></span>{{ block content }}
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-secondary&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;send_random_value()&quot;</span><span class="p">&gt;</span>Send a random value<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+{{ endblock }}
+
+{{ block scripts }}
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="c1">// Function to send a random value to the server</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">send_random_value</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">random_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span><span class="w">  </span><span class="c1">// Generate a random number</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Sending: </span><span class="si">${</span><span class="nx">random_value</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">liveSend</span><span class="p">({</span><span class="nx">random_value</span><span class="o">:</span><span class="w"> </span><span class="nx">random_value</span><span class="p">});</span><span class="w">  </span><span class="c1">// Send the random value</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Function to receive live data from the server</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">liveRecv</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Received:&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span><span class="w">  </span><span class="c1">// Display the received data</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+{{ endblock }}
+</pre></div>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=b5505aaf-105f-4182-8015-b505047044af" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>How the Example Works</strong></p>
+<ul>
+<li><p><strong><code>liveSend({random_value})</code></strong>: When the player clicks the button, a random value is generated and sent to the server.</p>
+</li>
+<li><p><strong><code>live_method(player, data)</code></strong>: The server receives the data, adds the player's <code>id_in_group</code> to indicate the sender, and sends it back to all group members (<code>return {0: data}</code>).</p>
+</li>
+<li><p><strong><code>liveRecv(data)</code></strong>: All players in the group receive the updated data and log it in the browser's console.</p>
+</li>
+</ul>
+<hr />
+<p><strong>Live interactions</strong> between players are achieved by sending data from the web page to the server, processing it with <code>live_method</code>, and sending responses back to the client.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=53282784-a2a1-47c3-a571-13d7e928984d" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Exercice:-Real-Time-Shared-Counter">Exercice: Real-Time Shared Counter<a class="anchor-link" href="#Exercice:-Real-Time-Shared-Counter">&#182;</a></h2><p>Create a simple app where players in a group can increment a shared counter.
+When a player clicks a button, the counter is incremented, and all group members see the updated value in real-time.</p>
+<p><strong>Steps</strong>:</p>
+<ul>
+<li>Create a new oTree app called live_counter.</li>
+<li>Set up a group-level counter that all players can interact with.</li>
+</ul>
+<p>Live Interaction:</p>
+<ul>
+<li>Use live_method to handle the live communication between the players and the server.</li>
+<li>Each time a player clicks a button, the counter is incremented and the updated value is sent to all players in the group.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=3ee2829a-4ab7-4a0a-b504-b53f458720ea" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h2><p><code>__init__.py</code></p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">BaseConstants</span><span class="p">):</span>
+    <span class="n">PLAYERS_PER_GROUP</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">NUM_ROUNDS</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">class</span> <span class="nc">Group</span><span class="p">(</span><span class="n">BaseGroup</span><span class="p">):</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Group-level counter</span>
+
+<span class="k">class</span> <span class="nc">Decision</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">live_method</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">group</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># Send the updated counter value to all players in the group</span>
+        <span class="k">return</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;counter&#39;</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">counter</span><span class="p">}}</span>
+
+<span class="n">page_sequence</span> <span class="o">=</span> <span class="p">[</span><span class="n">Decision</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=d2291f4a-e049-47e1-b609-d87399e99f48" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><code>Decision.html</code></p>
+<div class="highlight"><pre><span></span>{{ block content }}
+<span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Group Counter: <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;counter&quot;</span><span class="p">&gt;</span>{{ group.counter }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;incrementCounter()&quot;</span><span class="p">&gt;</span>Increment Counter<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+{{ endblock }}
+
+{{ block scripts }}
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">incrementCounter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Send an increment request to the server</span>
+<span class="w">        </span><span class="nx">liveSend</span><span class="p">({});</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">liveRecv</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Update the counter when new data is received</span>
+<span class="w">        </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;counter&quot;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">counter</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+{{ endblock }}
+</pre></div>
+
+</div>
+</div>
+</div>
+</div>
 <div id="cell-id=experimental-bangkok" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="HTML,-CSS-and-Bootstrap"><a name="bootstrap">HTML, CSS and Bootstrap</a><a class="anchor-link" href="#HTML,-CSS-and-Bootstrap">&#182;</a></h1>
+<h1 id="Bootstrap">Bootstrap<a class="anchor-link" href="#Bootstrap">&#182;</a></h1>
 </div>
 </div>
 </div>
-</div></section><section >
-<div id="cell-id=executive-dividend" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="HTML">HTML<a class="anchor-link" href="#HTML">&#182;</a></h2><ul>
-<li>set of tags that are interpreted by the browser</li>
-</ul>
-<p><strong>Useful tags</strong></p>
-<ul>
-<li>h1 to h6 are 6 levels of title</li>
-<li>p, br for paragraphs and break return</li>
-<li>table, thead, tbody, tr, th, td for tables</li>
-<li>ul, ol, li for list environment</li>
-<li>img for picture</li>
-<li>span, div, two kinds of blocks; span is an inline-block and div is a block</li>
-</ul>
-<p>Introduction to HTML by the Mozilla fundation <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML">here</a></p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=unlimited-director" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="CSS">CSS<a class="anchor-link" href="#CSS">&#182;</a></h2><ul>
-<li>Cascading Style Sheet</li>
-<li>set the style of the html tags</li>
-<li>either in the &quot;style&quot; attribute of a tag</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;font-size: 0.8em; color: brown;&quot;</span><span class="p">&gt;</span>
-    the sentences
-<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</pre></div>
-<p>or inside a style block</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-<span class="w">    </span><span class="nt">p</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="kt">em</span><span class="p">;</span>
-<span class="w">        </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">brown</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=lovely-tobago" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="id-attribute">id attribute<a class="anchor-link" href="#id-attribute">&#182;</a></h3><p>In the previous example, all the p of the html page are concerned. To apply the style to only one p (or tag) you must define an id to the corresponding p</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;my_p&quot;</span><span class="p">&gt;</span>
-    my sentence
-<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</pre></div>
-<p>and then select the id (add a # before the name of the id to let the browser knows you're searching for an id)</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-<span class="w">    </span><span class="p">#</span><span class="nn">my_p</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="kt">em</span><span class="p">;</span>
-<span class="w">        </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">brown</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=portuguese-dragon" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="class-attribute">class attribute<a class="anchor-link" href="#class-attribute">&#182;</a></h3><p>If it's for several p (tags) but not all of them, you define a class</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;my_p&quot;</span><span class="p">&gt;</span>
-    my sentence
-<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</pre></div>
-<p>and then</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-<span class="w">    </span><span class="nt">p</span><span class="p">.</span><span class="nc">my_p</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="kt">em</span><span class="p">;</span>
-<span class="w">        </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">brown</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</pre></div>
-<p>It means <code>all the paragraph of class my_p</code></p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=competent-absolute" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Main style properties</p>
-<ul>
-<li>font-family, font-size, font-weight, font-style</li>
-<li>color, background-color</li>
-<li>text-align, text-decoration</li>
-<li>height, width, margin, padding</li>
-<li><a href="http://www.css-faciles.com/proprietes-css-liste-alphabetique.php">List of all CSS properties</a></li>
-<li><a href="https://html-css-js.com/css/generator/">Online CSS generator</a></li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section><section >
 <div id="cell-id=amino-hurricane" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Bootstrap">Bootstrap<a class="anchor-link" href="#Bootstrap">&#182;</a></h2><ul>
+<ul>
 <li>library that defines a set of classes for many tags</li>
 <li>web-responsive</li>
 <li><a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">Boostrap's website</a></li>
@@ -18973,14 +18955,14 @@ lab_004
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=correct-bones" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Main-useful-classes">Main useful classes<a class="anchor-link" href="#Main-useful-classes">&#182;</a></h3><ul>
+<ul>
 <li>card: <code>&lt;div class=&quot;card&quot;&gt;...&lt;/div&gt;</code>: to place one or more paragraphs inside a frame whose background color can be defined (<a href="https://getbootstrap.com/docs/5.0/components/card/">doc</a>)</li>
 <li><code>&lt;div class=&quot;row&quot;&gt;...&lt;/div&gt;</code>: to define a row, in wich you can set a grid with new divs and &quot;col-x&quot; class</li>
 <li>col-x: a row is divided into 12 columns, so you can set the number of cols a div may span, with <code>&lt;div class=&quot;col-6&quot;&gt;</code> for example</li>
@@ -18995,14 +18977,15 @@ lab_004
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=secret-amateur" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Pratice">Pratice<a class="anchor-link" href="#Pratice">&#182;</a></h2><ul>
+<p><strong>Exercice</strong></p>
+<ul>
 <li>improve the web interfaces of the public goods game, by using the card div in the decision and results web pages</li>
 </ul>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card bg-light mb-3&quot;</span><span class="p">&gt;</span>
@@ -19026,627 +19009,18 @@ lab_004
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
-<div id="cell-id=domestic-reputation" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="JavaScript"><a name="js">JavaScript</a><a class="anchor-link" href="#JavaScript">&#182;</a></h1>
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=ignored-shade" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>programming language interpreted and executed on the client side, by the browser</li>
-<li>can access to the tags and change their css properties</li>
-<li>can add and handle events (click for example)</li>
-</ul>
-<p>Introduction to JavaScript by the mozilla fundation <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">here</a></p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=unknown-analyst" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>js can be added with a <code>&lt;script&gt;...&lt;/script&gt;</code> tag at any place in the document</li>
-<li>also in event attributes of some html tags, like <code>onclick</code> for example</li>
-<li>or in a dedicated block at the bottom of the html file</li>
-</ul>
-<div class="highlight"><pre><span></span>{{ block scripts }}
-<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="w">    </span><span class="nx">js</span><span class="w"> </span><span class="nx">functions</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">instructions</span>
-<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-{{ endblock }}
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=noble-cover" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Main-js-rules">Main js rules<a class="anchor-link" href="#Main-js-rules">&#182;</a></h2><ul>
-<li>&quot;;&quot; at the end of each instruction</li>
-<li>// for one line comments and /* ... */ for multiple lines comments</li>
-<li>main types: Number, String, Boolean, Array and Dictionnary</li>
-<li>Array is like a python list, can store different types of objects</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="nx">my_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;welcome&quot;</span><span class="p">];</span>
-</pre></div>
-<ul>
-<li>Dictionnary is like in python:</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="nx">my_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;value&quot;</span><span class="p">};</span>
-</pre></div>
-<p>and you can access to the value with my_dict[&quot;key&quot;]</p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=empty-thread" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Conditional structure</p>
-<div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">condition_1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">instructions</span><span class="p">;</span>
-<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">condition_2</span><span class="p">){</span>
-<span class="w">    </span><span class="nx">instructions</span><span class="p">;</span>
-<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">instructions</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=infrared-edward" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>For loop</p>
-<div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="mf">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">instructions</span><span class="w"> </span><span class="nx">repetead</span><span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="nx">times</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">// array</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">myArray</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myArray</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
-
-<span class="c1">// or</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">myArray</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span><span class="w">  </span><span class="c1">// display the value</span>
-<span class="p">}</span>
-
-<span class="c1">// dictionnary</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">k</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">my_dict</span><span class="p">))</span>
-<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">k</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">v</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=satisfactory-preservation" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>While</p>
-<div class="highlight"><pre><span></span><span class="k">while</span><span class="p">(</span><span class="nx">condition</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">instructions</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=stopped-antique" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>To create your own function</p>
-<div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">myFunction</span><span class="p">(</span><span class="nx">arguments_needed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">instructions</span><span class="p">;</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">something</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=retained-logging" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="The-document-object-model-(DOM)">The document object model (DOM)<a class="anchor-link" href="#The-document-object-model-(DOM)">&#182;</a></h2><ul>
-<li>created by the browser once the page is loaded</li>
-<li>list all the tags, their attributes and their values</li>
-<li>the root is the &quot;document&quot; object</li>
-<li>you can open the developer tools of your browser to see it</li>
-</ul>
-<figure>
-    <img src="img/dom.svg" alt="DOM" width=300/>
-</figure>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=perceived-brother" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>can be called with js</li>
-<li>document.title: displays or changes the title (tab name)</li>
-<li>console.log(&quot;text displayed in the console&quot;);</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=coupled-breath" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Selection-of-html-tags-with-querySelector-and-querySelectorAll">Selection of html tags with querySelector and querySelectorAll<a class="anchor-link" href="#Selection-of-html-tags-with-querySelector-and-querySelectorAll">&#182;</a></h3><ul>
-<li>querySelector returns the first element that matches the request</li>
-<li>querySelectorAll return an array with all the elements that match the resquest</li>
-<li>the request can be a tag, an id, a class etc.</li>
-<li>you have a list of the existing selector <a href="https://www.w3.org/Style/css3-selectors-updates/WD-css3-selectors-20010126.fr.html#selectors">here</a></li>
-<li>the easiest way is to set an id to the html element, and to select the element by its id, as in the example below. A <code>#</code> must be added to let the selector know that an id must be searched</li>
-</ul>
-<p>In the html code (a hidden paragraph only displayed if needed)</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;error_message&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-danger&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;visibility: hidden&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</pre></div>
-<p>In the script section</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="kd">let</span><span class="w"> </span><span class="nx">p_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#error_message&quot;</span><span class="p">);</span>
-<span class="nx">p_error</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Please enter a value&quot;</span><span class="p">;</span>
-<span class="nx">p_error</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">visibility</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;visible&quot;</span><span class="p">;</span>
-<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=legitimate-double" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Select-an-otree-widget-and-get-the-value">Select an otree widget and get the value<a class="anchor-link" href="#Select-an-otree-widget-and-get-the-value">&#182;</a></h3><ul>
-<li>otree sets an id to each widget, the id is <code>id_field_name</code>, so a field &quot;nationality&quot; will have an id <code>id_nationality</code></li>
-</ul>
-<p>To get the value of the selected element just add <code>.value</code></p>
-<div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="nx">nationality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#id_nationality&quot;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
-</pre></div>
-<p>For radio button, to get all the buttons</p>
-<div class="highlight"><pre><span></span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&quot;input[name=field_name]&quot;</span><span class="p">);</span>
-</pre></div>
-<p>and to get the checked button</p>
-<div class="highlight"><pre><span></span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;input[name=field_name]:checked&quot;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
-</pre></div>
-<p>Example :</p>
-<div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="nx">is_student</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;input[name=student]:checked&quot;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=74726311" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h3><ul>
-<li>run the demographic questionnaire</li>
-<li>on the web interface click on &quot;open source code&quot; or click on an element and click &quot;inspect&quot;</li>
-<li>in the browser console, try to select some elements with document.querySelector and document.querySelectorAll</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=61f246f0" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Main-attributes-of-DOM-objects">Main attributes of DOM objects<a class="anchor-link" href="#Main-attributes-of-DOM-objects">&#182;</a></h2><ul>
-<li>element.value : to get the value of the element</li>
-<li>element.disabled : to enable / disable the element</li>
-<li>element.innerHTML : to add html content to the element</li>
-<li>element.style.visibility : hidden / visible to display / hide the element</li>
-<li>element.style.color, element.style.backgroundColor, element.style.fontSize, element.style.fontWeight, element.style.fontStyle ... More generally, element.style.X allows to change the css value of X</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=857b7040" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Add-an-event-listener-to-a-widget">Add an event listener to a widget<a class="anchor-link" href="#Add-an-event-listener-to-a-widget">&#182;</a></h3><p>Connects an event to a function : each widget triggers events (change, click, input etc., see the doc of the corresponding widget)<br />
-Useful when you want to display/hide or enable/disable a widget depending on the value of another.<br />
-Below an example with student and level_of_study</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">stud_rb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&quot;input[name=student]&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">stud_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#id_level_of_study&quot;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">enable_stud_level</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">stud</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;input[name=student]:checked&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">stud_level</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">stud</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;False&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">stud_level</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">rb</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">stud_rb</span><span class="p">)</span>
-<span class="w">            </span><span class="nx">rb</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">enable_stud_level</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=ff518251" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Pratice">Pratice<a class="anchor-link" href="#Pratice">&#182;</a></h3><ul>
-<li>in the demographic questionnaire, enable/disable student_level and student_discipline depending on whether the participant is/isn't a student</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=e8e8a00e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>But if the widget is disabled no value is returned, so that if the field is mandatory it will raise an error.<br />
-To avoid this, we can add <code>blank=True</code> in the field declaration (init file, class Player), and use the method 
-<code>error_message</code> in the class associated to the web page:</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Questionnaire</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">error_message</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">values</span><span class="p">[</span><span class="s2">&quot;student&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">values</span><span class="p">[</span><span class="s2">&quot;level_of_study&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;You declared to be student, so you have to select your level of study.&quot;</span>
-</pre></div>
-<p>make the changes in the field declaration and the class associated to the web page.</p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=f5178ca7" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="An-application-with-javascript-:-the-balloon-Analogue-Risk-Task-(BART)">An application with javascript : the balloon Analogue Risk Task (BART)<a class="anchor-link" href="#An-application-with-javascript-:-the-balloon-Analogue-Risk-Task-(BART)">&#182;</a></h2><p>To measure the risk attitude of the participant</p>
-<p>The participant clicks on a button to inject some air in a balloon (min 0, max 64). Each injection the balloon has one half probability to explode. Each injection worths 0.5€ but if the balloon explodes the participant losts every accumulated amount.</p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=0f6978e9" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The participant must choose the number of air injection</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="n">BasePlayer</span><span class="p">):</span>
-    <span class="n">injections</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
-    <span class="n">explosion_value</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
-    <span class="n">explosion</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">()</span>
-
-
-<span class="k">def</span> <span class="nf">compute_payoff</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">player</span><span class="o">.</span><span class="n">explosition</span><span class="p">:</span>
-        <span class="n">player</span><span class="o">.</span><span class="n">payoff</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">player</span><span class="o">.</span><span class="n">payoff</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">injections</span> <span class="o">*</span> <span class="n">C</span><span class="o">.</span><span class="n">PAYOFF_PER_PUMP</span>
-
-
-<span class="k">class</span> <span class="nc">Decision</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
-    <span class="n">form_model</span> <span class="o">=</span> <span class="s2">&quot;player&quot;</span>
-    <span class="n">form_field</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;injections&quot;</span><span class="p">,</span> <span class="s2">&quot;explosion_value&quot;</span><span class="p">,</span> <span class="s2">&quot;explosion&quot;</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=179b0459" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>On the web interface :</p>
-<ul>
-<li>a balloon picture</li>
-<li>a + button that increases the number of injections and a - button that decreases it</li>
-<li>if the participant clicks on the + button, the size of the ballon increases by 2 px</li>
-<li>if the participant clicks on the - button, the size of the ballon decreases by 2 px</li>
-<li>a text area displays the number of injections, and the payoff if the ballon doesn't explode</li>
-<li>once the participant validates her decision, she discovers whether the balloon explodes or not. If it does, a picture with the exploded balloon is displayed.</li>
-</ul>
-<p>The pictures are available <a href="http://www.duboishome.info/dimitri/cours/oTree/files/bart_pictures.zip">here</a></p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=e6d4aefa" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Steps :</p>
-<ol>
-<li>a function that increases the number of injections and the size of the balloon</li>
-<li>a function that decreases the number of injections and the size of the balloon</li>
-<li>a connection between the + button and the increase function and a connection between the - button and the decreases function</li>
-<li>a button &quot;Validate&quot; that randomly selects the injection at which the ballon explodes. If the explosion value is lower than or equal the number of injections chosen by the participant the ballon explodes, otherwise it doesn't explode. If the balloon explodes the participant's payoff is equal to 0. If not, the participant's payoff is equal to the number of injections x 0.5 €</li>
-<li>once the result is displayed enabled the &quot;next&quot; button.</li>
-</ol>
-<p>$\downarrow$ Help in the next slide</p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=d4f4f862" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Help">Help<a class="anchor-link" href="#Help">&#182;</a></h3><ol>
-<li>to enable / disable the next button</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.otree-btn-next&quot;</span><span class="p">).</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">True</span><span class="p">;</span>
-</pre></div>
-<ol start="2">
-<li>to select of random value between 0 and 64</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="nx">explosion_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">64</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
-</pre></div>
-<ol start="3">
-<li>to change the size of an image</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="nx">the_image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#img_balloon&quot;</span><span class="p">);</span>
-<span class="nx">the_image</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
-<span class="nx">the_image</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
-</pre></div>
-<ol start="4">
-<li>to change an image (suppose the id of the image is img_balloon)</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="nx">the_image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#img_balloon&quot;</span><span class="p">);</span>
-<span class="nx">the_image</span><span class="p">.</span><span class="nx">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{{ static &#39;bart/exploded.png&#39; }}&quot;</span><span class="p">;</span>
-</pre></div>
-<p>$\downarrow$ to be continued in the next slide</p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=e464bb96" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ol start="5">
-<li>to add invisible input</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;explosion_value&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;explosion&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>
-</pre></div>
-<p>and in javascript</p>
-<div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="nx">input_exp_val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;input[name=explosion_value]&quot;</span><span class="p">);</span>
-<span class="kd">let</span><span class="w"> </span><span class="nx">input_exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;input[name=explosion]&quot;</span><span class="p">);</span>
-
-<span class="nx">input_exp_value</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">explosion_value</span><span class="p">;</span>
-<span class="nx">input_exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">explosion_value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">injections</span><span class="p">;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=similar-potato" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h3><p>Write the BART application</p>
-
-</div>
-</div>
-</div>
-</div></section></section><section ><section >
-<div id="cell-id=democratic-diameter" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Live-method"><a name="livemethod">Live method</a><a class="anchor-link" href="#Live-method">&#182;</a></h1>
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=professional-stream" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>allows a live communication between the web page and the server</li>
-<li>useful for a chat application or an auction market application for example</li>
-<li>javascripts methods in the web page:<ul>
-<li><strong>liveSend(data)</strong> to send data to the server (usually a dictionnary)</li>
-<li><strong>liveRecv(data)</strong> to receive the data from the server</li>
-</ul>
-</li>
-<li>python method (in the correspond page class): <code>live_method(player: Player, data)</code></li>
-<li>this method must return a dictionnary, with as key the player (id_in_group) to send the data to and as value the data</li>
-<li>to send to every group members the key must be 0</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=7d2fdfc5" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>html file : liveSend(data) $\rightarrow$ python file: live_method(player: Player, data) $\rightarrow$ html file : liveRecv(data)</p>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=b31cc733" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Example">Example<a class="anchor-link" href="#Example">&#182;</a></h2><p>Send a random value to the other players in the group</p>
-<p>In the init file</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Decision</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">live_method</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># to check</span>
-        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;sender&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">id_in_group</span>
-        <span class="k">return</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="n">data</span><span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=575ec581" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>In the Decision.html file</p>
-<div class="highlight"><pre><span></span>{{ block content }}
-<span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-secondary&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;send_random_value()&quot;</span><span class="p">&gt;</span>Send a random value<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-{{ endblock }}
-
-{{ block scripts }}
-<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">send_random_value</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">random_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>
-<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Send </span><span class="si">${</span><span class="nx">random_value</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">liveSend</span><span class="p">({</span><span class="nx">random_value</span><span class="o">:</span><span class="w"> </span><span class="nx">random_value</span><span class="p">});</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">liveRecv</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
-<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Received :`</span><span class="p">);</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">k</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
-<span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">k</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">v</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-{{ endblock }}
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=funded-cabin" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h2><ul>
-<li>write a simple application (chat for example) where the player sends messages to everyone in her group</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section></section><section ><section >
 <div id="cell-id=alone-provincial" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Highcharts"><a name="highcharts">Highcharts</a><a class="anchor-link" href="#Highcharts">&#182;</a></h1>
+<h1 id="Highcharts">Highcharts<a class="anchor-link" href="#Highcharts">&#182;</a></h1>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=brutal-columbus" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -19665,14 +19039,15 @@ To avoid this, we can add <code>blank=True</code> in the field declaration (init
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=25d73e77" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Example">Example<a class="anchor-link" href="#Example">&#182;</a></h2><p>In the block content create a div</p>
+<p><strong>Example</strong></p>
+<p>In the block content create a div</p>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;graphic&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </pre></div>
 <p>and in the scripts block :</p>
@@ -19708,32 +19083,33 @@ To avoid this, we can add <code>blank=True</code> in the field declaration (init
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=d4acf7ee" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h2><ul>
+<p><strong>Exercice</strong></p>
+<ul>
 <li>create an application (graph for example) and inside the page display a graph with highcharts</li>
 </ul>
 
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=9dcdf698" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Internationalisation"><a name="i18n">Internationalisation</a><a class="anchor-link" href="#Internationalisation">&#182;</a></h1>
+<h1 id="Internationalisation">Internationalisation<a class="anchor-link" href="#Internationalisation">&#182;</a></h1>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=4e03b64a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -19754,7 +19130,7 @@ To avoid this, we can add <code>blank=True</code> in the field declaration (init
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=d73f9db9" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -19774,7 +19150,7 @@ To avoid this, we can add <code>blank=True</code> in the field declaration (init
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=0da0428b" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -19796,7 +19172,7 @@ To avoid this, we can add <code>blank=True</code> in the field declaration (init
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=52f7d1ef" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -19820,32 +19196,151 @@ To avoid this, we can add <code>blank=True</code> in the field declaration (init
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=39853a28" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Pratice">Pratice<a class="anchor-link" href="#Pratice">&#182;</a></h2><ul>
+<p><strong>Exercice</strong></p>
+<ul>
 <li>add a language for one of the applications</li>
 </ul>
 
 </div>
 </div>
 </div>
-</div></section></section><section ><section >
+</div>
 <div id="cell-id=48f4fda8" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Tips-&amp;-tricks"><a name="tips_and_tricks">Tips &amp; tricks</a><a class="anchor-link" href="#Tips-&amp;-tricks">&#182;</a></h1>
+<h1 id="Tips-&amp;-tricks">Tips &amp; tricks<a class="anchor-link" href="#Tips-&amp;-tricks">&#182;</a></h1>
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
+<div id="cell-id=f0af0f1b-bd64-46d8-b17c-abf1746a4abe" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Payments">Payments<a class="anchor-link" href="#Payments">&#182;</a></h2><ul>
+<li>the tab &quot;Payments&quot; displays the payoff of each participant</li>
+<li>the value displayed is given by the variable <strong>participant.payoff</strong></li>
+<li>it is equal to the cumulative payoff since the beginning of the session, i.e. the cumulative value of <strong>player.payoff</strong> (for each round of each application)</li>
+<li>the value can be overriden by setting player.participant.payoff = new_value</li>
+<li>it is the case for example if we want to pay only one round or only one application</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=65c081eb-f47e-4596-9906-948fd0b31630" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Pay-only-one-round-of-the-repeated-game">Pay only one round of the repeated game<a class="anchor-link" href="#Pay-only-one-round-of-the-repeated-game">&#182;</a></h3><ul>
+<li>create a method and call this method just before the end of the application</li>
+<li>inside this method, select the paid round and set the value of this round's payoff to participant.payoff</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># ADDITIONAL METHODS</span>
+<span class="k">def</span> <span class="nf">set_final_payoff</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
+    <span class="n">paid_round</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">NUM_ROUNDS</span><span class="p">)</span>
+    <span class="n">player</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">payoff</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">in_round</span><span class="p">(</span><span class="n">paid_round</span><span class="p">)</span><span class="o">.</span><span class="n">payoff</span>
+
+<span class="c1"># PAGES</span>
+<span class="k">class</span> <span class="nc">Results</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">before_next_page</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">,</span> <span class="n">timeout_happened</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">player</span><span class="o">.</span><span class="n">round_number</span> <span class="o">==</span> <span class="n">C</span><span class="o">.</span><span class="n">NUM_ROUNDS</span><span class="p">:</span>
+            <span class="n">set_final_payoff</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=b3c1c2f6-c5e5-4297-9c7c-4643ee1f851b" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Pay-one-application-among-several">Pay one application among several<a class="anchor-link" href="#Pay-one-application-among-several">&#182;</a></h3><ul>
+<li>there exists an attribute in the participant class, called vars, which is a dictionnary, and in which you can store whatever you want</li>
+<li>the participant is the same in the different applications of the session, so you can access this &quot;vars&quot; dictionary from any application of the session</li>
+<li>so, in a method called at the end of each application you store the player's payoff for this application in the participant.vars dictionnary</li>
+<li>create a final application that displays the payoff of each application (with an explanation text)</li>
+<li>within this &quot;final&quot; application, you randomly select the application that will actually be paid</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=d80f501e-5e81-4764-a12e-353c5c3fcf6c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>In each application of the experiment</strong> :</p>
+<div class="highlight"><pre><span></span><span class="c1"># ADDITIONAL METHODS</span>
+<span class="k">def</span> <span class="nf">set_final_payoff</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
+    <span class="n">paid_round</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">NUM_ROUNDS</span><span class="p">)</span>
+    <span class="n">txt_final</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Round </span><span class="si">{</span><span class="n">paid_round</span><span class="si">}</span><span class="s2"> has been randomly selected to be paid&quot;</span>
+    <span class="n">player</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">vars</span><span class="p">[</span><span class="s2">&quot;app_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">payoff</span><span class="o">=</span><span class="n">player</span><span class="o">.</span><span class="n">in_round</span><span class="p">(</span><span class="n">paid_round</span><span class="p">)</span><span class="o">.</span><span class="n">payoff</span><span class="p">,</span> 
+        <span class="n">txt_final</span><span class="o">=</span><span class="n">txt_final</span>
+    <span class="p">)</span>
+
+<span class="c1"># PAGES</span>
+<span class="k">class</span> <span class="nc">Results</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">before_next_page</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">,</span> <span class="n">timeout_happened</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">player</span><span class="o">.</span><span class="n">round_number</span> <span class="o">==</span> <span class="n">C</span><span class="o">.</span><span class="n">NUM_ROUNDS</span><span class="p">:</span>
+            <span class="n">set_final_payoff</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=78a8bda7-4bf1-45fb-8920-a5b3a06ff566" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>In a final application</strong> (app_sequence=[&quot;welcome&quot;, &quot;public_goods&quot;, &quot;investment_game&quot;, demographics&quot;, &quot;final&quot;]):</p>
+<div class="highlight"><pre><span></span><span class="c1"># ADDITIONAL METHODS</span>
+<span class="k">def</span> <span class="nf">select_paid_app</span><span class="p">(</span><span class="n">subsession</span><span class="p">:</span> <span class="n">Subsession</span><span class="p">):</span>
+    <span class="n">apps</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;public_goods&quot;</span><span class="p">,</span> <span class="s2">&quot;investment_game&quot;</span><span class="p">]</span>  <span class="c1"># the list of potentially paid applications</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">subsession</span><span class="o">.</span><span class="n">get_players</span><span class="p">():</span>
+        <span class="n">paid_app</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">apps</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">payoff</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">vars</span><span class="p">[</span><span class="n">paid_app</span><span class="p">][</span><span class="s2">&quot;payoff&quot;</span><span class="p">]</span>
+
+<span class="c1"># PAGES</span>
+<span class="k">class</span> <span class="nc">BeforeFinalPage</span><span class="p">(</span><span class="n">WaitPage</span><span class="p">):</span>
+    <span class="n">wait_for_all_groups</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">after_all_players_arrive</span><span class="p">(</span><span class="n">subsession</span><span class="p">):</span>
+        <span class="n">select_paid_app</span><span class="p">(</span><span class="n">subsession</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Final</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+</div>
 <div id="cell-id=207bcc07" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -19862,7 +19357,7 @@ To avoid this, we can add <code>blank=True</code> in the field declaration (init
 </div>
 </div>
 </div>
-</div></section><section >
+</div>
 <div id="cell-id=e0ca4a80" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -19881,8 +19376,6 @@ To avoid this, we can add <code>blank=True</code> in the field declaration (init
 </div>
 </div>
 </div>
-</div></section></section>
-</div>
 </div>
 </body>
 
@@ -19891,56 +19384,5 @@ To avoid this, we can add <code>blank=True</code> in the field declaration (init
 
 
 
-
-<script>
-require(
-    {
-      // it makes sense to wait a little bit when you are loading
-      // reveal from a cdn in a slow connection environment
-      waitSeconds: 15
-    },
-    [
-      "https://unpkg.com/reveal.js@4.0.2/dist/reveal.js",
-      "https://unpkg.com/reveal.js@4.0.2/plugin/notes/notes.js"
-    ],
-
-    function(Reveal, RevealNotes){
-        // Full list of configuration options available here: https://github.com/hakimel/reveal.js#configuration
-        Reveal.initialize({
-            controls: true,
-            progress: true,
-            history: true,
-            transition: "slide",
-            slideNumber: "",
-            plugins: [RevealNotes]
-        });
-
-        var update = function(event){
-          if(MathJax.Hub.getAllJax(Reveal.getCurrentSlide())){
-            MathJax.Hub.Rerender(Reveal.getCurrentSlide());
-          }
-        };
-
-        Reveal.addEventListener('slidechanged', update);
-
-        function setScrollingSlide() {
-            var scroll = false
-            if (scroll === true) {
-              var h = $('.reveal').height() * 0.95;
-              $('section.present').find('section')
-                .filter(function() {
-                  return $(this).height() > h;
-                })
-                .css('height', 'calc(95vh)')
-                .css('overflow-y', 'scroll')
-                .css('margin-top', '20px');
-            }
-        }
-
-        // check and set the scrolling slide every time the slide change
-        Reveal.addEventListener('slidechanged', setScrollingSlide);
-    }
-);
-</script>
 
 </html>

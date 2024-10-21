@@ -11,9 +11,9 @@ Dimitri DUBOIS
 - [Building a first oTree application](#/5)
 - [Customizing models and fields](#6)
 - [Managing flow and pages](#7)
-- [Formation of groups, use of existing methods and creation of new methods](#/5)
-- [Tests and simulations](#/8)
-- [Data preprocessing](#/9)
+- [Group and multiplayer interaction](#/8)
+- [Automatic Execution and Simulations](#/9)
+- [Exporting Data and Data Wrangling](#/10)
 - [Role assignment, asymmetric web page sequencing and use of conditional structure in web pages](#/6)
 - [Tips to improve the existing applications](#/7)
 - [The admin side: rooms, payments and admin report](#/10)
@@ -1478,7 +1478,8 @@ Results
 
 # Group and multiplayer interaction
 
-*Illustrated with the Public Goods Game*  
+**Illustrated with the Public Goods Game**
+
 - In the **Public Goods Game**, participants are divided into groups.
 - Each participant decides how much of their private endowment to contribute to a common good.
 - The total contributions are multiplied by a factor and then shared equally among all group members.
@@ -1530,25 +1531,30 @@ class Constants(BaseConstants):
 
 
 ```python
-class Subsession(BaseSubsession):
-    def creating_session(self):
-        # Group participants randomly
-        self.group_randomly()
+def creating_session(subsession: Subsession):
+    # Group participants randomly
+    subsession.group_randomly()
 ```
 
 ## Grouping Players
 
-- Players are randomly grouped at the start of the game and then groups stay unchanged.
+- oTree forms groups based on participant ID and the PLAYERS_PER_GROUP value.
+- Participant ID are set based on the order in which they joined the session.
+
+**_With PLAYERS_PER_GROUP = 4_**:
+- The first four participants (Participant IDs 1, 2, 3, and 4) will be placed in Group 1.
+- The next four participants (Participant IDs 5, 6, 7, and 8) will be placed in Group 2.
+-  etc.
+- These groups will remain the same for every round, provided you have multiple rounds.
+
+In the PGG, players are randomly grouped at the start of the game and then groups stay unchanged :
 - In the first round, participants are randomly grouped
 - For all subsequent rounds, groups are **automatically retained** unless you explicitly re-group them.
 
 ```python
-class Subsession(BaseSubsession):
-    def creating_session(self):
-        if self.round_number == 1:
-            self.group_randomly()
-        else:
-            self.group_like_round(1)
+def creating_session(subsession: Subsession):
+    if subsession.round_number == 1:
+        subsession.group_randomly()
 ```
 
 ## Defining group-level fields and methods
@@ -1563,6 +1569,9 @@ class Group(BaseGroup):
     def compute_total_contribution(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()]))
         self.individual_share = self.total_contribution / len(self.get_players())
+        # calcul of players' individual payoff
+        for p in self.get_players():
+            p.compute_payoff()
 ```
 
 ## Player contribution and individual payoff
@@ -1588,40 +1597,49 @@ class Player(BasePlayer):
 Write the code of the public goods game.
 
 
-# Automatic execution and simulations
+# Automatic Execution and Simulations
 
-## before_next_page
+## Using `before_next_page` for Automated Execution
 
-- Based on ```before_next_page``` method and the ```timeout_happened``` parameter
-- timeout_happened is triggered when the experimenter click on ```advance slowest users``` in the admin web interface (Monitor tab)
+- The `before_next_page` method can be used to automate certain actions before moving to the next page.
+- The timeout_happened parameter is triggered when the experimenter clicks "Advance slowest users" in the admin interface under the Monitor tab.
 
 ```python
 def before_next_page(player, timeout_happened):
     if timeout_happened:
-        player.public_account = random.randint(0, C.ENDOWMENT)
-    player.private_account = C.ENDOWMENT - player.public_account
-
+        player.contribution = random.randint(0, C.ENDOWMENT)
+    player.keep = C.ENDOWMENT - player.contribution
 ```
 
-If timeout_happened is triggered, the amount placed by the player in the public account is programmatically set with a random value.  
-For pages without data collection there is nothing to do, the ``` advance slowest users``` button moves the players to the next page.  
-Once done, start a demo, open a link and go to the Monitor tab, and then ``` advance slowest users```. It allows to check wether the webpage are displayed without raising errors, and also to check the data generated (data tab) .
+**Explanation**:
+- If the timeout_happened flag is triggered (e.g., using the "Advance slowest users" button), the amount a player allocates to the public account is automatically set to a random value.
+- For pages without data collection, simply clicking "Advance slowest users" will move the players to the next page without any additional action.
+
+**How to Test**:
+- Start a demo session of your experiment.
+- Open a player link and navigate to the Monitor tab.
+- Click "Advance slowest users" to test the page transition and observe the generated data in the Data tab.
 
 
-## tests.py file
+This method helps you ensure that pages transition correctly and that data is being properly generated during automated play.
 
-- run the session in the terminal, with data programmatically generated.
-- possibility to start a great number of players. 
-- possibility to export the generated data.
+## Writing Test Scripts with `tests.py`
 
-In the folder of the application, create a new python file, called ```tests.py```.
+- You can run automated simulations in the terminal, generating data programmatically and testing the flow of your experiment.
+- This allows you to simulate many players and export the generated data for analysis.
+
+**Create a tests file**  
+In the folder of your oTree app (e.g., public_goods), create a new Python file called `tests.py`.
 
 ```python
 from . import *
 import random
 ```
-- create a class PlayerBot(Bot) and add a method play_round()
-- right now with the current version of oTree 5, it is necessary to use ```self``` (OOP paradigm)
+
+**Create the PlayerBot Class**
+- Define a PlayerBot class, which simulates participant behavior.
+- Use the play_round() method to specify the behavior for each round.
+
 ```python
 class PlayerBot(Bot):
     def play_round(self):
@@ -1630,57 +1648,146 @@ class PlayerBot(Bot):
         yield Submission(Decision, timeout_happened=True)
 ```
 
-```yield``` for each page of the page_sequence, Submission if it's a page with data collection, in order to trigger the timeout_happened event  
-No need for WaitPage
+- yield: For each page in the `page_sequence`, use `yield` to submit actions.
+- For data collection pages, use `Submission()` to trigger the `timeout_happened` event.
+- No need to handle Wait Pages in the bot’s actions as they will be handled automatically.
 
-Once done for each page of the page_sequence, in the terminal ```otree test public_goods```  
-By default starts with num_demo_participants  
-For more players just add the number at the end of the command : ```otree test public_goods 20``` 
-To export the csv files after the simulation add ```--export path``` where path is the absolute path to the location :   
-```otree test public_goods 20 -- export C:\Users\John_Doe\Desktop\public_goods``` 
+**Run Tests**  
 
-## Pratice
-
-- write the test files for the public goods game and the socio-demographic questionnaire
-- create and export simulated data
-
-# <a name="preprocessing">Data preprocessing</a>
-
-The csv files generated by otree need to be cleaned and prepared for data analysis :
-- remove unnecessary columns
-- rename some columns
-- check the series' type
-- sometimes create new variables
-- merge the tables
-
-Can be done either with R or Python (pandas module in a jupyter-notebook \*)
-
-```python
-df = pd.read_csv("public_goods.csv")  # load the csv file
-print(df.shape)  # nb rows, nb columns
-print(df.columns.to_list())
-
-# keeps only some columns
-df = df[[columns_kept]].copy()  
-
-# rename the kept variables to facilitate the manipulation
-df.rename(columns={"participant.code": "participant", "session.code": "session"}, inplace=True)  
-df.rename(columns={c: c.replace("player.", "") for c in df.columns}, inplace=True)
-
-# the same with the socio-demographics data frame
-demog = pd.read_csv("demographics.csv")
-demog = demog[[columns_kept]].copy()  
-demog.rename(columns={"participant.code": "participant", "session.code": "session"}, inplace=True)  
-demog.rename(columns={c: c.replace("player.", "") for c in demog.columns}, inplace=True)
-
-
-# merge the df and the demog dataframes, with the participant as the key
-df = df.merge(demog, on=["participant"])
+In the terminal, run the tests using the following command:
+```bash
+otree test public_goods
 ```
 
-\* pandas is already installed in the *base* anaconda environment
+By default, this runs the test with the num_demo_participants defined in your session config. You can specify more players like this:
+```bash
+otree test public_goods 20  # Simulate 20 participants
+```
 
-**Practice**
+**Export Simulated Data**  
+To export the simulated data as a CSV, add the `--export` argument and specify the file path where you want the data saved:
+```bash
+otree test public_goods 20 --export C:\Users\John_Doe\Desktop\public_goods
+``` 
+
+## Exercice
+
+Write test files for both the Public Goods Game and the socio-demographic questionnaire, then simulate data and export it.
+
+# Exporting Data for Analysis
+
+## Viewing data in real-time
+
+You can view it in real-time using the oTree **admin panel**.
+  
+**Admin Panel Features**:
+- View participants’ responses as they play the game.
+- See real-time updates of contributions, payoffs, or any other data collected during the experiment.
+
+
+
+## Session-Specific Data Export
+
+- This method exports **all data for a specific session**, including all apps that were played during the session. 
+- This is useful when you want a **complete overview** of the entire session, including all rounds and all participants.
+
+1. **Go to the Session Tab** in the oTree Admin interface.
+2. Select the session you want to export data from.
+3. Click on the **Data Tab**
+4. Click on the **Plain/Excel** link (bottom right of the screen) to download the CSV file.
+
+What is Exported:
+- Data from all apps that were part of that session.
+- Includes:
+  - **Player-level data** (e.g., contributions, decisions, payoffs).
+  - **Group-level data** (e.g., total contributions, group decisions).
+  - **Subsession-level data** (e.g., round numbers, session configurations).
+
+## Application-Specific Data Export
+
+- This method exports data for **individual apps** in your project.
+- This is useful when you want to analyze data for a **single app** in isolation, without including other apps from the session.
+
+1. **Go to the Data Tab** in the oTree Admin Interface.
+2. Select the specific application from which you want to export data.
+3. Click **"Download"** to export the CSV file.
+
+What is Exported:
+- Data specific to the chosen app.
+- Focuses on the fields and variables defined in that app’s **Player**, **Group**, and **Subsession** models.
+- Includes all rounds and participants for that app only.
+
+## Data Wrangling - Cleaning and Preparing oTree Data
+
+Once you've exported your CSV files from oTree, you often need to clean and organize the data before analysis.
+
+**Common Data Wrangling Tasks**:
+1. **Remove Unnecessary Columns**: 
+   - Drop columns that are irrelevant to your analysis (e.g., internal ID fields or system-generated variables).
+
+2. **Rename Columns**:
+   - Rename columns to make them more meaningful or easier to work with in your analysis.
+   - For example, rename `participant.label` to `participant`.
+
+3. **Check and Correct Data Types**:
+   - Ensure that columns have the correct data type (e.g., numeric columns are not mistakenly treated as strings).
+   - Convert columns like `round_number` and `payoff` to their appropriate types (integer, float).
+
+4. **Create New Variables**:
+   - Sometimes you need to derive new variables from existing data.
+   - Example: Calculate a **score** by summing up answers to multiple questions in a survey.
+
+**Data Wrangling Example in Python (pandas)**
+
+- In this example, we clean and merge data from two CSV files: **Public Goods Game data** and **Demographics data**.
+
+**Step-by-Step Code**:
+
+```python
+import pandas as pd
+
+# Load the Public Goods Game data
+df = pd.read_csv("public_goods.csv")  # Load the CSV file
+print(df.shape)  # Output the number of rows and columns
+print(df.columns.to_list())  # List all column names
+```
+- Load the data: The pd.read_csv() function reads in the CSV file.
+- Inspect the data: The shape function prints the dimensions (rows, columns), and columns.to_list() prints all the column names.
+
+```python
+# Keep only relevant columns
+df = df[[columns_kept]].copy()
+
+# Rename columns for easier manipulation
+df.rename(columns={"participant.code": "participant", "session.code": "session"}, inplace=True)
+df.rename(columns={c: c.replace("player.", "") for c in df.columns}, inplace=True)
+```
+- Keep selected columns: The list *columns_kept* defines which columns to retain. This step helps in removing unnecessary columns.
+- Rename columns: We rename some columns (e.g., participant.code → participant and session.code → session) for easier handling.
+- - Additionally, we simplify column names by removing the "player." prefix for player-related data.
+
+```python
+# Repeat the process for the socio-demographic data
+demog = pd.read_csv("demographics.csv")  # Load the CSV file
+demog = demog[[columns_kept]].copy()  # Keep relevant columns
+demog.rename(columns={"participant.code": "participant", "session.code": "session"}, inplace=True)
+demog.rename(columns={c: c.replace("player.", "") for c in demog.columns}, inplace=True)
+```
+
+Repeat for Demographics Data: The same process is applied to the demographics data—keep only selected columns, and rename them for consistency.
+
+**Merge the Public Goods data and Demographics data on the participant column**
+```python
+df = df.merge(demog, on=["participant"])
+
+# Optional: Save the cleaned and merged data for further analysis
+df.to_csv("cleaned_data.csv", index=False)
+```
+
+Merge DataFrames: The merge() function combines the cleaned Public Goods data (df) with the Demographics data (demog) using the participant column as the key.
+
+
+## Exercice
 
 - open a jupyter-notebook, load the csv files, keep the needed columns, rename the columns and merge the files  
 - if you prefer, you can prepare the data with R
