@@ -15174,6 +15174,7 @@ div.jp-OutputPrompt {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="oTree---An-open-source-platform-for-behavioral-research">oTree - An open-source platform for behavioral research<a class="anchor-link" href="#oTree---An-open-source-platform-for-behavioral-research">&#182;</a></h1><p>Dimitri DUBOIS<br />
 <a href="mailto:dimitri.dubois@umontpellier.fr">dimitri.dubois@umontpellier.fr</a></p>
+<p><a href="https://www.duboishome.info/dimitri/cours/otree">https://www.duboishome.info/dimitri/cours/otree</a></p>
 
 </div>
 </div>
@@ -15186,9 +15187,10 @@ div.jp-OutputPrompt {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><span style="font-size: 1.5em;font-weight: 500">Content</span></p>
-<ul>
+<ol>
 <li><a href="#/1">Introduction</a></li>
-<li><a href="#/2">Python</a> and <a href="#/3">HTML</a></li>
+<li><a href="#/2">Python</a></li>
+<li><a href="#/3">HTML</a></li>
 <li><a href="#/4">Getting started with oTree</a></li>
 <li><a href="#/5">Building a first oTree application</a></li>
 <li><a href="#6">Customizing models and fields</a></li>
@@ -15204,7 +15206,7 @@ div.jp-OutputPrompt {
 <li><a href="#/14">Highcharts</a></li>
 <li><a href="#/15">Internationalisation</a></li>
 <li><a href="#/16">Tips &amp; Tricks</a></li>
-</ul>
+</ol>
 
 </div>
 </div>
@@ -17466,6 +17468,111 @@ This is useful in experiments where group actions affect each other, or you want
 </div>
 </div>
 </div></section><section >
+<div id="cell-id=8ee7eafe-9716-4e3b-921a-da3dc69a3eb2" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Passing-Data-to-Templates:-vars_for_template-and-js_vars">Passing Data to Templates: <code>vars_for_template</code> and <code>js_vars</code><a class="anchor-link" href="#Passing-Data-to-Templates:-vars_for_template-and-js_vars">&#182;</a></h2><p><em>Methods for Rendering Data in HTML and JavaScript</em></p>
+<h3 id="vars_for_template"><code>vars_for_template</code><a class="anchor-link" href="#vars_for_template">&#182;</a></h3><ul>
+<li><strong><code>vars_for_template()</code></strong> is a method used to pass data from Python to the HTML template in oTree.</li>
+<li>It allows you to send data from the <strong>Page class</strong> (in Python) to be rendered in the HTML page.</li>
+</ul>
+<p><strong><em>How to Use It</em></strong>:</p>
+<ul>
+<li>Define this method in your <strong>Page class</strong>.</li>
+<li>Return a dictionary of variables that will be available in the HTML template.</li>
+</ul>
+<p><em>Example</em>:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">vars_for_template</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;player_payoff&#39;</span><span class="p">:</span> <span class="n">player</span><span class="o">.</span><span class="n">payoff</span><span class="p">,</span>
+            <span class="s1">&#39;group_contribution&#39;</span><span class="p">:</span> <span class="n">player</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">total_contribution</span>
+        <span class="p">}</span>
+</pre></div>
+<p>In this example, player_payoff and group_contribution are passed to the HTML template.</p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=7732be08-6314-4bbf-b481-0015277aad10" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong><code>vars_for_template</code> in HTML</strong></p>
+<ul>
+<li>The variables returned by <strong><code>vars_for_template()</code></strong> can be used in your HTML file.</li>
+</ul>
+<p><em>Example HTML</em>:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Your payoff is: {{ player_payoff }} ECU<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Total group contribution: {{ group_contribution }} ECU<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</pre></div>
+<ul>
+<li>{{ player_payoff }} and {{ group_contribution }} are placeholders that will be replaced by the actual data from the Python method.</li>
+<li>This is useful for displaying player-specific and group-specific data in the template.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=e9d13167-2657-4f94-97cc-d98b436bd6ad" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="js_vars"><code>js_vars</code><a class="anchor-link" href="#js_vars">&#182;</a></h2><ul>
+<li><strong><code>js_vars()</code></strong> is a method used to pass data from Python to <strong>JavaScript</strong> in the HTML template.</li>
+<li>It allows you to send variables from the server-side to be used in client-side JavaScript.</li>
+</ul>
+<p><strong><em>How to Use It</em></strong>:</p>
+<ul>
+<li>Define this method in your <strong>Page class</strong>.</li>
+<li>Return a dictionary of variables that will be available in JavaScript on the HTML page.</li>
+</ul>
+<p><em>Example</em>:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPage</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">js_vars</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;trustor_role&#39;</span><span class="p">:</span> <span class="n">player</span><span class="o">.</span><span class="n">role</span> <span class="o">==</span> <span class="n">C</span><span class="o">.</span><span class="n">TRUSTOR_ROLE</span><span class="p">,</span>
+            <span class="s1">&#39;trustee_contribution&#39;</span><span class="p">:</span> <span class="n">player</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">total_contribution</span>
+        <span class="p">}</span>
+</pre></div>
+<p>In this example, trustor_role and trustee_contribution are passed to JavaScript.</p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=70697c57-d276-4a69-b26f-657009704e20" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Using <code>js_vars</code> in JavaScript</strong></p>
+<p>The variables returned by <strong><code>js_vars()</code></strong> can be accessed directly in JavaScript using the <strong><code>js_vars</code></strong> object.</p>
+<p><strong>Example JavaScript</strong>:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Is the player a trustor? &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">js_vars</span><span class="p">.</span><span class="nx">trustor_role</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Trustee&#39;s total contribution: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">js_vars</span><span class="p">.</span><span class="nx">trustee_contribution</span><span class="p">);</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
+<ul>
+<li>js_vars.trustor_role and js_vars.trustee_contribution are JavaScript variables populated from Python.</li>
+<li>This is useful for dynamic interactions, such as updating the UI or processing data client-side based on server-side logic.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section >
 <div id="cell-id=d7619171-aa5f-4714-8eab-7fe090dbe5f1" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17478,6 +17585,8 @@ This is useful in experiments where group actions affect each other, or you want
 <li><strong>Wait Pages</strong>: Used to synchronize participants in multiplayer games.</li>
 <li><strong>Adding Logic</strong>: Use <code>is_displayed</code> and <code>before_next_page</code> to control the flow.</li>
 <li><strong>Timeouts</strong>: Limit the time participants have to answer.</li>
+<li><strong>vars_for_template</strong>: You need to display python variables in the HTML.</li>
+<li><strong>js_vars</strong>: You need to pass data to be used in JavaScript for dynamic interactions (e.g., real-time updates, calculations, or live interactions).</li>
 </ul>
 
 </div>
@@ -17995,7 +18104,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 </div>
 </div>
-</div>
+</div></section><section >
 <div id="cell-id=5282e5a6-68a4-4563-a8cd-3e25e2392d72" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18021,7 +18130,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 </div>
 </div>
-</div>
+</div></section><section >
 <div id="cell-id=7e29356a-6f28-40b1-8397-e0edcd6f7181" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18204,7 +18313,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 </div>
 </div>
-</div>
+</div></section><section >
 <div id="cell-id=3c2a1ad1-f6e9-4d9a-97a2-7b5903ffd844" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18507,7 +18616,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </li>
 <li><p><strong>Public Goods Game</strong>: Create a <strong>history</strong> page where participants can view the history of decisions from all rounds.</p>
 </li>
-<li><p><strong>Parameter Flexibility</strong>: Export the <strong>MPCR parameter</strong> in the <strong><code>SESSION_CONFIGS</code></strong> and update the Public Goods Game to use this configuration.</p>
+<li><p><strong>Parameter Flexibility</strong>: Export the <strong>MPCR parameter</strong> in the <strong><code>SESSION_CONFIGS</code></strong> and update the Public Goods Game to use this configuration. Create two treatments in <code>SESSION_CONFIGS</code>, one with mpcr = 0.5 and one with mpcr = 0.75.</p>
 </li>
 <li><p><strong>Welcome Application</strong>: Create a simple welcome app with an image of your lab, and include this app in the app sequence of the Public Goods Game.</p>
 </li>
@@ -18528,101 +18637,131 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 </div>
 </div></section><section >
-<div id="cell-id=illegal-demand" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=a0f65641-b0bc-4eec-ac1b-43632fea4abd" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Rooms">Rooms<a class="anchor-link" href="#Rooms">&#182;</a></h2><ul>
-<li>if you create a session you need to forward the url</li>
-<li>alternatively you can create a room</li>
-<li>a room is like a virtual lab, with always the same url to join</li>
-</ul>
-<p><strong>In the settings file</strong>, add a <code>ROOMS</code> list and add a dictionnary<br />
-An item for each room (each item is a dictionnary)</p>
-<div class="highlight"><pre><span></span><span class="n">ROOMS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="nb">dict</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_room&quot;</span><span class="p">,</span>
-        <span class="n">display_name</span><span class="o">=</span><span class="s2">&quot;My Room&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="p">]</span>
-</pre></div>
-<p>Once done, you can click on the &quot;Rooms&quot; tab, select the room and create a new session inside this room.</p>
+<h2 id="Overview-of-the-Admin-Interface">Overview of the Admin Interface<a class="anchor-link" href="#Overview-of-the-Admin-Interface">&#182;</a></h2><p>The <strong>Admin Interface</strong> in oTree is where you manage sessions, participants, and monitor experiment progress.</p>
+<ol>
+<li>Create and manage sessions</li>
+<li>View live participant data</li>
+<li>Access the Admin Report for custom data views</li>
+<li>Use Rooms to manage participants and session links</li>
+</ol>
+<p>The Admin Interface is the central control hub for running and monitoring experiments.</p>
 
 </div>
 </div>
 </div>
 </div></section><section >
-<div id="cell-id=08fd9f26" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=2a92217b-c084-4f0c-91cb-6e3e70c4f375" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>However if a participant clicks twice on the url, she opens two tabs and plays as two players.</p>
-<p>To avoid this we restrict the access to the room to some labels :</p>
-<ul>
-<li>a participant will have to connect and enter her label (or the label is given in the url)</li>
-<li>if she clicks twice on the same link she always plays as a unique player</li>
-<li>participant_label is one of the columns displayed in the monitor tab and in the Payments tab in the admin interface</li>
+<h2 id="Managing-Rooms">Managing Rooms<a class="anchor-link" href="#Managing-Rooms">&#182;</a></h2><ul>
+<li><strong>Rooms</strong> in oTree are used to group participants and provide them with session links.</li>
+<li>Each room can be assigned to a specific session, allowing you to run multiple sessions in parallel.</li>
 </ul>
-<p><strong>To create a room</strong></p>
+<p><strong><em>Why Use Rooms</em></strong>?</p>
 <ul>
-<li>create a folder named <code>_rooms</code> at the root of your otree project</li>
-<li>inside this folder create a text file (myroom.txt for example)</li>
-<li>inside this text file, add a participant label per row. It could be whatever you want</li>
+<li>To manage larger experiments with multiple groups.</li>
+<li>To provide unique links for participants joining from different physical locations (e.g., lab computers).</li>
 </ul>
-<pre><code>lab_001
-lab_002
-lab_003
+<p><strong><em>How Rooms Work</em></strong>:</p>
+<ul>
+<li>Each room has its own URL where participants can join the session.</li>
+<li>Room links are accessible through the Admin Interface under the <strong>&quot;Rooms&quot;</strong> tab.</li>
+</ul>
+<p>Example <code>settings.py</code> Configuration:</p>
+<div class="highlight"><pre><span></span><span class="n">ROOMS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;my_lab&#39;</span><span class="p">,</span>
+        <span class="n">display_name</span><span class="o">=</span><span class="s1">&#39;My Lab&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+<p>You can now click on the &quot;Rooms&quot; tab, select the room and create a new session inside this room.</p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=5022c04d-0373-4175-a32b-8e4f7eedb187" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Using Participant Labels to Restrict Access</strong></p>
+<ul>
+<li>When participants click the room link, they are automatically added to the session associated with the room.</li>
+<li>This method works well but has limitations, such as participants joining the room multiple times from different tabs.</li>
+</ul>
+<p>To avoid this, we can restrict access using <strong>participant labels</strong>.</p>
+<p><strong><em>How it works</em></strong>:</p>
+<ul>
+<li><strong>Participant labels</strong> allow you to limit the number of times a participant can join the room by assigning them a unique label.</li>
+<li>Each participant will have a <strong>unique label</strong> that they must enter to join the session.</li>
+<li>Alternatively, the label can be provided directly in the URL.</li>
+</ul>
+<p><strong><em>Benefits</em></strong>:</p>
+<ul>
+<li><strong>Prevents multiple logins</strong>: If a participant clicks the link twice, they will always join with the same label, preventing duplicate entries.</li>
+<li><strong>Participant labels</strong> are shown in the <strong>Monitor</strong> and <strong>Payments</strong> tabs in the admin interface.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=ab1bf648-57f4-4ea8-b18f-dafcecadc5c2" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>To enable participant labels, create a <strong><code>participant_label_file</code></strong> for the room.</p>
+<p><strong><em>Create a Room with Labels in <code>settings.py</code></em></strong>:</p>
+<div class="highlight"><pre><span></span><span class="n">ROOMS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;my_lab&#39;</span><span class="p">,</span>
+        <span class="n">display_name</span><span class="o">=</span><span class="s1">&#39;My Lab&#39;</span><span class="p">,</span>
+        <span class="n">participant_label_file</span><span class="o">=</span><span class="s1">&#39;_rooms/my_lab.txt&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+<p><strong><em>Create the participant_label_file</em></strong>:
+At the root of your oTree project, create a folder named _rooms.
+Inside this folder, create a text file (e.g., my_lab.txt).
+In this file, list one participant label per row.</p>
+<div class="highlight"><pre><span></span>lab_001<span class="w">  </span>
+lab_002<span class="w">  </span>
+lab_003<span class="w">  </span>
 lab_004
-</code></pre>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=satisfactory-crowd" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>In the settings file</strong>, add the key &quot;participant_label_file&quot; and for the value the path of the file.</p>
-<div class="highlight"><pre><span></span><span class="n">ROOMS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="nb">dict</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_room&quot;</span><span class="p">,</span>
-        <span class="n">display_name</span><span class="o">=</span><span class="s2">&quot;My Room&quot;</span><span class="p">,</span>
-        <span class="n">participant_label_file</span><span class="o">=</span><span class="s2">&quot;_rooms/myroom.txt&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="p">]</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 </div></section><section >
-<div id="cell-id=gothic-shark" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=42ec2d9c-ee2e-4ab8-be94-51dfa6ddfc6c" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>In the admin interface</strong>, tab Rooms</p>
-<ul>
-<li>click on the room &quot;My Room&quot;</li>
-<li>connect clients to the room at <a href="http://127.0.0.1:8000/rooms/my_room">http://127.0.0.1:8000/rooms/my_room</a></li>
-<li>clients enter a label (one of those in the text file)</li>
-</ul>
-<p><strong>Easy to send to a participant his personal link</strong></p>
-<p>in a lab or on internet, provide directly individual links, such that<br />
-<a href="http://127.0.0.1:8000/rooms/my_room/?participant_label=lab_001">http://127.0.0.1:8000/rooms/my_room/?participant_label=lab_001</a></p>
-<ul>
-<li>then wait to have the number of participants needed for the experiment, and once done, start the session</li>
-<li>once the session is started, open the Monitor tab to follow the players during the experiment</li>
-<li>once the session is finished, click on the Rooms tab, and close the room</li>
-</ul>
+<p><strong><em>Two Ways to Use Participant Labels</em></strong>:</p>
+<ol>
+<li><p><strong>Manual Entry</strong>: Participants are asked to enter their assigned label when they access the room URL.</p>
+</li>
+<li><p><strong>Automatic Label in URL</strong>: You can include the label directly in the URL (e.g., <code>?participant_label=lab_001</code>).</p>
+</li>
+</ol>
+<p>This ensures that each participant joins the session with a <strong>unique label</strong> and avoids duplicate entries.</p>
 
 </div>
 </div>
@@ -18634,12 +18773,135 @@ lab_004
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Practice</strong></p>
+<p><strong>Exercice</strong></p>
 <ul>
 <li>create a room</li>
 <li>start a session in this room</li>
 </ul>
 <p><em>To be tested : find you IP adress and then in terminal write <code>otree devserver IP:8000</code> and ask your neighbour to connect to IP:8000/rooms/your_room</em></p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=d08349f0-df54-4d27-9956-ca4c0476a61f" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="The-Admin-Report">The Admin Report<a class="anchor-link" href="#The-Admin-Report">&#182;</a></h2><p>The <strong>Admin Report</strong> is a customizable page added to the admin interface under the tab labeled <strong>&quot;Report&quot;</strong>.</p>
+<p><strong><em>Why Use the Admin Report?</em></strong></p>
+<ul>
+<li>Create customized payment pages.</li>
+<li>Display key information about players and groups.</li>
+<li>Show live statistics from ongoing sessions.</li>
+<li>Visualize data in tables or graphs (using tools like <strong>Highcharts</strong>).</li>
+</ul>
+<p>The Admin Report is useful for tracking session progress or summarizing results.</p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=714e21e4-9f0c-418b-a12e-a2fc00219399" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Creating the Admin Report</strong></p>
+<ul>
+<li>To add data to the Admin Report, create a method called <strong><code>vars_for_admin_report()</code></strong> in the <strong>Subsession</strong> class.</li>
+<li>This method returns a dictionary containing the data you want to display in the admin report.</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vars_for_admin_report</span><span class="p">(</span><span class="n">subsession</span><span class="p">:</span> <span class="n">Subsession</span><span class="p">):</span>
+    <span class="n">infos_groups</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">subsession</span><span class="o">.</span><span class="n">get_groups</span><span class="p">():</span>
+        <span class="n">trustor</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">get_player_by_role</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">TRUSTOR_ROLE</span><span class="p">)</span>
+        <span class="n">trustee</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">get_player_by_role</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">TRUSTEE_ROLE</span><span class="p">)</span>
+        <span class="n">infos_groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">group_id</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">id_in_subsession</span><span class="p">,</span>
+                <span class="n">trustor</span><span class="o">=</span><span class="n">trustor</span><span class="o">.</span><span class="n">id_in_subsession</span><span class="p">,</span>
+                <span class="n">trustee</span><span class="o">=</span><span class="n">trustee</span><span class="o">.</span><span class="n">id_in_subsession</span><span class="p">,</span>
+                <span class="n">amount_sent</span><span class="o">=</span><span class="n">trustor</span><span class="o">.</span><span class="n">field_maybe_none</span><span class="p">(</span><span class="s2">&quot;amount_sent&quot;</span><span class="p">),</span>
+                <span class="n">amount_sent_back</span><span class="o">=</span><span class="n">trustee</span><span class="o">.</span><span class="n">field_maybe_none</span><span class="p">(</span><span class="s2">&quot;amount_sent_back&quot;</span><span class="p">),</span>
+                <span class="n">trustor_payoff</span><span class="o">=</span><span class="n">trustor</span><span class="o">.</span><span class="n">payoff</span><span class="p">,</span>
+                <span class="n">trustee_payoff</span><span class="o">=</span><span class="n">trustee</span><span class="o">.</span><span class="n">payoff</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">infos_groups</span><span class="o">=</span><span class="n">infos_groups</span><span class="p">)</span>
+</pre></div>
+<ul>
+<li><strong><code>vars_for_admin_report()</code></strong>: This method gathers data for all groups, such as the amount sent, amount sent back, and payoffs for trustor and trustee.</li>
+<li>Group-level data: We retrieve information from each group and store it in the infos_groups list.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=d09b20b2-4c1a-498b-9070-cce71d913ac8" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Creating the Admin Report Template</strong></p>
+<p>Next, create an HTML file called <strong><code>admin_report.html</code></strong> to display the data in the report.</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;table&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Group<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Trustor<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Trustee<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Amount sent<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Amount sent back<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Trustor&#39;s payoff<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Trustee&#39;s payoff<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+    {{ for g in infos_groups }}
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>g{{ g.group_id }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>p{{ g.trustor }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>p{{ g.trustee }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ g.amount_sent }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ g.amount_sent_back }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ g.trustor_payoff }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ g.trustee_payoff }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    {{ endfor }}
+    <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</pre></div>
+<ul>
+<li>This template renders a table showing each group's information, including amounts sent, amounts sent back, and payoffs for both players.</li>
+<li>The data is iterated over using {{ for g in infos_groups }} to display all groups.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=1e593288-7e3a-42a2-9076-2d8f511f68ab" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Customizing the Admin Report</strong></p>
+<ul>
+<li>You can further customize the Admin Report by adding different data fields, using graphs, or integrating real-time statistics.</li>
+</ul>
+<ol>
+<li><strong>Live Statistics</strong>: Show real-time updates for variables like contributions or payoffs.</li>
+<li><strong>Graphical Representation</strong>: Use tools like <strong>Highcharts</strong> to display data in charts or graphs.</li>
+<li><strong>Additional Data</strong>: Add more player-specific or group-specific data to provide a deeper view of the session's progress.</li>
+</ol>
+<p>This flexibility allows you to monitor any key metrics of your experiment in real-time.</p>
 
 </div>
 </div>
@@ -18724,8 +18986,8 @@ lab_004
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Practice</strong></p>
-<p>create the admin report for the investment game</p>
+<p><strong>Exercice</strong></p>
+<p>Create an admin report for the public goods game.</p>
 
 </div>
 </div>
@@ -18923,7 +19185,7 @@ When a player clicks a button, the counter is incremented, and all group members
 </div>
 </div>
 </div>
-</div>
+</div></section><section >
 <div id="cell-id=3ee2829a-4ab7-4a0a-b504-b53f458720ea" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18951,7 +19213,7 @@ When a player clicks a button, the counter is incremented, and all group members
 </div>
 </div>
 </div>
-</div>
+</div></section><section >
 <div id="cell-id=d2291f4a-e049-47e1-b609-d87399e99f48" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -18994,47 +19256,142 @@ When a player clicks a button, the counter is incremented, and all group members
 </div>
 </div>
 </div></section><section >
-<div id="cell-id=amino-hurricane" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=cc575a06-63bf-44cb-805b-167916e8312e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Bootstrap</strong> is a popular, open-source CSS framework that helps create responsive, mobile-first websites with minimal effort.</p>
+<p>*<em>_Why Use Bootstrap in oTree?__</em></p>
 <ul>
-<li>library that defines a set of classes for many tags</li>
-<li>web-responsive</li>
-<li><a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">Boostrap's website</a></li>
-<li>otree web interfaces are based on bootstrap</li>
-<li>you can add some nice graphical elements easily, mainly by setting value in the class attribute of the html tags (often div)</li>
+<li>Provides pre-built classes for styling buttons, tables, forms, grids, and more.</li>
+<li>Helps make experiments look clean and professional with minimal custom CSS.</li>
+<li>Supports <strong>responsive design</strong>, so your experiment looks good on all screen sizes (desktop, tablet, mobile).</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card bg-light&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card-body&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Here some sentences<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</pre></div>
+<p>Bootstrap is included by default in oTree templates.<br />
+<a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">Boostrap's website</a></p>
 
 </div>
 </div>
 </div>
 </div></section><section >
-<div id="cell-id=correct-bones" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=125f8043-0b6b-4452-8b4c-e831b804794e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>card: <code>&lt;div class=&quot;card&quot;&gt;...&lt;/div&gt;</code>: to place one or more paragraphs inside a frame whose background color can be defined (<a href="https://getbootstrap.com/docs/5.0/components/card/">doc</a>)</li>
-<li><code>&lt;div class=&quot;row&quot;&gt;...&lt;/div&gt;</code>: to define a row, in wich you can set a grid with new divs and &quot;col-x&quot; class</li>
-<li>col-x: a row is divided into 12 columns, so you can set the number of cols a div may span, with <code>&lt;div class=&quot;col-6&quot;&gt;</code> for example</li>
-<li>look at <a href="https://getbootstrap.com/docs/5.0/layout/grid/">boostrap grid</a> to understand how it works</li>
-<li>table: table, table-bordered, table-sm, table-stripped etc. (<a href="https://getbootstrap.com/docs/5.0/content/tables/">doc</a>)</li>
-<li>text alignement: text-justify, text-center, text-right</li>
-<li>text-color: text-danger, text-warning, text-info etc.</li>
-<li>margin: mt-1 to mt-5 for margin-top, mb-1 to mb-5 for margin-bottom, mx-1 to mx-5 for magin left and right, m-auto for margin-auto</li>
-<li>padding: pt-1 to pt-5 for padding-top, pb-1 to pb-5 for padding-bottom</li>
+<h2 id="The-Bootstrap-Grid-System">The Bootstrap Grid System<a class="anchor-link" href="#The-Bootstrap-Grid-System">&#182;</a></h2><ul>
+<li>Bootstrap uses a <strong>12-column grid system</strong> to create responsive layouts.</li>
 </ul>
+<p><em>Example</em>:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-md-6&quot;</span><span class="p">&gt;</span>50% width<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-md-6&quot;</span><span class="p">&gt;</span>50% width<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+<ul>
+<li>.container: Centers content and adds padding.</li>
+<li>.row: Creates a row to contain columns.</li>
+<li>.col-md-*: Defines column widths. The grid is based on 12 columns, so col-md-6 takes up half the width (6/12).</li>
+</ul>
+<p>Bootstrap's grid system ensures your layout adjusts seamlessly on different devices.</p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=576f671a-2100-4c42-a0c3-4f6ed3c8a498" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Bootstrap-Buttons">Bootstrap Buttons<a class="anchor-link" href="#Bootstrap-Buttons">&#182;</a></h2><ul>
+<li>Bootstrap provides pre-defined button styles for quick use.</li>
+</ul>
+<p><em>Example</em>:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="p">&gt;</span>Primary Button<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-secondary&quot;</span><span class="p">&gt;</span>Secondary Button<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-success&quot;</span><span class="p">&gt;</span>Success Button<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</pre></div>
+<ul>
+<li>.btn: The base class for all buttons.</li>
+<li>.btn-primary: Blue button, often used for primary actions.</li>
+<li>.btn-secondary: Gray button for secondary actions.</li>
+<li>.btn-success: Green button, often used for success messages.</li>
+</ul>
+<p>Bootstrap offers many other button styles, such as danger (red), warning (yellow), and more.</p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=1df15761-c956-4532-afad-eaa9cb3ef807" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Bootstrap-Tables">Bootstrap Tables<a class="anchor-link" href="#Bootstrap-Tables">&#182;</a></h2><p>You can easily create styled tables with Bootstrap classes.</p>
+<p><em>Example</em>:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;table table-striped&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>#<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>First Name<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Last Name<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Email<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>John<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Doe<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>john.doe@example.com<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</pre></div>
+<ul>
+<li>.table: Applies basic Bootstrap styling to the table.</li>
+<li>.table-striped: Adds alternating row colors.</li>
+</ul>
+<p>Bootstrap also provides classes like .table-bordered and .table-hover for additional styles.</p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=c978c9b4-ef5c-4335-ab6b-530151db853d" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Bootstrap-Cards">Bootstrap Cards<a class="anchor-link" href="#Bootstrap-Cards">&#182;</a></h2><p><strong>Bootstrap Cards</strong> are flexible content containers with multiple variants, often used for:</p>
+<ul>
+<li>Displaying information in a well-structured way.</li>
+<li>Grouping related content.</li>
+<li><strong>Displaying instructions</strong> or text at the top of pages in oTree experiments.</li>
+</ul>
+<p><em>Card Structure</em>:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card-header&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h5</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card-title&quot;</span><span class="p">&gt;</span>Card Title<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card-body&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card-text&quot;</span><span class="p">&gt;</span>This is some text within a card body.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">card-footer&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Card footer<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
 
 </div>
 </div>
@@ -19046,27 +19403,11 @@ When a player clicks a button, the counter is incremented, and all group members
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Exercice</strong></p>
-<ul>
-<li>improve the web interfaces of the public goods game, by using the card div in the decision and results web pages</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card bg-light mb-3&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card-title&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>The title of the card<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card-body&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>The body of the card<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</pre></div>
-<ul>
-<li>change the history table style</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;table table-stripped&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
-<span class="err">&lt;</span>/table
-</pre></div>
+<h2 id="Exercice:-Improving-Web-Interfaces-with-Bootstrap">Exercice: Improving Web Interfaces with Bootstrap<a class="anchor-link" href="#Exercice:-Improving-Web-Interfaces-with-Bootstrap">&#182;</a></h2><p>Improve the design of the <strong>Public Goods Game</strong> web interfaces by:</p>
+<ol>
+<li>Using Bootstrap <strong>cards</strong> in the decision and results pages.</li>
+<li>Enhancing the style of the <strong>history table</strong>.</li>
+</ol>
 
 </div>
 </div>
@@ -19083,62 +19424,111 @@ When a player clicks a button, the counter is incremented, and all group members
 </div>
 </div>
 </div></section><section >
-<div id="cell-id=brutal-columbus" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=c26527e6-4c28-4de0-9477-ae7babc34fb8" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Highcharts</strong> is a popular JavaScript library for creating interactive charts.</p>
 <ul>
-<li>js/css library to make graphics</li>
-<li>website: <a href="https://www.highcharts.com/">https://www.highcharts.com/</a></li>
-<li>installation: just load the library by adding</li>
+<li>It supports various types of charts such as line, bar, pie, and more.</li>
+<li>Highcharts is <strong>easy to integrate</strong> with oTree to visualize experiment data, such as payoffs, contributions, or performance trends.</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://code.highcharts.com/highcharts.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>`
-</pre></div>
-<p>Visit the Highcharts' website, and in demos select the desired graphic, and click on &quot;edit in jsfiddle&quot; to download the code.</p>
+<p><strong><em>Why Use Highcharts?</em></strong></p>
+<ul>
+<li>Highly customizable charts for interactive data visualization.</li>
+<li>Useful for displaying real-time or historical data in experiments.</li>
+<li>Provides responsive charts that adapt to different screen sizes.</li>
+</ul>
 
 </div>
 </div>
 </div>
 </div></section><section >
-<div id="cell-id=25d73e77" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=c6b01c8e-ca4b-423e-9bd2-1d1d2abda902" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Example</strong></p>
-<p>In the block content create a div</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;graphic&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<h2 id="Include-Highcharts-in-oTree">Include Highcharts in oTree<a class="anchor-link" href="#Include-Highcharts-in-oTree">&#182;</a></h2><p>To use Highcharts in oTree, include the Highcharts library in your HTML file using a CDN.</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://code.highcharts.com/highcharts.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </pre></div>
-<p>and in the scripts block :</p>
+<p>This script tag adds the Highcharts library to your page, allowing you to create charts.</p>
+<p>Add a Box/Container for the Chart</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;my_chart&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;width:100%; height:400px;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+<p>id=&quot;my_chart&quot; is where the chart will be rendered, and the size can be customized.</p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=af1a71eb-a40f-4b57-a513-243abd4534ae" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Creating-a-Basic-Highcharts-Chart">Creating a Basic Highcharts Chart<a class="anchor-link" href="#Creating-a-Basic-Highcharts-Chart">&#182;</a></h2><p><strong>Add JavaScript to Render the Chart</strong></p>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="nx">Highcharts</span><span class="p">.</span><span class="nx">chart</span><span class="p">(</span><span class="s1">&#39;graphic&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">chart</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;line&#39;</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Injections dans le BART&#39;</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nx">xAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Rounds&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">10.5</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">tickInterval</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nx">yAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Injections&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">64</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">tickInterval</span><span class="o">:</span><span class="w"> </span><span class="mf">8</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nx">series</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
-<span class="w">        </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Injections&#39;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">11</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">17</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">34</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="mf">22</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="mf">9</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">6</span><span class="p">,</span><span class="w"> </span><span class="mf">45</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">7</span><span class="p">,</span><span class="w"> </span><span class="mf">21</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">8</span><span class="p">,</span><span class="w"> </span><span class="mf">23</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">9</span><span class="p">,</span><span class="w"> </span><span class="mf">38</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">52</span><span class="p">]]</span>
-<span class="w">    </span><span class="p">}],</span>
-<span class="w">    </span><span class="nx">credits</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">enabled</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">}</span>
-<span class="p">});</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Highcharts</span><span class="p">.</span><span class="nx">chart</span><span class="p">(</span><span class="s1">&#39;my_chart&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">chart</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;line&#39;</span><span class="w"> </span><span class="p">},</span><span class="w">  </span><span class="c1">// Chart type</span>
+<span class="w">            </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Payoffs Over Time&#39;</span><span class="w"> </span><span class="p">},</span><span class="w">  </span><span class="c1">// Chart title</span>
+<span class="w">            </span><span class="nx">xAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">categories</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;Round 1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Round 2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Round 3&#39;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span><span class="w">  </span><span class="c1">// X-axis categories</span>
+<span class="w">            </span><span class="nx">yAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Payoff (ECU)&#39;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span><span class="w">  </span><span class="c1">// Y-axis label</span>
+<span class="w">            </span><span class="nx">series</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">                </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Player 1&#39;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="mf">120</span><span class="p">,</span><span class="w"> </span><span class="mf">130</span><span class="p">]</span><span class="w">  </span><span class="c1">// Sample data points</span>
+<span class="w">            </span><span class="p">},</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Player 2&#39;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">90</span><span class="p">,</span><span class="w"> </span><span class="mf">110</span><span class="p">,</span><span class="w"> </span><span class="mf">150</span><span class="p">]</span><span class="w">  </span><span class="c1">// Another series of data</span>
+<span class="w">            </span><span class="p">}]</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
+<ul>
+<li>chart.type: Defines the type of chart (e.g., line, bar, pie).</li>
+<li>xAxis.categories: Defines the labels for the x-axis (e.g., rounds, categories).</li>
+<li>series: Contains the data points to be plotted for each player or group.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=de563d11-6113-45fd-ac9b-6d4bb0209576" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Using-Dynamic-Data-with-js_vars">Using Dynamic Data with <code>js_vars</code><a class="anchor-link" href="#Using-Dynamic-Data-with-js_vars">&#182;</a></h2><p>You can pass dynamic data from Python to Highcharts using the <strong><code>js_vars()</code></strong> method in your Page class.</p>
+<p><strong><em>Pass data to JavaScript</em></strong></p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Results</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">js_vars</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;rounds&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Round 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Round 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Round 3&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;payoff_data&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">player</span><span class="o">.</span><span class="n">in_round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">payoff</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">in_round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">payoff</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">in_round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">payoff</span><span class="p">]</span>
+        <span class="p">}</span>
+</pre></div>
+<p><strong><em>Use js_vars in Highcharts</em></strong></p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Highcharts</span><span class="p">.</span><span class="nx">chart</span><span class="p">(</span><span class="s1">&#39;my_chart&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">chart</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;line&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Your Payoffs Over Rounds&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="nx">xAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">categories</span><span class="o">:</span><span class="w"> </span><span class="nx">js_vars</span><span class="p">.</span><span class="nx">rounds</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="nx">yAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Payoff (ECU)&#39;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="nx">series</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">                </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Your Payoff&#39;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="nx">js_vars</span><span class="p">.</span><span class="nx">payoff_data</span>
+<span class="w">            </span><span class="p">}]</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">});</span>
 <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </pre></div>
 
@@ -19146,16 +19536,40 @@ When a player clicks a button, the counter is incremented, and all group members
 </div>
 </div>
 </div></section><section >
-<div id="cell-id=d4acf7ee" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=b88c2bcc-cb10-45d3-9abd-b3f736f7c343" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Exercice</strong></p>
-<ul>
-<li>create an application (graph for example) and inside the page display a graph with highcharts</li>
+<h2 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h2><ol>
+<li><strong>Include Highcharts</strong>: Add the Highcharts CDN to your oTree templates.</li>
+<li><strong>Create Charts</strong>: Use the Highcharts API to create charts for data visualization.</li>
+<li><strong>Dynamic Data</strong>: Pass dynamic data from Python using <code>js_vars()</code> to create real-time charts.</li>
+<li><strong>Customize</strong>: Adjust chart types, titles, and axes to suit the experiment.</li>
+</ol>
+<p>Highcharts enables rich, interactive data visualization in oTree, perfect for real-time feedback or performance analysis.</p>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=de271642-1024-4eba-aba4-5c20a13bc9b7" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Exercise:-Visualizing-Group-Contributions-in-the-Admin-Report">Exercise: Visualizing Group Contributions in the Admin Report<a class="anchor-link" href="#Exercise:-Visualizing-Group-Contributions-in-the-Admin-Report">&#182;</a></h2><ul>
+<li>Use <strong>Highcharts</strong> to draw the evolution of <strong>group contributions</strong> over multiple rounds in the Public Goods Game (PGG).</li>
+<li>Display this chart in the <strong>Admin Report</strong> for real-time monitoring of group contributions.</li>
 </ul>
+<p><strong><em>Steps</em></strong>:</p>
+<ol>
+<li>Collect group contribution data across rounds.</li>
+<li>Pass this data to the Admin Report.</li>
+<li>Use Highcharts to visualize the data.</li>
+</ol>
 
 </div>
 </div>
