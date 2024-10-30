@@ -16962,7 +16962,7 @@ Element Selector: Targets HTML elements.</p>
 <li>for the python interpreter, select &quot;Custom environment&quot;, then &quot;Conda environment&quot; and click on the <em>browse</em> button to get the environment created with anaconda navigator (otree_env).</li>
 </ul>
 <p><strong>Now PyCharm will use the correct Python version and environment for your oTree project.</strong></p>
-<p><em>NB : the otree_env environment is located in the anaconda folder/envs/otree_course/python.exe (or python if Linux or Mac)</em></p>
+<p><em>NB : On Windows, the otree_env environment is located in AppData (hidden directory)</em></p>
 
 </div>
 </div>
@@ -17082,18 +17082,12 @@ With the development server running, you can now start building apps in your oTr
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Creating-Your-First-oTree-App">Creating Your First oTree App<a class="anchor-link" href="#Creating-Your-First-oTree-App">&#182;</a></h2><ul>
-<li><p><strong>Step 1: Start a new app</strong> : Run the following command to create a new app in your project:</p>
+<h2 id="Creating-Your-First-oTree-App">Creating Your First oTree App<a class="anchor-link" href="#Creating-Your-First-oTree-App">&#182;</a></h2><p><strong>Step 1: Start a new app</strong> : Run the following command to create a new app in your project:</p>
 <div class="highlight"><pre><span></span>otree<span class="w"> </span>startapp<span class="w"> </span>my_first_app
 </pre></div>
-</li>
-<li><p><strong>Step 2: Add the app to your project</strong></p>
-<ul>
-<li>Open settings.py in your project folder.</li>
-<li>Add your new app to the SESSION_CONFIGS list:</li>
-</ul>
-</li>
-</ul>
+<p><strong>Step 2: Add the app to your project</strong>
+    - Open settings.py in your project folder.
+    - Add your new app to the SESSION_CONFIGS list:</p>
 <div class="highlight"><pre><span></span><span class="n">SESSION_CONFIGS</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span>
         <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;my_first_app&#39;</span><span class="p">,</span>
@@ -17190,15 +17184,12 @@ With the development server running, you can now start building apps in your oTr
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Running-the-oTree-App">Running the oTree App<a class="anchor-link" href="#Running-the-oTree-App">&#182;</a></h2><ul>
-<li><p><strong>Step 1: Run the development server</strong> :</p>
+<h2 id="Running-the-oTree-App">Running the oTree App<a class="anchor-link" href="#Running-the-oTree-App">&#182;</a></h2><p><strong>Step 1: Run the development server</strong> :</p>
 <div class="highlight"><pre><span></span>otree<span class="w"> </span>devserver
 </pre></div>
-</li>
-<li><p><strong>Step 2: Access the app in your browser</strong></p>
-</li>
-</ul>
-<p><code>http://localhost:8000</code></p>
+<p><strong>Step 2: Access the app in your browser</strong></p>
+<div class="highlight"><pre><span></span>http://localhost:8000
+</pre></div>
 <p>From here, you can select your app and run it with the demo participants.</p>
 
 </div>
