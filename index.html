@@ -17477,7 +17477,7 @@ With the development server running, you can now start building apps in your oTr
     <span class="n">form_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;decision&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">before_next_page</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="n">Player</span><span class="p">,</span> <span class="n">timeout_happened</span><span class="p">):</span>
-        <span class="n">player</span><span class="o">.</span><span class="n">compute_payoff</span>
+        <span class="n">player</span><span class="o">.</span><span class="n">compute_payoff</span><span class="p">()</span>
 
 <span class="k">class</span> <span class="nc">Results</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
     <span class="k">pass</span>
@@ -18089,7 +18089,6 @@ Results
 <p><strong>Create a tests file</strong><br />
 In the folder of your oTree app (e.g., public_goods), create a new Python file called <code>tests.py</code>.</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">random</span>
 </pre></div>
 
 </div>
@@ -19374,7 +19373,7 @@ When a player clicks a button, the counter is incremented, and all group members
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Bootstrap</strong> is a popular, open-source CSS framework that helps create responsive, mobile-first websites with minimal effort.</p>
-<p>*<em>_Why Use Bootstrap in oTree?__</em></p>
+<p><strong><em>Why Use Bootstrap in oTree?</em></strong></p>
 <ul>
 <li>Provides pre-built classes for styling buttons, tables, forms, grids, and more.</li>
 <li>Helps make experiments look clean and professional with minimal custom CSS.</li>
