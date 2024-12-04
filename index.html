@@ -17948,7 +17948,7 @@ Results
 </div>
 </div>
 </div>
-</div>
+</div></section><section >
 <div id="cell-id=cbb2474d-1869-4524-b615-a5152e9a20d0" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -17963,58 +17963,6 @@ Results
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">creating_session</span><span class="p">(</span><span class="n">subsession</span><span class="p">:</span> <span class="n">Subsession</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">subsession</span><span class="o">.</span><span class="n">round_number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">subsession</span><span class="o">.</span><span class="n">group_randomly</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=e241e6d9-7408-42e7-869a-1416c1a979c2" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Defining-group-level-fields-and-methods">Defining group-level fields and methods<a class="anchor-link" href="#Defining-group-level-fields-and-methods">&#182;</a></h2><ul>
-<li>Each group needs to track the total contributions made by all group members.</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Group</span><span class="p">(</span><span class="n">BaseGroup</span><span class="p">):</span>
-    <span class="n">total_contribution</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
-    <span class="n">individual_share</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">compute_total_contribution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">total_contribution</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">contribution</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_players</span><span class="p">()]))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">individual_share</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_contribution</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_players</span><span class="p">())</span>
-        <span class="c1"># calcul of players&#39; individual payoff</span>
-        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_players</span><span class="p">():</span>
-            <span class="n">p</span><span class="o">.</span><span class="n">compute_payoff</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=09d50b87-0a46-4911-8a38-aa3d82800ffe" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Player-contribution-and-individual-payoff">Player contribution and individual payoff<a class="anchor-link" href="#Player-contribution-and-individual-payoff">&#182;</a></h2><ul>
-<li>Each player decide how much to contribute from their endowment to the public good.</li>
-<li>Their remaining endowment (what they don’t contribute) will be kept as private profit.</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="n">BasePlayer</span><span class="p">):</span>
-    <span class="n">keep</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
-    <span class="n">contribution</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;How much do you contribute to the public good ?&quot;</span><span class="p">,</span>
-        <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">ENDOWMENT</span>
-    <span class="p">)</span>
-    <span class="n">payoff_ecu</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">compute_payoff</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">payoff_ecu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">individual_share</span> <span class="o">*</span> <span class="n">C</span><span class="o">.</span><span class="n">MPCR</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">payoff</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">payoff_ecu</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;real_world_currency_per_point&quot;</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -18272,6 +18220,19 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 <li>For example, rename <code>participant.label</code> to <code>participant</code>.</li>
 </ul>
 </li>
+</ol>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=c0d1d0f4-9526-4062-ac5c-ae7ae8d4f47b" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ol start="3">
 <li><p><strong>Check and Correct Data Types</strong>:</p>
 <ul>
 <li>Ensure that columns have the correct data type (e.g., numeric columns are not mistakenly treated as strings).</li>
@@ -18324,6 +18285,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div class="highlight"><pre><span></span><span class="c1"># Keep only relevant columns</span>
+<span class="n">columns_kept</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;columns_to_keep&quot;</span><span class="p">]</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="n">columns_kept</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Rename columns for easier manipulation</span>
@@ -18333,10 +18295,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 <ul>
 <li>Keep selected columns: The list <em>columns_kept</em> defines which columns to retain. This step helps in removing unnecessary columns.</li>
 <li>Rename columns: We rename some columns (e.g., participant.code → participant and session.code → session) for easier handling.</li>
-<li><ul>
 <li>Additionally, we simplify column names by removing the &quot;player.&quot; prefix for player-related data.</li>
-</ul>
-</li>
 </ul>
 
 </div>
@@ -18415,7 +18374,7 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 <ul>
 <li>In the Investment Game:<ul>
 <li>Players are paired, with 2 roles: <strong>trustor</strong> and <strong>trustee</strong>.</li>
-<li><strong>Both players</strong> start with 10 Euros.</li>
+<li>Both players start with 10 Euros.</li>
 </ul>
 </li>
 </ul>
@@ -18537,11 +18496,9 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Exercice:-Write-the-Investment-Game">Exercice: Write the Investment Game<a class="anchor-link" href="#Exercice:-Write-the-Investment-Game">&#182;</a></h2><p><strong>Instructions</strong>:</p>
-<ul>
-<li>Write the code for the <strong>one-shot Investment Game</strong> as described in previous slides.</li>
-</ul>
-<p><strong>Help with Key Fields</strong>:</p>
+<h2 id="Exercice:-Write-the-Investment-Game">Exercice: Write the Investment Game<a class="anchor-link" href="#Exercice:-Write-the-Investment-Game">&#182;</a></h2><p>Write the code for the <strong>one-shot Investment Game</strong> as described in previous slides.<br />
+<strong>Page Sequence</strong>: <code>[Instructions, Role, DecisionTrustor, DecisionTrustorWaitForGroup, DecisionTrustee, DecisionTrusteeWaitForGroup, Results]</code></p>
+<p><strong>Key Fields</strong>:</p>
 <ul>
 <li><p><strong>Trustor</strong>:</p>
 <ul>
@@ -18556,15 +18513,12 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 </ul>
 </li>
 </ul>
-<p><strong>Page Sequence</strong>:</p>
-<ul>
-<li><code>[DecisionTrustor, DecisionTrustorWaitForGroup, DecisionTrustee, DecisionTrusteeWaitForGroup, Results]</code></li>
-</ul>
 <p><strong>Methods to Implement</strong>:</p>
 <ul>
 <li><strong>set_amount_received</strong>: Calculate and set the amount the trustee receives.</li>
 <li><strong>set_amount_returned</strong>: Calculate and set the amount returned to the trustor.</li>
 <li><strong>amount_sent_back_max</strong>: Set the maximum amount the trustee can send back.</li>
+<li><strong>compute_payoffs</strong>: individual payoff, depending on the role</li>
 </ul>
 
 </div>
@@ -18792,6 +18746,17 @@ To export the simulated data as a CSV, add the <code>--export</code> argument an
 <li>To manage larger experiments with multiple groups.</li>
 <li>To provide unique links for participants joining from different physical locations (e.g., lab computers).</li>
 </ul>
+
+</div>
+</div>
+</div>
+</div></section><section >
+<div id="cell-id=0a672bc3-c572-4db7-8bbf-28da5c3ccf39" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong><em>How Rooms Work</em></strong>:</p>
 <ul>
 <li>Each room has its own URL where participants can join the session.</li>
@@ -18954,10 +18919,6 @@ lab_004
         <span class="p">)</span>
     <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">infos_groups</span><span class="o">=</span><span class="n">infos_groups</span><span class="p">)</span>
 </pre></div>
-<ul>
-<li><strong><code>vars_for_admin_report()</code></strong>: This method gathers data for all groups, such as the amount sent, amount sent back, and payoffs for trustor and trustee.</li>
-<li>Group-level data: We retrieve information from each group and store it in the infos_groups list.</li>
-</ul>
 
 </div>
 </div>
@@ -18998,10 +18959,6 @@ lab_004
     <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
 </pre></div>
-<ul>
-<li>This template renders a table showing each group's information, including amounts sent, amounts sent back, and payoffs for both players.</li>
-<li>The data is iterated over using {{ for g in infos_groups }} to display all groups.</li>
-</ul>
 
 </div>
 </div>
@@ -19028,87 +18985,13 @@ lab_004
 </div>
 </div>
 </div></section><section >
-<div id="cell-id=neutral-xerox" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Admin-report">Admin report<a class="anchor-link" href="#Admin-report">&#182;</a></h2><ul>
-<li>add a customized page to the admin interface, under the tab name &quot;report&quot;</li>
-<li>useful to create a customized payment page, or a page to display informations about the applications, or to display live statistics, either in a table or in a graph (with Highcharts)</li>
-</ul>
-<p>Create a method <strong>vars_for_admin_report(subsession)</strong>, that returns a dictionnary</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vars_for_admin_report</span><span class="p">(</span><span class="n">subsession</span><span class="p">:</span> <span class="n">Subsession</span><span class="p">):</span>
-    <span class="n">infos_groups</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">subsession</span><span class="o">.</span><span class="n">get_groups</span><span class="p">():</span>
-        <span class="n">trustor</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">get_player_by_role</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">TRUSTOR_ROLE</span><span class="p">)</span>
-        <span class="n">trustee</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">get_player_by_role</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">TRUSTEE_ROLE</span><span class="p">)</span>
-        <span class="n">infos_groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="nb">dict</span><span class="p">(</span>
-                <span class="n">group_id</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">id_in_subsession</span><span class="p">,</span>
-                <span class="n">trustor</span><span class="o">=</span><span class="n">trustor</span><span class="o">.</span><span class="n">id_in_subsession</span><span class="p">,</span>
-                <span class="n">trustee</span><span class="o">=</span><span class="n">trustee</span><span class="o">.</span><span class="n">id_in_subsession</span><span class="p">,</span>
-                <span class="n">amount_sent</span><span class="o">=</span><span class="n">trustor</span><span class="o">.</span><span class="n">field_maybe_none</span><span class="p">(</span><span class="s2">&quot;amount_sent&quot;</span><span class="p">),</span>
-                <span class="n">amount_sent_back</span><span class="o">=</span><span class="n">trustee</span><span class="o">.</span><span class="n">field_maybe_none</span><span class="p">(</span><span class="s2">&quot;amount_sent_back&quot;</span><span class="p">),</span>
-                <span class="n">trustor_payoff</span><span class="o">=</span><span class="n">trustor</span><span class="o">.</span><span class="n">payoff</span><span class="p">,</span>
-                <span class="n">trustee_payoff</span><span class="o">=</span><span class="n">trustee</span><span class="o">.</span><span class="n">payoff</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
-    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">infos_groups</span><span class="o">=</span><span class="n">infos_groups</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
-<div id="cell-id=understanding-velvet" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Create an html file name <strong>admin_report.html</strong></p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;table&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Group<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Trustor<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Trustee<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Amount sent<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Amount sent back<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Trustor&#39;s payoff<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Trustee&#39;s payoff<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
-    {{ for g in infos_groups }}
-    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>g{{ g.group_id }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>p{{ g.trustor }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>p{{ g.trustee }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ g.amount_sent }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ g.amount_sent_back }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ g.trustor_payoff }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ g.trustee_payoff }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-    {{ endfor }}
-    <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-</div></section><section >
 <div id="cell-id=hazardous-immune" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Exercice</strong></p>
-<p>Create an admin report for the public goods game.</p>
+<h2 id="Exercice">Exercice<a class="anchor-link" href="#Exercice">&#182;</a></h2><p>Create an admin report for the public goods game.</p>
 
 </div>
 </div>
