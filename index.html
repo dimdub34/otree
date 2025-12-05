@@ -7724,7 +7724,7 @@ Focus on improving financial decisions and well-being<br/>
 <li>Named after the British comedy group <strong>Monty Python</strong>, not the snake.</li>
 <li><strong>Design philosophy</strong>: Emphasizes code readability, simplicity, and ease of use.</li>
 </ul>
-<p>The latest stable version as of March 202: <strong>Python 3.13.2</strong>.</p>
+<p>The latest stable version: <strong>Python 3.13.10</strong>.</p>
 </div>
 </div>
 </div>
@@ -7772,12 +7772,50 @@ Focus on improving financial decisions and well-being<br/>
 <h2 id="Python-environment-:-Anaconda">Python environment : Anaconda<a class="anchor-link" href="#Python-environment-:-Anaconda">¶</a></h2><ul>
 <li>a Python distribution that includes all the packages needed for data science</li>
 <li>easy to install and manage</li>
-<li><a href="https://www.anaconda.com/download">https://www.anaconda.com/download</a></li>
-<li>download and install the distribution</li>
+<li><a href="https://www.anaconda.com/download/success">https://www.anaconda.com/download/success</a></li>
+<li>download and install the miniconda distribution</li>
 </ul>
 <figure>
 <img alt="Anaconda" src="img/anaconda.png" width="300px">
 </img></figure>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bc6e10c3-c041-4b80-b4bf-80e9926e6714">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>Useful Anaconda Commands (via Anaconda Prompt)</strong></p>
+<ul>
+<li>List existing environments: <code>conda env list</code></li>
+<li>Create a new environment: <code>conda create -n envName python=3.xx</code> (where envName is the name given to the environment and 3.xx is the desired Python version). → Activate the environment: <code>conda activate envName</code> → Deactivate the environment: <code>conda deactivate</code></li>
+<li>Export an environment: <code>conda env export &gt; fileName.yml</code></li>
+<li>Create an environment from a *.yml file: <code>conda env create -n envName -f fileName.yml</code></li>
+<li>Install Python packages within an environment: <code>conda install jupyter</code></li>
+</ul>
+<p>📌 When installing Python packages, Anaconda automatically installs dependencies and verifies version compatibility between the different packages.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5d07d0fb-6b31-4c9d-b1cb-b43d053569c2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>➡️ <strong>Exercice</strong></p>
+<ul>
+<li>Install Miniconda</li>
+<li>Open Anaconda Prompt</li>
+<li>Create a new environment : <code>conda create -n myEnv python=3.13</code></li>
+<li>Activate your environment : <code>conda activate myEnv</code></li>
+<li>Display the list of install packages: <code>conda list</code></li>
+<li>Install jupyter: <code>conda install jupyter</code></li>
+</ul>
 </div>
 </div>
 </div>
