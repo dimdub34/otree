@@ -1,10 +1,10 @@
 # oTree - Platform for Behavioral Research
 
-This repository contains the course materials for the oTree course in the Master 2 Economics and Psychology.
+This repository contains the course materials for the oTree course.
 
 ## Course Overview
 
-The course is mainly structured around the interactive notebook [otree.ipynb](otree.ipynb). It covers the use of oTree, an open-source Python-based framework for creating economic experiments, surveys, and strategic games.
+The course covers the use of oTree, an open-source Python-based framework for creating economic experiments, surveys, and strategic games.
 
 ### Course Syllabus
 
@@ -17,8 +17,8 @@ The course is mainly structured around the interactive notebook [otree.ipynb](ot
     - Simulations and bots.
     - Data Wrangling.
     - Real-time interactions.
-    - Visualization with Highcharts.
     - Customization with Bootstrap.
+    - Visualization with Highcharts.
 7. **Tips and Tricks**: Internationalization, deployment, etc.
 
 ## Usage
