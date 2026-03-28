@@ -6,7 +6,7 @@ format:
   revealjs:
     theme: default
     css: custom.css
-    output-file: "index.html"
+    # output-file: "index.html"
     highlight-style: github
     navigation-mode: vertical
     slide-level: 2
@@ -25,7 +25,7 @@ execute:
   warning: false
 ---
 
-**Content**
+# Content
 
 1.  [Introduction](#introduction)
 2.  [Getting started with oTree](#getting-started-with-otree)
@@ -41,6 +41,8 @@ execute:
 12. [CSS and Bootstrap](#css-and-bootstrap)
 13. [Graphics with Highcharts](#graphics-with-highcharts)
 14. [Internationalisation](#internationalisation)
+15. [Tips & Tricks](#tips-tricks)
+16. [Appendix](#appendix)
 
 ```{=html}
 <!--
@@ -2417,7 +2419,11 @@ will display "You have an endowment of €10.00".
 
 
 
-# Python
+# Appendix {#appendix}
+
+# Python {#python}
+
+---
 
 - **Python** is a high-level, interpreted and object-oriented programming language.
 - Created by **Guido van Rossum** in the late 1980s and released in **1991**.
@@ -2426,7 +2432,7 @@ will display "You have an endowment of €10.00".
 
 The latest stable version: **Python 3.13**.
 
-**Key Features of Python**
+## Key Features of Python
 
 - **Simple and Readable Syntax**: Easy to learn, focuses on readability.
 - **Interpreted Language**: Python code is executed line by line, making it easy to debug.
@@ -2435,7 +2441,7 @@ The latest stable version: **Python 3.13**.
 - **Cross-Platform**: Python runs on Windows, macOS, and Linux without any modification.
 - **Versatile**: Used in web development, data science, machine learning, automation, scientific computing, and more.
 
-**Disadvantages of Python**
+## Disadvantages of Python
 
 - **Performance**: Python is **slower** than compiled languages like C++ or Java due to its interpreted nature.
 - **Mobile Development**: Python is not widely used for **mobile app development**.
