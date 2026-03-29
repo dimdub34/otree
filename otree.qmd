@@ -79,15 +79,21 @@ execute:
 
 ---
 
-![](img/leem.jpg "LEEM"){fig-align="center" height="500px"}
+Can be used for various types of experiments:
 
----
+:::: {.columns}
+::: {.column width="30%"}
+![Lab experiment](img/leem.jpg "LEEM"){height="200px"}
+:::
 
-![](img/indonesie.jpg "Field experiment (Indonesia)"){fig-align="center" height="500px"}
+::: {.column width="30%"}
+![Field experiment](img/indonesie.jpg "Field experiment (Indonesia)"){height="200px"}
+:::
 
----
-
-![](img/internet.jpg "Online experiment"){fig-align="center" height="500px"}
+::: {.column width="30%"}
+![Online experiment](img/internet.jpg "Online experiment"){height="200px"}
+:::
+::::
 
 ## Advantages of oTree
 
