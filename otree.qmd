@@ -2,6 +2,7 @@
 title: oTree
 subtitle: An open-source platform for behavioral research
 author : Dimitri Dubois <br> [dimitri.dubois@umontpellier.fr](mailto:dimitri.dubois@umontpellier.fr)
+institute: CNRS - University of Montpellier - CEE-M
 format:
   revealjs:
     theme: default
@@ -44,13 +45,13 @@ execute:
 15. [Tips & Tricks](#tips-tricks)
 16. [Appendix](#appendix)
 
-```{=html}
-<!--
-13. [Bootstrap](#bootstrap)
-14. [Internationalisation](#internationalisation)
-15. [Tips & Tricks](#tips-tricks)
--->
-```
+## Slides
+
+[**https://www.duboishome.info/dimitri/cours/otree/**](https://www.duboishome.info/dimitri/cours/otree/)
+
+![](img/otree_cours.png "oTree course"){fig-align="center" height="500px"}
+
+
 
 # Introduction {#introduction}
 
@@ -105,8 +106,8 @@ execute:
 - **Public policy evaluation**\
   taxes, subsidies, nudges, etc.
 
-::: lightbulb
-***💬 oTree enables controlled, interactive, and reproducible studies on all these topics — making it a powerful tool for both research and applied data science.***
+::: {.callout-note}
+oTree enables controlled, interactive, and reproducible studies on all these topics — making it a powerful tool for both **research and applied data science**.
 :::
 
 ## A Tool for Behavioral Strategy, Consulting and Data Science
@@ -131,21 +132,21 @@ In behavioral strategy, historical data often falls short. oTree empowers you to
 
 ### Government-Backed & International Units
 
-- **Behavioural Insights Team (UK)**\
-  Public-private organization solving issues in health, education, finance, etc.\
-  👉 https://www.bi.team/
+- **Behavioural Insights Team (UK)**  
+  Public-private organization solving issues in health, education, finance, etc.  
+  <https://www.bi.team/>
 
-- **OECD Behavioural Insights Unit**\
-  Policy applications across member countries (taxes, environment, digital security)\
-  👉 https://www.oecd.org/gov/regulatory-policy/behavioural-insights.htm
+- **OECD Behavioural Insights Unit**  
+  Policy applications across member countries (taxes, environment, digital security)  
+  <https://www.oecd.org/gov/regulatory-policy/behavioural-insights.htm>
 
-- **World Bank – eMBeDS**\
-  Behavioral research applied to development, governance, and financial inclusion\
-  👉 https://www.worldbank.org/en/programs/embed
+- **World Bank – eMBeDS**  
+  Behavioral research applied to development, governance, and financial inclusion  
+  <https://www.worldbank.org/en/programs/embed>
 
-- **European Commission – JRC Behavioral Insights**\
-  Behavioral support for EU policy (energy, food, mobility, trust)\
-  👉 https://knowledge4policy.ec.europa.eu/behavioural-insights_en
+- **European Commission – JRC Behavioral Insights**  
+  Behavioral support for EU policy (energy, food, mobility, trust)  
+  <https://knowledge4policy.ec.europa.eu/behavioural-insights_en>
 
 ---
 
@@ -153,28 +154,28 @@ In behavioral strategy, historical data often falls short. oTree empowers you to
 
 ***Nonprofits & Companies Using Experimental Design***
 
-- **ideas42 (US)**\
-  Nonprofit using behavioral science in education, climate, justice, etc.\
-  👉 https://www.ideas42.org/
+- **ideas42 (US)**  
+  Nonprofit using behavioral science in education, climate, justice, etc.  
+  <https://www.ideas42.org/>
 
-- **BEworks (Canada/Global)**\
-  Consultancy founded by Dan Ariely, working with businesses & governments\
-  👉 https://www.beworks.com/
+- **BEworks (Canada/Global)**  
+  Consultancy founded by Dan Ariely, working with businesses & governments  
+  <https://www.beworks.com/>
 
-- **Irrational Agency (UK)**\
-  Behavioral market research and innovation for private companies\
-  👉 https://www.irrationalagency.com/
+- **Irrational Agency (UK)**  
+  Behavioral market research and innovation for private companies  
+  <https://www.irrationalagency.com/>
 
-- **Common Cents Lab (US)**\
-  Focus on improving financial decisions and well-being\
-  👉 https://www.commoncentslab.org/
+- **Common Cents Lab (US)**  
+  Focus on improving financial decisions and well-being  
+  <https://www.commoncentslab.org/>
 
 ## Licence and Documentation
 
 - Licensed under the MIT open source license
-- Website: https://www.otree.org/
-- Documentation: https://otree.readthedocs.io/en/latest/
-- Citation: Chen, D.L., Schonger, M. & Wickens, C., 2016, "oTree - An open-source platform for laboratory, online, and field experiments", Journal of Behavioral and Experimental Finance 9, pp. 88-97
+- Website: <https://www.otree.org/>
+- Documentation: <https://otree.readthedocs.io/en/latest/>
+- Citation: Chen, D.L., Schonger, M. & Wickens, C., 2016, "oTree - An open-source platform for laboratory, online, and field experiments", *Journal of Behavioral and Experimental Finance* 9, pp. 88-97
 
 # Getting Started with oTree {#getting-started-with-otree}
 
@@ -192,7 +193,7 @@ Download and install the miniconda distribution: <a href="https://www.anaconda.c
 
 ---
 
-**Useful Anaconda Commands (via Anaconda Prompt)**
+### Useful Anaconda Commands (via Anaconda Prompt)
 
 - List existing environments: `conda env list`
 - Create a new environment: `conda create -n envName python=3.xx` (where envName is the name given to the environment and 3.xx is the desired Python version).
@@ -200,8 +201,8 @@ Download and install the miniconda distribution: <a href="https://www.anaconda.c
 - Deactivate the environment: `conda deactivate`
 - Install Python packages within an environment: `conda install jupyter`
 
-::: lightbulb
-📌 When installing Python packages, Anaconda automatically installs dependencies and verifies version compatibility between the different packages.
+::: callout-note
+When installing Python packages, Anaconda automatically installs dependencies and verifies version compatibility between the different packages.
 :::
 
 ---
@@ -215,14 +216,17 @@ Download and install the miniconda distribution: <a href="https://www.anaconda.c
 - Intall otree : `pip install otree==5.11.4`
 - Check the installed version of otree : `otree --version`
 
-::: supplementary
+::: callout-caution
 The current version of oTree is 6.0.13, but it is a very recent version with frequent updates. For stability, we recommend using version 5.11.4 for now.
 :::
 
 ## Creating a New oTree Project
 
-- Run the following command to create an oTree project: `otree startproject my_otree_project`\
-  ⚠️ Select *n* for the example games
+- Run the following command to create an oTree project: `otree startproject my_otree_project`  
+
+::: callout-warning
+Select *n* for the example games, otherwhise the project will be created with the example games, which can be useful for learning but may be overwhelming for a first project.
+:::
 
 → This will create a folder `my_otree_project` with the project structure.
 
@@ -244,12 +248,13 @@ Navigate to your project folder `cd my_otree_project` At this point, you have a 
 
 **Now PyCharm will use the correct Python version and environment for your oTree project.**
 
-*⚠️ On Windows, the otree_env environment is located in AppData (hidden directory)*
+::: callout-caution
+On Windows, the otree_env environment is located in AppData (hidden directory), so you may need to enable the display of hidden files in the file explorer to find it.
+:::
 
 ## Running the oTree Development Server
 
 - **Start the oTree server** : Inside PyCharm's terminal or the Anaconda Prompt, run `otree devserver`
-
 - **Access the local server**: Open your web browser and go to `http://localhost:8000`
 
 You’ll see the oTree demo page where you can configure and run experiments. With the development server running, you can now start building apps in your oTree project.
@@ -291,8 +296,8 @@ my_otree_project/
     - Contains the **HTML files** for rendering each page.
     - Allows for customization of the interface using HTML and Jinja2 templates.
 
-::: lightbulb
-*💬 models and pages* are in the `__init__.py` file, templates are in the app directory with `*.html` extension.
+::: callout-important
+*models and pages* are in the `__init__.py` file, templates are in the app directory with `*.html` extension.
 :::
 
 ## Creating an oTree App
@@ -378,7 +383,7 @@ Example:
 {{ endblock }}
 ```
 
-💬 The `{{ formfields }}` block automatically renders the fields from MyPage (e.g., name, age).
+💬 The `{{{ formfields }}}` block automatically renders the fields from MyPage (e.g., name, age).
 
 ## Running the oTree App
 
@@ -390,7 +395,7 @@ Example:
 
 ## 💻 Exercise: Create your first application
 
-- create your first application
+- create your first application, named `my_first_app`
 - display the application in the web browser
 
 # Customizing Models and Fields {#customizing-models-and-fields}
@@ -407,7 +412,9 @@ Built-in constants:
 - `PLAYERS_PER_GROUP`: the number of players per group
 - `NUM_ROUNDS`: the number of rounds
 
-💬 You can also define **custom constants** for your app.
+::: callout-tip
+You can define **custom constants** for your app.
+:::
 
 ## Data Models in oTree
 
@@ -427,26 +434,26 @@ These models are defined in `__init__.py` and are subclasses of:
 
 - Fields in oTree are used to store data for **players, groups, and subsessions**.
 - You can define custom fields with different data types (e.g., strings, integers, currency, etc.).
-- Fields are stored in the application's table in the database.
-- Fields are **objects from the `models` module**.
+- Fields are stored in the application's tables in the database.
+- Fields are **objects from the `models` module** → `models.StringField()`, `models.IntegerField()`, etc.
 
 ---
 
 ### Common Field Types
 
-- **IntegerField**: Stores whole numbers.\
+- **IntegerField**: Stores whole numbers.  
   `score = models.IntegerField()`
 
-- **FloatField** : Stores decimal numbers.\
+- **FloatField** : Stores decimal numbers.  
   `average = models.FloatField()`
 
-- **StringField**: Stores text data.\
+- **StringField**: Stores text data.  
   `name = models.StringField()`
 
-- **BooleanField**: Stores True or False values.\
+- **BooleanField**: Stores True or False values.  
   `student = models.BooleanField()`
 
-- **CurrencyField**: Stores monetary values (custom oTree type).\
+- **CurrencyField**: Stores monetary values (custom oTree type).  
   `payoff = models.CurrencyField()`
 
 ---
@@ -467,26 +474,26 @@ class Player(BasePlayer):
 
 ### Arguments in Fields for customization
 
-- **label**: Text that appears next to the input field.\
+- **label**: Text that appears next to the input field.  
   `age = models.IntegerField(label="Your Age")`
 
-- **choices**: Provide a list of options for multiple choice fields.\
+- **choices**: Provide a list of options for multiple choice fields.  
   `favorite_color = models.StringField(choices=["Red", "Blue", "Green"])`
 
-- **initial**: Set a default value.\
+- **initial**: Set a default value.  
   `score = models.IntegerField(initial=0)`
 
-- **min and max**: Define boundaries for numeric inputs.\
+- **min and max**: Define boundaries for numeric inputs.  
   `age = models.IntegerField(label="Your Age", min=18, max=100)`
 
-- **blank**: Allows a field to be left empty by participants (default is False). If blank=True, the field can be optional.\
+- **blank**: Allows a field to be left empty by participants (default is False). If blank=True, the field can be optional.  
   `age = models.IntegerField(label="Your Age", min=18, max=100, blank=True)`
 
-- **widget**: Customize the type of input type (e.g., radio buttons, sliders, etc.).\
+- **widget**: Customize the type of input type (e.g., radio buttons, sliders, etc.).  
   `favorite_color = models.StringField(choices=["Red", "Blue", "Green"], widget=widgets.RadioSelectHorizontal)`
 
-::: supplementary
-ℹ️ By default, fields with choices appear as a dropdown menu.\
+::: callout-tip
+By default, fields with choices appear as a dropdown menu.  
 Other widget options include RadioSelect and RadioSelectHorizontal.
 :::
 
@@ -582,8 +589,11 @@ class Results(Page):
     pass
 ```
 
-**💬 The player's payoff is calculated before the display of the Results.**\
+**💬 The player's payoff is calculated before the display of the Results.**  
+
+::: callout-warning
 *It supposes that the Player class has a method compute_payoff() that calculates the payoff based on the player's decision and other relevant information.*
+:::
 
 ## Synchronizing Participants with Wait Pages
 
@@ -595,15 +605,17 @@ class WaitForGroup(WaitPage):
     pass
 ```
 
-ℹ️ If you want the page to wait **for all participants across all groups in a session**, use the `wait_for_all_groups = True` attribute.
+To wait **for all participants across all groups in a session**, use the `wait_for_all_groups = True` attribute.
 
 ``` python
 class WaitForAll(WaitPage):
     wait_for_all_groups = True
 ```
 
-💬 When `wait_for_all_groups = True`, the Wait Page will only proceed when **all groups in the session have reached the Wait Page**.\
+::: callout-tip
+When `wait_for_all_groups = True`, the Wait Page will only proceed when **all groups in the session have reached the Wait Page**.  
 *This is useful in experiments where group actions affect each other, or you want to synchronize the entire session.*
+:::
 
 ## Running Logic After All Players Arrive
 
@@ -617,14 +629,17 @@ class WaitForGroup(WaitPage):
         group.compute_total_contributions()
 ```
 
-💬 This method is called once all players in the group have arrived at the wait page.\
+💬 This method is called once all players in the group have arrived at the wait page.
+
+::: callout-warning
 *It supposes that the Group class has a method compute_total_contributions() that calculates the total contributions of the group based on the players' decisions.*
+:::
 
 ---
 
 ### Wait for all groups
 
-To synchronize across all groups, set wait_for_all_groups = True.
+To synchronize across all groups, set `wait_for_all_groups = True`.
 
 In this case, `after_all_players_arrive` takes a Subsession object instead of a Group.
 
@@ -636,11 +651,14 @@ class WaitForAll(WaitPage):
         subsession.compute_players_payoffs()
 ```
 
-💬 This method is called once all players in the subsession have arrived at the wait page.\
-*It supposes that the Subsession class has a method compute_players_payoffs() that calculates the payoffs of all players.*
+💬 This method is called once all players in the subsession have arrived at the wait page.  
 
-::: lightbulb
-⚠️ The argument of `after_all_players_arrive` changes depending on whether you are waiting for a single group or all groups.
+::: callout-warning
+*It supposes that the Subsession class has a method compute_players_payoffs() that calculates the payoffs of all players.*
+:::
+
+::: callout-important
+The argument of `after_all_players_arrive` changes depending on whether you are waiting for a single group or all groups.
 :::
 
 ## 💻 Exercise: Task with Synchronization
@@ -652,12 +670,10 @@ Create a **multiplayer app** (`number_sync`) where:
 - Each player enters a number between **0 and 100**.
 - Once all players have submitted (or been assigned) a number, the **average is computed** and **displayed to all participants**.
 
-::: supplementary
-**ℹ️ Note**
+::: callout-tip
 
 1.  You can access **all players** in the session using `subsession.get_players()`
-
-2.  In templates, you can directly access attributes of player, group, and subsession, for example to display the attribute `average` in class Subsession: `{{ subsession.average }}`
+2.  In templates, you can directly access attributes of player, group, and subsession, for example to display the attribute `average` in class Subsession: `{{{ subsession.average }}}`
 :::
 
 ## Passing Data to Templates
@@ -692,7 +708,9 @@ Sometimes, you may want to use participant data **inside JavaScript** -- for tim
 
 oTree provides a method called `js_vars()` to send Python variables to your JavaScript code inside the HTML page.
 
-💬 You’ll discover later when we start adding JavaScript to the templates
+::: callout-note
+You’ll discover later when we start adding JavaScript to the templates
+:::
 
 ## 💻 Exercise: Display Group Statistics
 
@@ -754,12 +772,14 @@ def creating_session(subsession: Subsession):
 - Participants 9, 10, 11, 12 → **Group 3**\
 - etc.
 
-📌 By default, these groups will **remain fixed across all rounds**, unless you implement custom grouping logic or use dynamic grouping.
+::: callout-note
+By default, these groups will **remain fixed across all rounds**, unless you implement custom grouping logic or use dynamic grouping.
+:::
 
 ---
 
-::: lightbulb
-💡 If the application is a repeated game, and players should be randomly grouped once at the start and then stay in the same group
+::: callout-tip
+If the application is a repeated game, and players should be randomly grouped once at the start and then stay in the same group
 :::
 
 - In **round 1**, participants are randomly assigned to groups
@@ -769,9 +789,9 @@ def creating_session(subsession: Subsession):
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
         subsession.group_randomly()
+    else:
+        subsession.group_like_round(1)
 ```
-
-📌 No need to group again in later rounds — oTree carries over the group structure by default.
 
 ## 💻 Exercise : the public goods game
 
@@ -813,8 +833,8 @@ By default:
 
 💬 oTree automatically sets this value in the player.role field.
 
-::: lightbulb
-⚠️ If the game involves more complex group structures (e.g., 2 buyers and 2 sellers in a 4-player group), roles must be assigned manually
+::: callout-warning
+If the game involves more complex group structures (e.g., 2 buyers and 2 sellers in a 4-player group), roles must be assigned manually
 :::
 
 ## Role-Based Page Display
@@ -873,7 +893,9 @@ This will:
 - Automatically apply a max constraint in the form field for offer
 - Adjust the upper limit based on a previous decision or value
 
-**💬 Similarly, you can use `fieldname_min()` to set a dynamic minimum.**
+::: callout-note
+**Similarly, you can use `fieldname_min()` to set a dynamic minimum.**
+:::
 
 ## 💻 Exercise: The Investment Game
 
@@ -897,7 +919,7 @@ Both players start with **10 Euros**.
 - **Trustor's payoff**: 10 - amount sent + amount returned by the trustee.
 - **Trustee's payoff**: 10 + 3 × amount sent by the trustor - amount sent back.
 
-*➡️ to be continued on the next slide*
+⬇ to be continued on the next slide
 
 ---
 
@@ -950,8 +972,7 @@ def before_next_page(player, timeout_happened):
     player.keep = C.ENDOWMENT - player.contribution
 ```
 
-::: supplementary
-**Explanation**:
+::: callout-note
 
 - If the timeout_happened flag is triggered (e.g., using the `Advance slowest users` button), the amount a player allocates to the public account is automatically set to a random value.
 - For pages without data collection, simply clicking "Advance slowest users" will move the players to the next page without any additional action.
@@ -970,8 +991,8 @@ def before_next_page(player, timeout_happened):
 
 💬 This method helps you ensure that pages transition correctly and that data is being properly generated during automated play.
 
-::: lightbulb
-💡 You can simulate a full session by **opening multiple player links** in separate tabs.
+::: callout-tip
+You can simulate a full session by **opening multiple player links** in separate tabs.
 :::
 
 ## Writing Test Scripts with `tests.py`
@@ -983,7 +1004,7 @@ Automated tests let you **simulate players** and **generate data** via the termi
 
 ### Step 1: Create a tests file
 
-In the folder of your oTree app (e.g., public_goods), create a new Python file called `tests.py`.\
+In the folder of your oTree app, create a new Python file called `tests.py`.  
 Add the first line below to import the necessary oTree testing tools and your app's models:
 
 ``` python
@@ -1032,28 +1053,24 @@ otree test public_goods 20  # Simulate 20 participants
 To export the simulated data as a CSV, add the `--export` argument and specify the file path where you want the data saved:
 
 ``` bash
-otree test public_goods 20 --export C:\Users\John_Doe\Desktop\public_goods
+otree test public_goods 20 --export C:\\Users\\John_Doe\\Desktop\\public_goods
 ```
 
-The CSV file will contain all data (players, groups, sessions), just like a real experiment.
+The CSV file will contain all data (players, groups, sessions), like a real experiment.
 
-✅ Perfect for debugging, validating logic, and preparing demo datasets.
+✅ Perfect for debugging, validating logic, and preparing datasets for analyses.
 
 ## 💻 Exercise: Simulate and Export Data
 
 ### Part 1: Individual app testing
 
-In the following apps:
+In your existing apps:
 
-- `demographics`
-- `public_goods`
-- `investment_game`
+1.  Add `before_next_page` where appropriate to simulate player input  
+→ Test using **"Advance slowest users"** in the browser
 
-1.  Add `before_next_page` where appropriate to simulate player input\
-    → Test using **"Advance slowest users"** in the browser
-
-2.  Create a `tests.py` file for each app\
-    → Simulate full sessions using `otree test`
+2.  Create a `tests.py` file for each app  
+→ Simulate full sessions using `otree test`
 
 3.  Export the data from simulations for inspection
 
@@ -1062,7 +1079,9 @@ In the following apps:
 ### Part 2: Combined app testing
 
 Simulate **two apps played by the same participants**.\
-→ In your `settings.py`, create a new session config:
+→ In your `settings.py`, create a new session config with at least two apps in the `app_sequence`.
+
+**Example**: 
 
 ``` python
 dict(
@@ -1122,26 +1141,18 @@ What is Exported:
 
 ## Wrangling oTree Data
 
-Once exported, use `pandas` to clean and prepare your data.
+Once exported, use `pandas` (Python library for data manipulation) or `R` to clean and prepare your data.
 
 ### Common Data Wrangling Tasks
 
 1.  **Remove Unnecessary Columns**: Drop columns that are irrelevant to your analysis (e.g., internal ID fields or system-generated variables).
 
-2.  **Rename Columns**:
+2.  **Rename Columns**: Rename columns to make them more meaningful or easier to work with in your analysis. For example, rename `participant.code` to `participant`.
 
-    - Rename columns to make them more meaningful or easier to work with in your analysis.
-    - For example, rename `participant.label` to `participant`.
+3.  **Check and Correct Data Types**: Ensure that columns have the correct data type (e.g., categorical variables are not mistakenly treated as strings).
 
-3.  **Check and Correct Data Types**:
-
-    - Ensure that columns have the correct data type (e.g., numeric columns are not mistakenly treated as strings).
-    - Convert columns like `round_number` and `payoff` to their appropriate types (integer, float).
-
-4.  **Create New Variables**:
-
-    - Sometimes you need to derive new variables from existing data.
-    - Example: Calculate a **score** by summing up answers to multiple questions in a survey.
+4.  **Create New Variables**: Sometimes we need to derive new variables from existing data.  
+Example: Calculate a **score** by summing up answers to multiple questions in a survey.
 
 ---
 
@@ -1160,10 +1171,10 @@ print(df.shape)  # Output the number of rows and columns
 print(df.columns.to_list())  # List all column names
 ```
 
-**🗒️ Explanation**
-
+::: callout-note
 - Load the data: The pd.read_csv() function reads in the CSV file.
 - Inspect the data: The shape function prints the dimensions (rows, columns), and columns.to_list() prints all the column names.
+:::
 
 ---
 
@@ -1177,23 +1188,22 @@ df.rename(columns={"participant.code": "participant", "session.code": "session"}
 df.rename(columns={c: c.replace("player.", "") for c in df.columns}, inplace=True)
 ```
 
-**🗒️ Explanation**
-
+::: callout-note
 - Keep selected columns: The list *columns_kept* defines which columns to retain. This step helps in removing unnecessary columns.
 - Rename columns: We rename some columns (e.g., participant.code → participant and session.code → session) for easier handling.
 - Additionally, we simplify column names by removing the "player." prefix for player-related data.
+:::
 
 ---
 
+Repeat the process for the socio-demographic data
+
 ``` python
-# Repeat the process for the socio-demographic data
 demog = pd.read_csv("demographics.csv")  # Load the CSV file
 demog = demog[[columns_kept]].copy()  # Keep relevant columns
 demog.rename(columns={"participant.code": "participant", "session.code": "session"}, inplace=True)
 demog.rename(columns={c: c.replace("player.", "") for c in demog.columns}, inplace=True)
 ```
-
-Repeat for Demographics Data: The same process is applied to the demographics data—keep only selected columns, and rename them for consistency.
 
 ---
 
@@ -1206,33 +1216,24 @@ df = df.merge(demog, on=["participant"])
 df.to_csv("cleaned_data.csv", index=False)
 ```
 
-**🗒️ Explanation**
+::: callout-note
+The merge() function combines the cleaned Public Goods data (df) with the Demographics data (demog) using the participant column as the key.  
+:::
 
-Merge DataFrames: The merge() function combines the cleaned Public Goods data (df) with the Demographics data (demog) using the participant column as the key.\
 ✅ Now you have one unified file with data from both apps.
 
 ## 💻 Exercise
 
-1.  Open a **Jupyter notebook**
-2.  Load your exported CSV files (e.g. `public_goods.csv`, `demographics.csv`)
+1.  Open a **Jupyter notebook** or a **R notebook** 
+2.  Load your exported CSV files (at least 2)
 3.  Keep only relevant columns
 4.  Rename columns for clarity
 5.  Merge files using the `participant` column
 6.  Export the cleaned and merged data as `cleaned_data.csv`
 
----
-
-***Optional*** (if you finish early): Compute some **descriptive statistics**:
-
-- **Demographics**: Distribution of `age`, `sex`, `level_of_study`, etc.
-- **Game behavior**:
-  - Average contribution per round\
-  - Average contribution per group\
-  - Compare contribution across categories (e.g. by `sex` or `student`)
-
 ## Unifying Datasets with `custom_export`
 
-- oTree's default export creates separate CSV files for each app (e.g., one for the demographic survey, one for the repeated game etc.).
+- oTree's default export creates separate CSV files for each app.
 - Merging these files ex-post requires tedious data wrangling and joining on participant IDs.
 - The `custom_export` method allows you to **define a custom export format** for your data.
 - We pull transversal variables stored globally in `participant.vars` (like survey demographics) and attach them directly to the main game's behavioral data, row by row.
@@ -1247,8 +1248,7 @@ def custom_export(players):
     
     # 2. Iterate over players to build the dataset
     for p in players:
-        # 3. Retrieve data saved earlier (e.g., in a previous survey app)
-        # Note: Ensure you saved this in the survey app via p.participant.vars['age'] = p.age
+        # 3. Retrieve data of other apps from participant.vars
         age = p.participant.vars.get('age', 'N/A') 
         gender = p.participant.vars.get('gender', 'N/A')
         
@@ -1256,7 +1256,7 @@ def custom_export(players):
         yield [p.session.code, p.participant.code, p.round_number, p.decision, age, gender]
 ```
 
-::: lightbulb
+::: callout-warning
 It supposes that in the survey app, you have saved the age and gender in participant.vars like this:
 
 ``` python
@@ -1271,6 +1271,10 @@ p.participant.vars['gender'] = p.gender
 2.  Make sure to save the relevant survey data (e.g., age, gender) in `participant.vars` during the survey app.
 3.  Run a test session and export the data using the custom export format.
 4.  Open the exported CSV file and verify that it contains the combined data from both the game and the survey, with clear column names and values.
+
+::: callout-warning
+With otree < 6.0, the `custom_export` method is not called from tests.py, so you will need to run a demo session and export the data from the admin interface to see the results of your custom export.
+:::
 
 # Rooms and Admin Report {#rooms-and-admin-report}
 
@@ -1289,7 +1293,7 @@ The Admin Interface is the central control hub for running and monitoring experi
 
 Rooms let you organize and manage **controlled access** to your experiment.
 
-- Run sessions where participants **enter a predefined URL**
+- Rooms are virtual spaces where participants can join a session by entering **a predefined URL**.
 - Allow players to **join one by one** without sending them individual links
 - Keep control over the session start and monitor who has joined
 - Perfect for **lab experiments**, classrooms, or public settings
@@ -1320,7 +1324,7 @@ You can now click on the "Rooms" tab, select the room and create a new session i
 
 ### Using Participant Labels to Restrict Access
 
-- When participants click the room link, they are automatically added to the session associated with the room.\
+- When participants click the room link, they are automatically added to the session associated with the room.
 - This method works well but has limitations, such as participants joining the room multiple times from different tabs.
 
 To avoid this, we can restrict access using **participant labels**.
@@ -1329,11 +1333,10 @@ To avoid this, we can restrict access using **participant labels**.
 - Each participant will have a **unique label** that they must enter to join the session.
 - Alternatively, the label can be provided directly in the URL.
 
-::: lightbulb
-***Benefits***:
-
+::: callout-tip
 - **Prevents multiple logins**: If a participant clicks the link twice, they will always join with the same label, preventing duplicate entries.
-- **Participant labels** are shown in the **Monitor** and **Payments** tabs in the admin interface.
+- **Participant labels** are shown in the **Monitor** and **Payments** tabs in the admin interface. Easier in the lab to identify participants and manage payments.
+- In **online experiments**, with the Prolific plateform for example, you can use the Prolific ID as a participant label to ensure that each participant can only join once and payments are automatically linked to the correct participant.
 :::
 
 ---
@@ -1367,7 +1370,8 @@ lab_004
 
 1.  **Manual Entry**: Participants are asked to enter their assigned label when they access the room URL.
 
-2.  **Automatic Label in URL**: You can include the label directly in the URL (e.g., `?participant_label=lab_001`).
+2.  **Automatic Label in URL**: You can include the label directly in the URL (e.g., `http://serverURL/room/roomName/?participant_label=lab_001`).  
+→ in that case, the participant will automatically join the room `roomName` with the specified label without needing to enter it manually.
 
 This ensures that each participant joins the session with a **unique label** and avoids duplicate entries.
 
@@ -1451,14 +1455,14 @@ Next, create an HTML file called **`admin_report.html`** to display the data in 
 You can further customize the Admin Report by adding different data fields, using graphs, or integrating real-time statistics.
 
 1.  **Live Statistics**: Show real-time updates for variables like contributions or payoffs.
-2.  **Graphical Representation**: Use tools like [**Highcharts**](#graphics-with-highcharts)) to display data in charts or graphs.
+2.  **Graphical Representation**: Use tools like ([**Highcharts**](#graphics-with-highcharts)) to display data in charts or graphs.
 3.  **Additional Data**: Add more player-specific or group-specific data to provide a deeper view of the session's progress.
 
 💬 This flexibility allows you to monitor any key metrics of your experiment in real-time.
 
 ## 💻 Exercise
 
-Create an admin report for the public goods game.
+Create an admin report for one of our existing app.
 
 # Javascript and Real-Time Interactions {#javascript-and-real-time-interactions}
 
@@ -1468,11 +1472,12 @@ Many experiments require participants to interact with each other in real-time o
 
 1. **Live decision-making**: Where participants' choices immediately affect other participants. 
 2. **Real-time feedback**: Displaying immediate updates or feedback based on group contributions, payoffs, or other variables. 
-3. **Dynamic updates**: Changing experiment parameters (e.g., payoffs, group composition) based on participants’ actions.
 
 Examples include: auctions, negotiations, multiplayer games in continuous time, etc.
 
+::: callout-note
 [**⇒ Short presentation of JavaScript**](#javascript)
+:::
 
 ## The `live_method`
 
@@ -1531,7 +1536,7 @@ function liveRecv(data) {
 }
 ```
 
-## Python
+## Python Server-Side Handling
 
 The **`live_method`** in the corresponding page class receives the data, processes it, and sends a response.
 
@@ -1618,9 +1623,10 @@ Create a simple app where players in a group can increment a shared counter. Whe
 **Steps**: 
 
 - Create a new oTree app called live_counter. 
-- Set up a group-level counter that all players can interact with. Live Interaction: 
-- Use live_method to handle the live communication between the players and the server. 
-- Each time a player clicks a button, the counter is incremented and the updated value is sent to all players in the group.
+- Set up a group-level counter that all players can interact with. 
+- Live Interaction: 
+    - Use `live_method` to handle the live communication between the players and the server. 
+    - Each time a player clicks a button, the counter is incremented and the updated value is sent to all players in the group.
 
 ## 💻 Exercise 2: Real-Time Supply & Demand Market
 
@@ -1631,10 +1637,13 @@ Create a simple app where players in a group can increment a shared counter. Whe
 - **Buyers:** Have a **Reservation Value** (maximum willingness to pay). They submit **bids** (offers to buy). The server only accepts a new bid if it is strictly greater than the market's current best bid.
 - **Sellers:** Have a **Reservation Price** or Cost (minimum willingness to accept). They submit **asks** (offers to sell). The server only accepts a new ask if it is strictly lower than the market's current best ask.
 - **Transactions:** A transaction occurs when a bid crosses an ask (e.g., `new_bid >= best_ask` or `new_ask <= best_bid`). After a transaction, both the buyer and seller involved are removed from the market.
-- **Payoffs:** - Buyers: Payoff = Reservation Value - Transaction Price
-  - Sellers: Payoff = Transaction Price - Reservation Price
-  - Zero payoff for non-transacting players.
+- **Payoffs:** 
+    - Buyers: Payoff = Reservation Value - Transaction Price
+    - Sellers: Payoff = Transaction Price - Reservation Price
+    - Zero payoff for non-transacting players.
 - **Timing:** The market automatically closes after 90 seconds using oTree's standard `timeout_seconds = 90` [see documentation](https://otree.readthedocs.io/en/latest/pages.html#timeout).
+
+⬇ to be continued on the next slide
 
 ---
 
@@ -1666,6 +1675,7 @@ class Trading(Page):
 
         # Write the code for when a transaction occurs (e.g., bid >= ask)
 ```
+⬇ to be continued on the next slide
 
 ---
 
@@ -1864,11 +1874,13 @@ Either using the `ExtraModel` or the JSON serialization method, implement a way 
 Bootstrap is included by default in oTree templates.\
 [Boostrap's website](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 
+::: callout-note
 [**⇒ Short presentation of CSS**](#css)
+:::
 
 ## Applying CSS in oTree: `block styles`
 
-- In oTree, pages are dynamically generated using templates. To add **Internal CSS** to a single page, you must place your `<style>` tags inside the `{{ block styles }}` block.
+- In oTree, pages are dynamically generated using templates. To add **Internal CSS** to a single page, you must place your `<style>` tags inside the `{{{ block styles }}}` block.
 - This ensures oTree loads your custom styles safely without breaking the built-in layout.
 
 ```html
@@ -1928,7 +1940,7 @@ Bootstrap's grid system ensures your layout adjusts seamlessly on different devi
 
 ## Bootstrap Buttons
 
-- Bootstrap provides pre-defined button styles for quick use.
+Bootstrap provides pre-defined button styles for quick use.
 
 *Example*:
 
@@ -2009,7 +2021,7 @@ It is standard industry practice to use AI to help design web interfaces. Howeve
 
 1. **Delegate the tedious work:** Ask the AI to generate the Bootstrap grid, style the buttons, or create tables. 
 2. **Understand before you paste:** Never paste code you cannot explain. You must understand the underlying structure (e.g., why it used `col-md-8` or a `card`).
-3. **Beware the "oTree Trap":** AI models are trained on general HTML. They might generate forms that break oTree's specific templating (`{{ formfields }}`, `{{ next_button }}`). If you don't know the basics, you won't be able to fix the AI's mistakes.
+3. **Beware the "oTree Trap":** AI models are trained on general HTML. They might generate forms that break oTree's specific templating (`{{{ formfields }}}`, `{{{ next_button }}}`). If you don't know the basics, you won't be able to fix the AI's mistakes.
 
 ## How to Prompt an AI for oTree
 
@@ -2017,7 +2029,7 @@ To get good results, your prompt must be highly specific about the framework and
 
 **❌ Bad Prompt:** > *"Make my oTree page look good."* (The AI will guess and probably break your form).
 
-**✅ Good Prompt:** > *"I am building an oTree experiment. I need a Bootstrap 5 layout for the decision page. Create a 2-column layout. The left column (col-md-8) should contain a Bootstrap Card with the game instructions. The right column (col-md-4) should contain the oTree `{{ formfields }}` and the `{{ next_button }}` inside a styled container."*
+**✅ Good Prompt:** > *"I am building an oTree experiment. I need a Bootstrap 5 layout for the decision page. Create a 2-column layout. The left column (col-md-8) should contain a Bootstrap Card with the game instructions. The right column (col-md-4) should contain the oTree `{{{ formfields }}}` and the `{{{ next_button }}}` inside a styled container."*
 
 ## 💻 Exercise: Improving Web Interfaces with Bootstrap
 
@@ -2026,6 +2038,8 @@ Take one of your existing oTree apps and enhance its user interface using Bootst
 
 
 # Graphics with Highcharts {#graphics-with-highcharts}
+
+## Overview of Highcharts
 
 **Highcharts** is a powerfull JavaScript library for creating interactive charts.
 
@@ -2037,6 +2051,8 @@ Take one of your existing oTree apps and enhance its user interface using Bootst
   - etc.
 - Great for displaying **real-time** or **historical data**
 - Fully **customizable** and mobile-friendly
+
+<https://www.highcharts.com/>
 
 ## Include Highcharts in oTree
 
@@ -2058,12 +2074,14 @@ Then, create a container where the chart will be rendered:
 
 ## Creating a Basic Highcharts Chart
 
-**Add the following JavaScript code in the HTML Template**
+**JavaScript code in the HTML Template**
 
 ``` html
 <script>
+    let mychart;
+
     document.addEventListener('DOMContentLoaded', function () {
-        Highcharts.chart('my_chart', {
+        mychart = Highcharts.chart('my_chart', {
             chart: { type: 'line' },  // Chart type
             title: { text: 'Payoffs Over Time' },  // Chart title
             xAxis: { categories: ['Round 1', 'Round 2', 'Round 3'] },  // X-axis categories
@@ -2079,6 +2097,8 @@ Then, create a container where the chart will be rendered:
     });
 </script>
 ```
+
+---
 
 **📌 Key elements:**
 
@@ -2100,6 +2120,8 @@ class Results(Page):
             'payoff_data': [player.in_round(1).payoff, player.in_round(2).payoff, player.in_round(3).payoff]
         }
 ```
+
+---
 
 ### Javascript (HTML Template)
 
@@ -2144,9 +2166,11 @@ class Lexicon:
     amount_sent_back="Vous devez décider du montant que vous renvoyez au joueur A."
 ```
 
+---
+
 Import the language code and depending on it import the corresponding lexicon file
 
-In the \_\_init\_\_ file in the import section
+In the `__init__.py` file in the import section
 
 ``` python
 from settings import LANGUAGE_CODE
@@ -2186,7 +2210,7 @@ For long sentences or whole paragraphs, or if some variables are needed (as `pla
     
 {{ elif language == "en" }}
     <p>
-        a paragraph in english.
+        A paragraph in English.
     </p>
     
 {{ endif }}
@@ -2194,13 +2218,13 @@ For long sentences or whole paragraphs, or if some variables are needed (as `pla
 
 ## 💻 Exercise
 
-Add a language for one of the applications
+Add a language for one of your applications
 
 # Tips & tricks
 
 ## Displaying Form Fields in a Table
 
-- By default, when using **`{{ formfields }}`** in oTree, the fields and labels are displayed one below the other.
+- By default, when using **`{{{ formfields }}}`** in oTree, the fields and labels are displayed one below the other.
 - To change this layout, you can use an HTML table to align the labels and input fields in a more structured way.
 
 ``` html
@@ -2216,6 +2240,10 @@ Add a language for one of the applications
 
 The `class='table'` attribute adds basic styling using [Bootstrap](#css-and-bootstrap).
 
+::: callout-tip
+For surveys, it is also possible to use Bootstrap cards to display the questions in a more visually appealing way.
+:::
+
 ## Creating a Game History for Repeated Games
 
 - In repeated games (e.g., Public Goods Game), it is helpful to display the **history** of decisions and payoffs from previous rounds.
@@ -2225,6 +2253,8 @@ The `class='table'` attribute adds basic styling using [Bootstrap](#css-and-boot
 
 - **`player.in_all_rounds`**: Accesses the data for all rounds. 
 - **`player.in_previous_rounds`**: Accesses the data for previous rounds only.
+
+---
 
 ``` html
 <table class="table">
@@ -2251,16 +2281,22 @@ The `class='table'` attribute adds basic styling using [Bootstrap](#css-and-boot
 </table>
 ```
 
+::: callout-tip
+Often easier to create the history in the `vars_for_template` method and then just display it in the HTML.
+:::
+
 ## Including Images in Your Web Pages
 
-- To add an image to your oTree application, first create a subfolder `static/application_name` in your app folder, and put the image inside.
+- To add an image to your oTree application, first create a subfolder `static/appName` in your app folder, and put the image inside.
 - Then, include the image in your HTML file using the **`img`** tag.
 
 ``` html
-<img src="{{ static 'application_name/picture_name.png' }}" />
+<img src="{{ static 'appName/picture_name.png' }}" />
 ```
 
+::: callout-caution
 You can also use this method for videos and audio files, but it’s generally better to host large media files externally and link to them in the src attribute.
+:::
 
 ## Working with Timeout
 
@@ -2310,6 +2346,8 @@ SESSION_CONFIGS = [
 ]
 ```
 
+---
+
 In the **`creating_session`** method, retrieve the parameter like this:
 
 ``` python
@@ -2317,20 +2355,20 @@ class Subsession(BaseSubsession):
     mpcr = models.FloatField()
 
 def creating_session(subsession: Subsession):
-    subsession.mpcr = subsession.session.config["mpcr"]
+    subsession.mpcr = subsession.session.config.get("mpcr", C.MPCR)  
 ```
 
 ## Payments
 
-- The tab "Payments" displays the payoff of each participant.
+- The tab "Payments" in the admin interface displays the payoff of each participant.
 - The value displayed is given by the variable **participant.payoff**.
-- It is equal to the cumulative payoff since the beginning of the session, i.e., the cumulative value of **player.payoff** (for each round of each application).
+- It is equal to the cumulative payoff since the beginning of the session, i.e., the cumulative value of **player.payoff** for each round of each application.
 - The value can be overridden by setting **player.participant.payoff = new_value**.
 - This is the case, for example, if we want to pay only one round or only one application.
 
 ---
 
-### Pay only one round of the repeated game
+### Pay only one round of a repeated game
 
 - create a method and call this method just before the end of the application
 - inside this method, select the paid round and set the value of this round's payoff to participant.payoff
@@ -2352,11 +2390,11 @@ class Results(Page):
 
 ### Pay one application among several
 
-- there exists an attribute in the participant class, called vars, which is a dictionnary, and in which you can store whatever you want
-- the participant is the same in the different applications of the session, so you can access this "vars" dictionary from any application of the session
-- so, in a method called at the end of each application you store the player's payoff for this application in the participant.vars dictionnary
-- create a final application that displays the payoff of each application (with an explanation text)
-- within this "final" application, you randomly select the application that will actually be paid
+1. In a method called at the end of each application, store the player's payoff for this application in the participant.vars dictionnary
+2. Create a final application that displays the payoff of each application (with an explanation text)
+3. Within this "final" application, randomly select the application that will actually be paid
+
+---
 
 **In each application of the experiment** :
 
@@ -2377,7 +2415,9 @@ class Results(Page):
             set_final_payoff(player)
 ```
 
-**In a final application** (app_sequence=\["welcome", "public_goods", "investment_game", demographics", "final"\]):
+---
+
+**In a final application** (`app_sequence=["welcome", "public_goods", "investment_game", "demographics", "final"]`):
 
 ``` python
 # ADDITIONAL METHODS
@@ -2456,6 +2496,8 @@ Download and install the miniconda distribution: <a href="https://www.anaconda.c
 
 <figure><img src="img/anaconda.png" alt="Anaconda" width="300px"/></figure>
 
+---
+
 **Useful Anaconda Commands (via Anaconda Prompt)**
 
 - List existing environments: `conda env list`
@@ -2464,7 +2506,11 @@ Download and install the miniconda distribution: <a href="https://www.anaconda.c
 - Deactivate the environment: `conda deactivate`
 - Install Python packages within an environment: `conda install jupyter`
 
-📌 When installing Python packages, Anaconda automatically installs dependencies and verifies version compatibility between the different packages.
+::: callout-note
+When installing Python packages, Anaconda automatically installs dependencies and verifies version compatibility between the different packages.
+:::
+
+---
 
 💻 **Prepare the Python environment**
 
@@ -2540,6 +2586,8 @@ def check_number(num):
   result = None
   ```
 
+---
+
 **List**
 
 - Lists are used to store multiple values in a single variable.
@@ -2587,6 +2635,8 @@ y = 5
 print(f"The sum of {x} and {y} is {x + y}")
 ```
 
+---
+
 You can embed calculations or any valid Python expression inside an f-string.
 
 *Example with Formatting*:
@@ -2616,6 +2666,8 @@ else:
     print("C")
 ```
 
+---
+
 ### Loops : `for`
 
 Used to iterate over a sequence (like a list).
@@ -2630,6 +2682,8 @@ for fruit in fruits:
 
 This will print each fruit in the list.
 
+---
+
 ### The `range()` Function
 
 Used to generate a sequence of numbers, commonly used in loops.
@@ -2642,6 +2696,8 @@ for i in range(5):
 ```
 
 This will print numbers from 0 to 4 (5 iterations, starting from 0).
+
+---
 
 **Parameters of range()**
 
@@ -2671,6 +2727,8 @@ range(0, 10, 2)  # Generates [0, 2, 4, 6, 8]
 ``` python
 range(10, 0, -2)  # Generates [10, 8, 6, 4, 2]
 ```
+
+---
 
 ### Loops : While
 
@@ -2705,6 +2763,8 @@ message = greet("Alice")
 print(message)  # Outputs: Hello, Alice
 ```
 
+---
+
 ### Parameters and Arguments
 
 **Parameters**: - Variables that are specified in the function definition. - These allow functions to accept input data.
@@ -2722,6 +2782,8 @@ print(result)  # Outputs: 8
 ```
 
 a and b are **parameters**, and 5 and 3 are **arguments**.
+
+---
 
 ### Default arguments and keyword arguments
 
@@ -2748,6 +2810,8 @@ def greet(name, greeting="Hello"):
 print(greet(name="Alice", greeting="Good Morning"))
 ```
 
+---
+
 ### Variable Number of Arguments
 
 Python allows to define functions that accept a **variable number of arguments** using `*args` and `**kwargs`.
@@ -2773,6 +2837,8 @@ def print_info(**kwargs):
 
 print_info(name="Alice", age=30)
 ```
+
+---
 
 ### `lambda` function
 
@@ -2816,6 +2882,8 @@ p1 = Player("Alice")
 print(p1.name, p1.score)  # Outputs: Alice 0
 ```
 
+---
+
 ### Methods and Attributes
 
 - **Attributes**: Variables that belong to an object (e.g., `self.name`, `self.score`).
@@ -2837,6 +2905,8 @@ p1.increase_score(10)
 print(p1.score)  # Outputs: 10
 ```
 
+---
+
 ### Inheritance
 
 - allows one class to inherit attributes and methods from another class.
@@ -2857,6 +2927,8 @@ class Player(Person):
 p1 = Player("Alice")
 print(p1.name, p1.score)  # Outputs: Alice 0
 ```
+
+---
 
 ### Encapsulation and Polymorphism
 
@@ -2907,6 +2979,8 @@ Create an new Notebook in Jupyterlab, and for each Exercise copy and paste the i
 3.  Create a variable `height` that stores your height in meters (as a float).
 4.  Print a sentence that uses all three variables in a formatted string. Example: "My name is Alice, I'm 30 years old and 1.75 meters tall."
 
+--- 
+
 ### Exercise 2 : Working with Lists
 
 1.  Create a list `fruits` that contains the following elements: "apple", "banana", "cherry", "date".
@@ -2914,6 +2988,8 @@ Create an new Notebook in Jupyterlab, and for each Exercise copy and paste the i
 3.  Remove "banana" from the list.
 4.  Print the number of fruits in the list.
 5.  Print the third fruit in the list (remember that lists are zero-indexed).
+
+---
 
 ### Exercise 3: Control Flow (Conditionals)
 
@@ -2924,16 +3000,22 @@ Create an new Notebook in Jupyterlab, and for each Exercise copy and paste the i
     - "Grade C" if the score is between 70 and 79,
     - "Grade D" if the score is below 70.
 
+---
+
 ### Exercise 4: Loops
 
 1.  Write a for loop that prints all even numbers between 1 and 20.
 2.  Write a while loop that starts with `n = 10` and decreases `n` by 1 in each iteration until `n` equals 0. Print the value of `n` in each iteration.
+
+---
 
 ### Exercise 5: Functions
 
 1.  Write a function `multiply(a, b)` that returns the product of two numbers `a` and `b`.
 2.  Write a function `is_even(n)` that returns `True` if the number `n` is even, and `False` otherwise.
 3.  Write a function `count_vowels(s)` that takes a string `s` and returns the number of vowels (a, e, i, o, u) in the string.
+
+---
 
 ### Exercise 6: Working with Dictionaries
 
@@ -2942,132 +3024,15 @@ Create an new Notebook in Jupyterlab, and for each Exercise copy and paste the i
 3.  Add a new key "gender" with a value of 'F'.
 4.  Display the dictionary.
 
+---
+
 ### Exercise 7: List Comprehensions
 
 1.  Create a list `numbers` that contains the numbers from 1 to 10.
 2.  Use a **list comprehension** to create a new list `squares` that contains the square of each number in `numbers`.
 3.  Use another list comprehension to create a list `evens` that contains only the even numbers from `numbers`.
 
-## ✅ Solutions
 
-### Exercise 1: Basic variables and Data Types
-
-``` python
-age = 25  # Replace with your age  
-name = "Alice"  # Replace with your name  
-height = 1.75  # Replace with your height  
-
-print(f"My name is {name}, I'm {age} years old and {height} meters tall.")
-
-### Exercise 2: Working with Lists
-
-```python
-fruits = ["apple", "banana", "cherry", "date"]
-fruits.append("orange")
-fruits.remove("banana")
-
-print(f"Number of fruits: {len(fruits)}")
-print(f"The third fruit in the list is: {fruits[2]}")
-```
-
-### Exercise 3: Control flow (conditionals)
-
-``` python
-score = 85  # Replace with any value between 0 and 100
-
-if score >= 90:
-    print("Grade A")
-elif score >= 80:
-    print("Grade B")
-elif score >= 70:
-    print("Grade C")
-else:
-    print("Grade D")
-```
-
-### Exercise 4: Loops
-
-For loop for even numbers
-
-``` python
-for i in range(2, 21, 2):
-    print(i)
-```
-
-While loop
-
-``` python
-n = 10
-while n > 0:
-    print(n)
-    n -= 1
-```
-
-### Exercise 5: Functions
-
-Function to multiply two numbers
-
-``` python
-def multiply(a, b):
-    return a * b
-
-print(multiply(3, 4))  # Output: 12
-```
-
-Function to check if a number is even
-
-``` python
-def is_even(n):
-    return n % 2 == 0
-
-print(is_even(5))  # Output: False
-print(is_even(6))  # Output: True
-```
-
-Function to count vowels in a string
-
-``` python
-def count_vowels(s):
-    vowels = "aeiouAEIOU"
-    count = 0
-    for char in s:
-        if char in vowels:
-            count += 1
-    return count
-
-print(count_vowels("hello"))  # Output: 2
-print(count_vowels("Python Programming"))  # Output: 4
-```
-
-### Exercise 6: Dictionaries
-
-``` python
-student = {
-    "name": "Alice",
-    "age": 20,
-    "grade": "A"
-}
-
-# Add a new key
-student["gender"] = 'F'
-
-# Print the dictionary
-print(student)
-```
-
-### Exercise 7: List-Comprehension
-
-``` python
-numbers = list(range(1, 11))
-
-# List comprehension for squares
-squares = [n**2 for n in numbers]
-print(squares)
-
-# List comprehension for even numbers
-evens = [n for n in numbers if n % 2 == 0]
-print(evens)
-```
 
 # HTML {#html}
 
@@ -3092,7 +3057,7 @@ print(evens)
 </html>
 ```
 
-HTML elements are represented by tags enclosed in \< \>.
+HTML elements are represented by tags enclosed in `< >` and `< />`.
 
 ## Common HTML Elements
 
@@ -3109,18 +3074,6 @@ HTML elements are represented by tags enclosed in \< \>.
 <p>This is a paragraph.</p>
 ```
 
-- **Links**: Used to create hyperlinks.
-
-``` html
-<a href="https://www.example.com">Visit Example</a>
-```
-
-- **Images**: Used to embed images.
-
-``` html
-<img src="image.jpg" alt="A description of the image">
-```
-
 - **Lists**: Used to create ordered or unordered lists.
 
 ``` html
@@ -3128,6 +3081,20 @@ HTML elements are represented by tags enclosed in \< \>.
   <li>First item</li>
   <li>Second item</li>
 </ul>
+```
+
+- **Links**: Used to create hyperlinks.
+
+``` html
+<a href="https://www.example.com">Visit Example</a>
+```
+
+---
+
+- **Images**: Used to embed images.
+
+``` html
+<img src="image.jpg" alt="A description of the image">
 ```
 
 - **Forms**: Used to collect user input.
@@ -3229,9 +3196,7 @@ ID Selector: Targets a single element with a specific ID (uses `#`).
 | **CSS Symbol** | **`.`** (Dot) | **`#`** (Hash) |
 | **CSS Example** | `.btn { padding: 10px; }` | `#submit-btn { background: green; }` |
 
-::: {.lightbulb}
-💡 **Best Practice:** 
-
+::: callout-tip
 - Use **Classes** for styling 90% of the time. 
 - Use **IDs** only when you need to target a specific element (often for JavaScript).
 :::
@@ -3286,37 +3251,45 @@ div {
 }
 ```
 
-## Block vs. Inline Elements
+--- 
 
-**Block Elements (`<div>`, `<p>`, `<h1>`)** 
+### Block Elements (`<div>`, `<p>`, `<h1>`)
 
 - Take up the **full width** available. 
 - Start on a new line. 
 - The **Box Model** (margin, padding, border etc.) applies fully.
 
-**Inline Elements (`<span>`, `<a>`, `<b>`)** 
+``` html
+<div style="border: 1px solid red; padding-left: 10px;">
+    I am a DIV (Block)
+</div>
+```
+
+::: {style="border: 1px solid red; padding-left: 10px; margin-top: 10px;"}
+I am a DIV (Block)
+:::
+
+---
+
+### Inline Elements (`<span>`, `<a>`, `<b>`)
 
 - Take up **only the necessary width**. 
 - Do not start on a new line (they flow with text). 
 - Vertical margins/padding often behave differently.
 
 ``` html
-<div style="border: 1px solid red;">I am a DIV (Block)</div>
-
 <p>
     I am a text with a <span style="background-color: yellow;">SPAN (Inline)</span> inside.
 </p>
 ```
-
-::: {style="border: 1px solid red;"}
-I am a DIV (Block)
-:::
 
 <p>I am a text with a [SPAN (Inline)]{style="background-color: yellow;"} inside.</p>
 
 
 
 # JavaScript {#javascript}
+
+## Introduction to JavaScript
 
 - **JavaScript (JS)** is a programming language used to add **interactivity** to web pages.
 - It can be used for:
@@ -3426,7 +3399,7 @@ console.log(finalPayoff);  // Outputs: 15
 - to pass data from your Python backend to your frontend JavaScript.
 - oTree automatically converts Python dictionaries into JavaScript objects (JSON).
 
-**1. In Python (models.py or __init__.py):**
+**1. In Python (__init__.py):**
 ```python
 class MyPage(Page):
     @staticmethod
@@ -3436,6 +3409,8 @@ class MyPage(Page):
             treatment_group='A'
         )
 ```
+
+---
 
 **2. In HTML/JS:**
 
@@ -3447,5 +3422,173 @@ console.log(js_vars.exchange_rate); // Outputs: 1.5
 if (js_vars.treatment_group === 'A') {
     // Apply specific logic for this treatment
 }
+</script>
+```
+
+# Applications' instructions {#applications-instructions}
+
+## Socio-Demographic Questionnaire
+
+**Fields to include**
+
+- sex: male / female
+- age
+- marital status: single, married, divorced, widowed
+- student: yes / no
+- level of study (Bac, Licence, Master, PhD)
+- field of study (Education, Sciences, Engineering, Law and Political Science, Agriculture and Food, Health, Economics and Management, Technical Studies)
+
+## Gneezy & Potters (1997)
+
+The player receives an endowment of €100. They must choose an amount to invest in a risky asset. There is a 50% chance of losing the investment entirely, and a 50% chance of having it multiplied by 3. The player keeps whatever amount they choose not to invest.
+
+**Payoffs** : 
+
+- With 50% probability: Payoff = (100 - investment) + (investment * 3)
+- With 50% probability: Payoff = (100 - investment)
+
+In the `tests.py` file, program:
+
+- A **"Risk-Averse"** bot (always submits 0).
+- A **"Risk-Neutral"** bot (submits 50).
+- A **"Risk-Seeking"** bot (submits 100).
+- A **"Random"** bot (uses `random.randint(0, 100)`).
+
+## Public Goods Game
+
+***Experiment Parameters***:
+
+- **Group size**: 4 players.
+- **Endowment**: Each player is endowed with 100 €
+- **Private account**: Each token kept is worth 1 €
+- **Public account**: Each euro contributed to the public account is worth 0.5 € for **each group member**.
+- **Rounds**: 5 rounds, with random grouping at the start of the session.
+
+***Flow of the Experiment***:
+
+1.  **Instructions**: Display game instructions to all players.
+2.  **WaitForAll**: Wait for all players to finish reading the instructions.
+3.  **Decision**: Players decide how much of their 100 € endowment to contribute to the public pool.
+4.  **WaitForGroup**: Synchronize the group after decisions are made.
+5.  **Results**: Display the total group contribution and individual earnings.
+
+## Investment Game
+
+### Groups and Roles
+
+Players are paired in groups of 2 with predefined roles:
+
+- **Trustor** (Player 1)
+- **Trustee** (Player 2)
+
+Both players start with **10 Euros**.
+
+### Game Flow
+
+1.  The **Trustor** decides how much to send to the Trustee (from 0 to 10 €)
+2.  The amount sent is **tripled** by the experimenter → Trustee receives `3 × amount_sent`
+3.  The **Trustee** chooses how much to send back (between 0 and the amount received)
+
+### Payoff Calculations
+
+- **Trustor's payoff**: 10 - amount sent + amount returned by the trustee.
+- **Trustee's payoff**: 10 + 3 × amount sent by the trustor - amount sent back.
+
+## Real-Time Shared Counter
+
+App **`live_counter`**
+
+Create a simple app where players in a group can increment a shared counter. When a player clicks a button, the counter is incremented, and all group members see the updated value in real-time.
+
+**Steps**: 
+
+- Create a new oTree app called live_counter. 
+- Set up a group-level counter that all players can interact with. 
+- Live Interaction: 
+    - Use `live_method` to handle the live communication between the players and the server. 
+    - Each time a player clicks a button, the counter is incremented and the updated value is sent to all players in the group.
+
+## Real-Time Supply & Demand Market
+
+**Objective:** Build a 90-second continuous market with 3 Buyers and 3 Sellers.
+
+**Market Rules:**
+
+- **Buyers:** Have a **Reservation Value** (maximum willingness to pay). They submit **bids** (offers to buy). The server only accepts a new bid if it is strictly greater than the market's current best bid.
+- **Sellers:** Have a **Reservation Price** or Cost (minimum willingness to accept). They submit **asks** (offers to sell). The server only accepts a new ask if it is strictly lower than the market's current best ask.
+- **Transactions:** A transaction occurs when a bid crosses an ask (e.g., `new_bid >= best_ask` or `new_ask <= best_bid`). After a transaction, both the buyer and seller involved are removed from the market.
+- **Payoffs:** 
+    - Buyers: Payoff = Reservation Value - Transaction Price
+    - Sellers: Payoff = Transaction Price - Reservation Price
+    - Zero payoff for non-transacting players.
+- **Timing:** The market automatically closes after 90 seconds using oTree's standard `timeout_seconds = 90` [see documentation](https://otree.readthedocs.io/en/latest/pages.html#timeout).
+
+⬇ to be continued on the next slide
+
+---
+
+### The Server: Managing the Order Book (Python)
+
+In your `__init__.py`, your `live_method` must validate the market rules at the `Group` level before broadcasting updates to all participants.
+
+```python
+class Trading(Page):
+    timeout_seconds = 90
+
+    @staticmethod
+    def live_method(player, data):
+        group = player.group
+        
+        # 1. Processing a Buyer's Bid
+        if 'bid' in data and player.role == 'buyer':
+            bid = data['bid']
+            
+            # Check if it's the highest market bid and within the buyer's budget
+            if (group.best_bid is None or bid > group.best_bid) and bid <= player.value:
+                group.best_bid = bid
+                
+                # 2. Broadcast the update to the entire group (ID 0)
+                return {0: {'type': 'market_update', 'best_bid': group.best_bid, 'best_ask': group.best_ask}}
+                
+        # Equivalent logic for Sellers and 'asks'
+        # ...
+
+        # Write the code for when a transaction occurs (e.g., bid >= ask)
+```
+⬇ to be continued on the next slide
+
+---
+
+### The Client: Sending and Receiving (JS)
+
+On the HTML page, players use an input field to send their offer. `liveRecv` dynamically updates everyone's screen using the exact keys sent by Python.
+
+```html
+<p>Current Best Bid: <span id="best-bid-display">--</span></p>
+<p>Current Best Ask: <span id="best-ask-display">--</span></p>
+
+<input type="number" id="my-offer">
+<button onclick="sendOffer()">Submit Offer</button>
+
+<script>
+    function sendOffer() {
+        let offerAmount = parseFloat(document.getElementById('my-offer').value);
+        // ('bid' or 'ask') based on the player's role
+        liveSend({'bid': offerAmount}); 
+    }
+
+    function liveRecv(data) {
+        if (data.type === 'market_update') {
+            // Update the DOM elements if the values are not null
+            if (data.best_bid !== null) {
+                document.getElementById('best-bid-display').innerText = data.best_bid;
+            }
+            if (data.best_ask !== null) {
+                document.getElementById('best-ask-display').innerText = data.best_ask;
+            }
+        } else if (data.type === 'transaction') {
+            // Handle transaction updates (e.g., show a message, update payoffs, etc.)
+        }
+    }
 </script>
 ```

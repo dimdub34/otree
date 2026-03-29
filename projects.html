@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.28">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Behavioral Science with oTree</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="projets_en_files/libs/clipboard/clipboard.min.js"></script>
+<script src="projets_en_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="projets_en_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="projets_en_files/libs/quarto-html/popper.min.js"></script>
+<script src="projets_en_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="projets_en_files/libs/quarto-html/anchor.min.js"></script>
+<link href="projets_en_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="projets_en_files/libs/quarto-html/quarto-syntax-highlighting-49e51e44f424ea8c7044b429bdbbbfe2.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="projets_en_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="projets_en_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="projets_en_files/libs/bootstrap/bootstrap-11b76fd8ab3a59cf7e31b77a902598ee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="projets_en_files/libs/quarto-contrib/bootstrap-icons-1.13.1/bootstrap-icons.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Projects</h2>
+   
+  <ul class="collapse">
+  <li><a href="#general-instructions-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20626920696e666f2d636972636c6520636c6173733d22746578742d7072696d61727922203e7d7d" id="toc-general-instructions-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20626920696e666f2d636972636c6520636c6173733d22746578742d7072696d61727922203e7d7d" class="nav-link active" data-scroll-target="#general-instructions-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20626920696e666f2d636972636c6520636c6173733d22746578742d7072696d61727922203e7d7d">General Instructions <i class="bi-info-circle text-primary" style="" role="img" aria-hidden="true"></i></a></li>
+  <li><a href="#simple-projects" id="toc-simple-projects" class="nav-link" data-scroll-target="#simple-projects">1. Simple Projects</a>
+  <ul class="collapse">
+  <li><a href="#the-power-of-scarcity" id="toc-the-power-of-scarcity" class="nav-link" data-scroll-target="#the-power-of-scarcity">1.1 The Power of Scarcity</a></li>
+  <li><a href="#framing-effects-on-subscriptions" id="toc-framing-effects-on-subscriptions" class="nav-link" data-scroll-target="#framing-effects-on-subscriptions">1.2 Framing Effects on Subscriptions</a></li>
+  <li><a href="#social-vs.-algorithmic-recommendations" id="toc-social-vs.-algorithmic-recommendations" class="nav-link" data-scroll-target="#social-vs.-algorithmic-recommendations">1.3 Social vs.&nbsp;Algorithmic Recommendations</a></li>
+  <li><a href="#the-influencer-trust-test" id="toc-the-influencer-trust-test" class="nav-link" data-scroll-target="#the-influencer-trust-test">1.4 The Influencer Trust Test</a></li>
+  <li><a href="#the-decoy-effect" id="toc-the-decoy-effect" class="nav-link" data-scroll-target="#the-decoy-effect">1.5 The Decoy Effect</a></li>
+  <li><a href="#the-green-nudge" id="toc-the-green-nudge" class="nav-link" data-scroll-target="#the-green-nudge">1.6 The “Green Nudge”</a></li>
+  <li><a href="#incentives-and-productivity" id="toc-incentives-and-productivity" class="nav-link" data-scroll-target="#incentives-and-productivity">1.7 Incentives and Productivity</a></li>
+  <li><a href="#dishonesty-and-declarations" id="toc-dishonesty-and-declarations" class="nav-link" data-scroll-target="#dishonesty-and-declarations">1.8 Dishonesty and Declarations</a></li>
+  </ul></li>
+  <li><a href="#advanced-real-time-projects" id="toc-advanced-real-time-projects" class="nav-link" data-scroll-target="#advanced-real-time-projects">2. Advanced Real-Time Projects</a>
+  <ul class="collapse">
+  <li><a href="#the-dutch-auction-flash-sale" id="toc-the-dutch-auction-flash-sale" class="nav-link" data-scroll-target="#the-dutch-auction-flash-sale">2.1 The Dutch Auction (Flash Sale)</a></li>
+  <li><a href="#all-or-nothing-crowdfunding" id="toc-all-or-nothing-crowdfunding" class="nav-link" data-scroll-target="#all-or-nothing-crowdfunding">2.2 “All or Nothing” Crowdfunding</a></li>
+  <li><a href="#the-tragedy-of-the-commons" id="toc-the-tragedy-of-the-commons" class="nav-link" data-scroll-target="#the-tragedy-of-the-commons">2.3 The Tragedy of the Commons</a></li>
+  <li><a href="#the-ranking-effect" id="toc-the-ranking-effect" class="nav-link" data-scroll-target="#the-ranking-effect">2.4 The Ranking Effect</a></li>
+  <li><a href="#information-cascade" id="toc-information-cascade" class="nav-link" data-scroll-target="#information-cascade">2.5 Information Cascade</a></li>
+  <li><a href="#real-time-decentralized-punishment" id="toc-real-time-decentralized-punishment" class="nav-link" data-scroll-target="#real-time-decentralized-punishment">2.6 Real-Time Decentralized Punishment</a></li>
+  <li><a href="#the-market-for-attention-click-war" id="toc-the-market-for-attention-click-war" class="nav-link" data-scroll-target="#the-market-for-attention-click-war">2.7 The Market for Attention (Click War)</a></li>
+  <li><a href="#bilateral-negotiation-with-a-deadline" id="toc-bilateral-negotiation-with-a-deadline" class="nav-link" data-scroll-target="#bilateral-negotiation-with-a-deadline">2.8 Bilateral Negotiation with a Deadline</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Behavioral Science with oTree</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="general-instructions-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20626920696e666f2d636972636c6520636c6173733d22746578742d7072696d61727922203e7d7d" class="level1">
+<h1>General Instructions <i class="bi-info-circle text-primary" style="" role="img" aria-hidden="true"></i></h1>
+<div class="alert alert-info">
+<p>Choose one project from the list below. In a team of 2-3 people, you will design and implement a behavioral experiment using oTree, simulating data, analyzing results, and presenting your findings.</p>
+</div>
+<p><strong>Each project must include:</strong></p>
+<ol type="1">
+<li><strong>A functional oTree implementation:</strong> The app must run without errors and include randomized treatments.</li>
+<li><strong>Data Simulation:</strong> A comprehensive <code>tests.py</code> file to simulate user behavior (bots) and verify data integrity.</li>
+<li><strong>Data Analysis:</strong> A simple analysis of the simulated data (using R or Python).</li>
+<li><strong>Oral Presentation:</strong> A 15-20 minute pitch and demo.</li>
+</ol>
+<p><strong>Presentation Structure:</strong></p>
+<ul>
+<li><strong>Pitch (5 min):</strong> Context, client’s problem, behavioral hypothesis, and proposed solution.</li>
+<li><strong>Demo (10 min):</strong> Live demonstration of the oTree experiment (involving the class via smartphones/PCs).</li>
+<li><strong>Analysis (5 min):</strong> Basic visualization of simulated results and expected outcomes.</li>
+</ul>
+<hr>
+</section>
+<section id="simple-projects" class="level1">
+<h1>1. Simple Projects</h1>
+<section id="the-power-of-scarcity" class="level2">
+<h2 class="anchored" data-anchor-id="the-power-of-scarcity">1.1 The Power of Scarcity</h2>
+<p><strong>Context:</strong> An e-commerce website wants to investigate how scarcity cues influence consumer behavior. They suspect that highlighting limited availability or high demand increases the likelihood of purchase.</p>
+<p><strong>Research Question:</strong> Does the type of scarcity message (quantitative vs.&nbsp;social) affect the click-through rate (CTR) or purchase probability?</p>
+<p><strong>Experimental Design:</strong> Create a product selection task where participants view items under different conditions:</p>
+<p><strong>Example</strong> :</p>
+<ul>
+<li><strong>Treatment A (Control):</strong> Neutral product display (no messages).</li>
+<li><strong>Treatment B (Quantitative Scarcity):</strong> Message indicating low stock (e.g., “Only 2 items left!”).</li>
+<li><strong>Treatment C (Social Scarcity):</strong> Message indicating high interest (e.g., “10 people are viewing this item right now”).</li>
+</ul>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>oTree app with randomized treatment assignment</li>
+<li>Participant instructions page.</li>
+<li>Analysis of click rates/purchases across the three conditions.</li>
+</ul>
+<hr>
+</section>
+<section id="framing-effects-on-subscriptions" class="level2">
+<h2 class="anchored" data-anchor-id="framing-effects-on-subscriptions">1.2 Framing Effects on Subscriptions</h2>
+<p><strong>Context:</strong> A streaming platform wants to optimize its subscription page. They need to understand how the presentation of pricing options (framing) alters user choices between monthly and yearly plans.</p>
+<p><strong>Research Question:</strong> How does framing the cost (e.g., emphasizing savings vs.&nbsp;flexibility) impact the uptake of long-term subscriptions?</p>
+<p><strong>Experimental Design:</strong> Design a subscription choice interface with randomized framing:</p>
+<p><strong>Example</strong>:</p>
+<ul>
+<li><strong>Treatment A (Baseline):</strong> Standard presentation (e.g., “$10/month” vs.&nbsp;“$100/year”).</li>
+<li><strong>Treatment B (Loss Aversion/Gain):</strong> Emphasize savings (e.g., “Yearly plan: Get 2 months free”).</li>
+<li><strong>Treatment C (Flexibility):</strong> Emphasize freedom (e.g., “Monthly plan: Cancel anytime, total flexibility”).</li>
+</ul>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>oTree app collecting the user’s choice and a short follow-up on their reasoning.</li>
+<li>Randomization mechanism.</li>
+<li>Report comparing the proportion of “Yearly” subscriptions across treatments.</li>
+</ul>
+<hr>
+</section>
+<section id="social-vs.-algorithmic-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="social-vs.-algorithmic-recommendations">1.3 Social vs.&nbsp;Algorithmic Recommendations</h2>
+<p><strong>Context:</strong> An online clothing retailer is debating its recommendation strategy. They want to know if customers trust peer choices (social proof) more than algorithmic curation.</p>
+<p><strong>Research Question:</strong> Do users prefer products recommended by “other customers” or products “selected for them” by an algorithm?</p>
+<p><strong>Experimental Design:</strong> Create a simulated shopping environment where products are highlighted based on the condition:</p>
+<p><strong>Example</strong>:</p>
+<ul>
+<li><strong>Treatment A (Social):</strong> Recommendations labeled as “Most purchased by others.”</li>
+<li><strong>Treatment B (Algorithmic):</strong> Recommendations labeled as “Selected for you by our AI.”</li>
+</ul>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>Fictional product selection interface.</li>
+<li>Click-stream data collection.</li>
+<li>Behavioral analysis comparing the click-through rate of recommended items in both conditions.</li>
+</ul>
+<hr>
+</section>
+<section id="the-influencer-trust-test" class="level2">
+<h2 class="anchored" data-anchor-id="the-influencer-trust-test">1.4 The Influencer Trust Test</h2>
+<p><strong>Context:</strong> A brand wants to measure the “Influencer Effect.” They need to determine if a product is perceived more favorably when endorsed by a social media personality compared to a standard neutral presentation.</p>
+<p><strong>Research Question:</strong> Does an influencer endorsement significantly increase trust or purchase intention compared to a neutral product description?</p>
+<p><strong>Experimental Design:</strong> Participants view a product profile under one of two conditions.</p>
+<p><strong>Example</strong>:</p>
+<ul>
+<li><strong>Treatment A (Neutral):</strong> Standard technical datasheet and product photo.</li>
+<li><strong>Treatment B (Influencer):</strong> An Instagram-style post featuring an influencer with a photo and a descriptive caption.</li>
+</ul>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>Randomization between conditions.</li>
+<li>Measurement of “Trust Score” (Likert scale) or “Willingness to Buy” (0-100 slider).</li>
+<li>Comparative analysis of the scores.</li>
+</ul>
+<hr>
+</section>
+<section id="the-decoy-effect" class="level2">
+<h2 class="anchored" data-anchor-id="the-decoy-effect">1.5 The Decoy Effect</h2>
+<p><strong>Context:</strong> An online retailer wants to nudge users toward their Premium (higher margin) product. They are considering introducing a “decoy” option to make the Premium option look more attractive.</p>
+<p><strong>Research Question:</strong> Does the introduction of an irrelevant “decoy” option (asymmetrically dominated) increase the share of participants choosing the Premium option?</p>
+<p><strong>Experimental Design:</strong> Participants choose a production in one of two conditions.</p>
+<p><strong>Example</strong>:</p>
+<ul>
+<li><strong>Treatment A (No Decoy):</strong> Choice between <strong>Basic</strong> ($10) and <strong>Premium</strong> ($30).</li>
+<li><strong>Treatment B (With Decoy):</strong> Choice between <strong>Basic</strong> ($10), <strong>Premium</strong> ($30), and <strong>Decoy</strong> ($35, or $30 with fewer features) — <em>The decoy is clearly worse than the Premium option.</em></li>
+</ul>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>oTree implementation of the choice task.</li>
+<li>Data collection of the chosen product.</li>
+<li>Analysis of the shift in “Premium” market share between Treatment A and B.</li>
+</ul>
+<hr>
+</section>
+<section id="the-green-nudge" class="level2">
+<h2 class="anchored" data-anchor-id="the-green-nudge">1.6 The “Green Nudge”</h2>
+<p><strong>Context:</strong> An online supermarket aims to reduce plastic waste. They want to encourage customers to buy bulk products (packaging-free) instead of pre-packaged goods using behavioral nudges.</p>
+<p><strong>Research Question:</strong> Is social pressure (Social Norm) or environmental impact information (Ecological signaling) more effective in promoting bulk purchases?</p>
+<p><strong>Experimental Design:</strong> Participants have a budget of €20 to spend in a simulated store.</p>
+<p><strong>Example</strong>:</p>
+<ul>
+<li><strong>Treatment A (Control):</strong> Neutral display.</li>
+<li><strong>Treatment B (Social Norm):</strong> Bulk products display a badge: “80% of our customers choose this product.”</li>
+<li><strong>Treatment C (Impact):</strong> Bulk products display a badge: “Save 50g of plastic by choosing this.”</li>
+</ul>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>A shopping list task implementation.</li>
+<li>Calculation of the percentage of “bulk” items in the final basket.</li>
+<li>Analysis comparing the effectiveness of the two nudges against the control.</li>
+</ul>
+<hr>
+</section>
+<section id="incentives-and-productivity" class="level2">
+<h2 class="anchored" data-anchor-id="incentives-and-productivity">1.7 Incentives and Productivity</h2>
+<p><strong>Context:</strong> A gig-economy food delivery platform wants to increase courier activity during peak hours. They are hesitating between a guaranteed fixed bonus and a lottery-based bonus.</p>
+<p><strong>Research Question:</strong> Which incentive scheme generates higher effort (productivity): a small fixed piece-rate or a probabilistic large reward (with the same expected value)?</p>
+<p><strong>Experimental Design:</strong> Implement a <strong>Real Effort Task</strong> (e.g., counting zeros in a matrix, decoding text) lasting exactly 2 minutes.</p>
+<p><strong>Example</strong>:</p>
+<ul>
+<li><strong>Treatment A (Fixed):</strong> “You earn €0.50 per correctly solved task.”</li>
+<li><strong>Treatment B (Lottery):</strong> “Every correctly solved task gives you a 1 in 10 chance to win €5.00.”</li>
+</ul>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>Real Effort Task logic (looping pages until timeout).</li>
+<li>Payoff calculation logic based on the treatment.</li>
+<li>Analysis of effort (number of tasks attempted/solved) and risk preferences.</li>
+</ul>
+<hr>
+</section>
+<section id="dishonesty-and-declarations" class="level2">
+<h2 class="anchored" data-anchor-id="dishonesty-and-declarations">1.8 Dishonesty and Declarations</h2>
+<p><strong>Context:</strong> A car insurance company is losing money due to inflated claims. They want to test if the <em>timing</em> of an honesty pledge (signature) affects the magnitude of fraud.</p>
+<p><strong>Research Question:</strong> Does signing an honesty pledge <em>before</em> reporting a claim reduce dishonesty more than signing it <em>after</em>?</p>
+<p><strong>Experimental Design:</strong> Adapt the standard <strong>“Die-roll task”</strong>: Participants roll a die (physically or virtually) and report the result. Higher numbers equal higher payoffs.</p>
+<p><strong>Example</strong>:</p>
+<ul>
+<li><strong>Treatment A (Post-signature):</strong> Participant enters the result, then signs a statement at the bottom (“I certify this is accurate…”).</li>
+<li><strong>Treatment B (Pre-signature/Priming):</strong> Participant must sign the honesty pledge <em>before</em> the input field for the result appears.</li>
+</ul>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>Implementation of the reporting interface.</li>
+<li>Comparison of the distribution of reported numbers against the statistical probability (uniform distribution).</li>
+<li>Analysis of “cheating magnitude” between conditions.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="advanced-real-time-projects" class="level1">
+<h1>2. Advanced Real-Time Projects</h1>
+<div class="alert alert-info">
+<p><em>Note: The following projects involve continuous time, multiplayer interactions, and high-frequency data. They require the use of advanced oTree features such as <code>live_method</code>, JavaScript (Highcharts/Bootstrap), and custom databases (<code>ExtraModel</code> or JSON serialization).</em></p>
+</div>
+<hr>
+<section id="the-dutch-auction-flash-sale" class="level2">
+<h2 class="anchored" data-anchor-id="the-dutch-auction-flash-sale">2.1 The Dutch Auction (Flash Sale)</h2>
+<p><strong>Context:</strong> A last-minute concert ticket resale platform wants to test if buyers panic and pay a higher premium during a descending-price auction compared to a standard fixed-price format.</p>
+<p><strong>Research Question:</strong> Does a descending-price clock (Dutch Auction) increase the final sale price due to anticipated competition and panic, compared to static pricing?</p>
+<p><strong>Experimental Design:</strong> Create a real-time market for a single indivisible good among a group of competing buyers.</p>
+<ul>
+<li><strong>Treatment A (Fixed Price):</strong> Buyers can buy the ticket at a static price at any time.</li>
+<li><strong>Treatment B (Dutch Auction):</strong> The price starts at €100 and drops by €1 every second. The first player to click “Buy” wins the item at the current price. The others earn nothing.</li>
+</ul>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>Server-side timer and <code>live_method</code> to broadcast the decreasing price.</li>
+<li>Dynamic visualization of the price drop (e.g., using Highcharts).</li>
+<li>Data analysis: Distribution of winning bids based on the number of competitors.</li>
+</ul>
+<hr>
+</section>
+<section id="all-or-nothing-crowdfunding" class="level2">
+<h2 class="anchored" data-anchor-id="all-or-nothing-crowdfunding">2.2 “All or Nothing” Crowdfunding</h2>
+<p><strong>Context:</strong> A crowdfunding startup (like Kickstarter) wants to study the momentum effect of donations. They hypothesize that people donate more frequently and generously as the campaign approaches its funding threshold.</p>
+<p><strong>Research Question:</strong> Does the probability and amount of donations increase exponentially as the collective pool gets closer to the required threshold?</p>
+<p><strong>Experimental Design:</strong> Players are endowed with tokens and have 60 seconds to make continuous, free-will donations to a public project.</p>
+<p><strong>Rules:</strong> If the total threshold (e.g., 200 tokens) is reached before the timeout, the project is funded and yields a multiplier return to all. If not, everyone is refunded.</p>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li><code>live_method</code> to aggregate donations and broadcast the new total instantly.</li>
+<li>A live Bootstrap Progress Bar updating dynamically.</li>
+<li><code>ExtraModel</code> to record the exact timestamp and amount of <em>every single donation</em>.</li>
+<li>Data analysis: Plotting the cumulative donation curve over time to identify end-game momentum.</li>
+</ul>
+<hr>
+</section>
+<section id="the-tragedy-of-the-commons" class="level2">
+<h2 class="anchored" data-anchor-id="the-tragedy-of-the-commons">2.3 The Tragedy of the Commons</h2>
+<p><strong>Context:</strong> The Ministry of Ecological Transition wants to understand how fast a shared resource is depleted in the absence of quotas, to calibrate future extraction taxes.</p>
+<p><strong>Research Question:</strong> Do extraction rates accelerate (panic behavior) as the shared resource becomes visibly scarce?</p>
+<p><strong>Experimental Design:</strong> A shared pool (e.g., a lake) contains 500 units. During a 90-second window, players can click an “Extract” button as fast as they want. Each click earns them a personal payoff but reduces the shared pool. All players see the remaining stock decreasing in real-time.</p>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>High-frequency <code>live_method</code> handling consecutive clicks.</li>
+<li>“In-Memory Batching” (saving data to a dictionary in RAM before writing to the database at the end) to prevent server crashes.</li>
+<li>Automatic page submission if the stock hits 0 before the timeout.</li>
+<li>Data analysis: Comparing the extraction rate (clicks per second) at the beginning vs.&nbsp;the end of the game.</li>
+</ul>
+<hr>
+</section>
+<section id="the-ranking-effect" class="level2">
+<h2 class="anchored" data-anchor-id="the-ranking-effect">2.4 The Ranking Effect</h2>
+<p><strong>Context:</strong> A large logistics company wants to know if displaying a live “Best Employee Leaderboard” increases overall productivity or discourages lower-performing workers.</p>
+<p><strong>Research Question:</strong> Does real-time relative performance feedback (ranking) increase total effort, or does it cause the lowest-ranked participants to give up?</p>
+<p><strong>Experimental Design:</strong> A Real-Effort Task (e.g., solving math matrices) where players earn piece-rate points.</p>
+<ul>
+<li><strong>Treatment A (Control):</strong> Players only see their own score.</li>
+<li><strong>Treatment B (Leaderboard):</strong> Players see a dynamically sorted Top 3 ranking of their group updated live on their screen.</li>
+</ul>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>Server-side validation of answers via <code>live_method</code>.</li>
+<li>Dynamic DOM manipulation in JavaScript to re-sort the HTML leaderboard without reloading the page.</li>
+<li>Data analysis: Time-series analysis of the effort of the “last-placed” player compared to the control group.</li>
+</ul>
+<hr>
+</section>
+<section id="information-cascade" class="level2">
+<h2 class="anchored" data-anchor-id="information-cascade">2.5 Information Cascade</h2>
+<p><strong>Context:</strong> An algorithmic investment fund wants to model the formation of speculative bubbles based on mimicry, even when economic fundamentals are weak.</p>
+<p><strong>Research Question:</strong> How often do individuals ignore their own private information to follow the observed decisions of the majority (herd behavior)?</p>
+<p><strong>Experimental Design:</strong> Two urns exist (A: 70% Red balls, B: 70% Blue balls). The computer secretly picks one.</p>
+<ul>
+<li><strong>Sequential Gameplay:</strong> Each player receives a private signal (one ball drawn) and must publicly guess the chosen urn <em>one after the other</em>.</li>
+<li>Players waiting their turn watch the decisions of their predecessors appear live on their screen.</li>
+</ul>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>Use of <code>get_players()</code> to manage sequential turns within a group.</li>
+<li><code>live_method</code> broadcasting the decision of player <span class="math inline">\(N\)</span> to players <span class="math inline">\(N+1\)</span>, <span class="math inline">\(N+2\)</span>, etc.</li>
+<li>Data analysis: Calculating the percentage of players who enter an “information cascade” (choosing contrary to their private signal).</li>
+</ul>
+<hr>
+</section>
+<section id="real-time-decentralized-punishment" class="level2">
+<h2 class="anchored" data-anchor-id="real-time-decentralized-punishment">2.6 Real-Time Decentralized Punishment</h2>
+<p><strong>Context:</strong> An online collaborative platform (like Wikipedia) wants to evaluate if allowing users to instantly sanction “free-riders” improves overall team contributions.</p>
+<p><strong>Research Question:</strong> Does the threat of immediate, real-time peer punishment sustain higher cooperation levels than standard end-of-round punishment?</p>
+<p><strong>Experimental Design:</strong> A 60-second continuous Public Goods Game.</p>
+<ul>
+<li>Players use a slider to adjust their contribution level live.</li>
+<li>They can see others’ contributions and can click a button to pay 1 point to deduct 3 points from a specific group member at any time.</li>
+</ul>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>Complex <code>ExtraModel</code> to track a web of interactions (Who punished whom? When? At what contribution level?).</li>
+<li>Highcharts integration showing two series: the player’s contribution level and the sanctions received over time.</li>
+<li>Data analysis: Econometric analysis checking if a sanction received at time <span class="math inline">\(t\)</span> leads to a contribution increase at time <span class="math inline">\(t+1\)</span>.</li>
+</ul>
+<hr>
+</section>
+<section id="the-market-for-attention-click-war" class="level2">
+<h2 class="anchored" data-anchor-id="the-market-for-attention-click-war">2.7 The Market for Attention (Click War)</h2>
+<p><strong>Context:</strong> A digital marketing agency running keyword auctions (like Google Ads) wants to analyze the “War of Attrition” where bidding costs time and effort rather than money.</p>
+<p><strong>Research Question:</strong> In a sunk-cost auction, at what point do competitors concede to an aggressive opponent?</p>
+<p><strong>Experimental Design:</strong> Two players fight for a single ad space. To be the “current winner,” a player must continuously mash a button. If they stop and the opponent clicks more, the opponent takes the spot. The winner is whoever holds the spot when the 90-second timer ends.</p>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>Extremely high-frequency data collection (requires JSON serialization in a <code>LongStringField</code> or optimized memory batching).</li>
+<li>A dynamic Bootstrap Progress Bar acting as a “Tug-of-War” visual indicator.</li>
+<li>Data analysis: Survival analysis of when bots/players “give up” the click war.</li>
+</ul>
+<hr>
+</section>
+<section id="bilateral-negotiation-with-a-deadline" class="level2">
+<h2 class="anchored" data-anchor-id="bilateral-negotiation-with-a-deadline">2.8 Bilateral Negotiation with a Deadline</h2>
+<p><strong>Context:</strong> A labor union wants to investigate the “Ultimatum Effect”—the tendency for negotiations to stall until the final seconds before a strike deadline.</p>
+<p><strong>Research Question:</strong> Does the rate of concessions (price compromises) accelerate exponentially in the final 15 seconds of a negotiation window?</p>
+<p><strong>Experimental Design:</strong> A 1-on-1 over-the-counter market (1 Buyer, 1 Seller). They have 2 minutes to agree on a transaction price. - They can submit and revise offers continuously. - To close the deal, one player must explicitly click “Accept” on the other’s current offer. If the timer hits zero with no accepted offer, both earn nothing.</p>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>Custom chat/offer interface relying entirely on <code>live_method</code> and <code>liveRecv</code>.</li>
+<li>Logic to instantly end the page and calculate payoffs as soon as an offer is mutually accepted.</li>
+<li>Data analysis: Measuring the average concession amount (difference between consecutive offers) over time.</li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
