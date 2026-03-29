@@ -248,10 +248,15 @@ Navigate to your project folder `cd my_otree_project` At this point, you have a 
 
 ## Python IDE : Pycharm
 
+:::: {.columns}
+::: {.column width="80%"}
 - IDE = Integrated Development Environment
 - <https://www.jetbrains.com/pycharm/>
-
-![](img/pycharm.png "Pycharm"){fig-align="left" height="100px"}
+:::
+::: {.column width="20%"}
+![](img/pycharm.png "Pycharm"){fig-align="left" height="80px"}
+:::
+::::
 
 💻 Download the Pycharm **Community version** and install it
 
@@ -893,7 +898,7 @@ In **sequential games**, a player's input may depend on another player's earlier
 - The **buyer** makes an offer.
 - The **seller** receives the offer and can **respond with a counter-offer** -- but this counter-offer must not exceed the amount offered.
 
-**Setting a Dynamic Constraint**
+---
 
 You can limit a player's input dynamically using the `fieldname_max` method.
 
@@ -908,7 +913,7 @@ This will:
 - Adjust the upper limit based on a previous decision or value
 
 ::: callout-note
-**Similarly, you can use `fieldname_min()` to set a dynamic minimum.**
+**Similarly, you can use `fieldname_min()` to set a dynamic minimum and `fieldname_choices()` to set the list of choices.**
 :::
 
 ## 💻 Exercise: The Investment Game
@@ -928,14 +933,14 @@ Both players start with **10 Euros**.
 2.  The amount sent is **tripled** by the experimenter → Trustee receives `3 × amount_sent`
 3.  The **Trustee** chooses how much to send back (between 0 and the amount received)
 
+⬇ to be continued on the next slide
+
+--- 
+
 ### Payoff Calculations
 
 - **Trustor's payoff**: 10 - amount sent + amount returned by the trustee.
 - **Trustee's payoff**: 10 + 3 × amount sent by the trustor - amount sent back.
-
-⬇ to be continued on the next slide
-
----
 
 ### Page Sequence
 
@@ -949,6 +954,10 @@ Both players start with **10 Euros**.
 - **Trustee**:
   - `amount_received`: The amount the trustee receives (3× amount sent).
   - `amount_sent_back`: How much the trustee sends back to the trustor.
+
+⬇ to be continued on the next slide
+
+---
 
 ### Methods to Implement
 
@@ -1655,7 +1664,7 @@ Create a simple app where players in a group can increment a shared counter. Whe
     - Buyers: Payoff = Reservation Value - Transaction Price
     - Sellers: Payoff = Transaction Price - Reservation Price
     - Zero payoff for non-transacting players.
-- **Timing:** The market automatically closes after 90 seconds using oTree's standard `timeout_seconds = 90` [see documentation](https://otree.readthedocs.io/en/latest/pages.html#timeout).
+- **Timing:** The market automatically closes after 90 seconds using oTree's standard `timeout_seconds = 90` [see dedicated slide](#timeout).
 
 ⬇ to be continued on the next slide
 
@@ -1663,7 +1672,7 @@ Create a simple app where players in a group can increment a shared counter. Whe
 
 ### The Server: Managing the Order Book (Python)
 
-In your `__init__.py`, your `live_method` must validate the market rules at the `Group` level before broadcasting updates to all participants.
+In `__init__.py`, the `live_method` must validate the market rules at the `Group` level before broadcasting updates to all participants.
 
 ```python
 class Trading(Page):
@@ -1685,8 +1694,6 @@ class Trading(Page):
                 return {0: {'type': 'market_update', 'best_bid': group.best_bid, 'best_ask': group.best_ask}}
                 
         # Equivalent logic for Sellers and 'asks'
-        # ...
-
         # Write the code for when a transaction occurs (e.g., bid >= ask)
 ```
 ⬇ to be continued on the next slide
@@ -1971,8 +1978,9 @@ Bootstrap provides pre-defined button styles for quick use.
 
 Bootstrap offers many other button styles, such as danger (red), warning (yellow), and more.
 
-## Bootstrap Tables
+## Bootstrap Tables 
 
+::: {style="font-size: 0.8em;"}
 You can easily create styled tables with Bootstrap classes.
 
 *Example*:
@@ -2002,6 +2010,7 @@ You can easily create styled tables with Bootstrap classes.
 - .table-striped: Adds alternating row colors.
 
 Bootstrap also provides classes like .table-bordered and .table-hover for additional styles.
+:::
 
 ## Bootstrap Cards
 
@@ -2182,6 +2191,7 @@ class Lexicon:
 
 ---
 
+::: {style="font-size: 0.9em;"}
 Import the language code and depending on it import the corresponding lexicon file
 
 In the `__init__.py` file in the import section
@@ -2211,6 +2221,7 @@ and then in the html file
 ```html
 {{ lexicon.amount_sent }}
 ```
+:::
 
 ## Conditional structure
 
@@ -2312,7 +2323,7 @@ Often easier to create the history in the `vars_for_template` method and then ju
 You can also use this method for videos and audio files, but it’s generally better to host large media files externally and link to them in the src attribute.
 :::
 
-## Working with Timeout
+## Working with Timeout {#timeout}
 
 Pages in oTree can have time limits, allowing participants a limited amount of time to respond.
 
@@ -3543,6 +3554,7 @@ Create a simple app where players in a group can increment a shared counter. Whe
 
 ### The Server: Managing the Order Book (Python)
 
+::: {style="font-size: 0.9em;"}
 In your `__init__.py`, your `live_method` must validate the market rules at the `Group` level before broadcasting updates to all participants.
 
 ```python
@@ -3569,6 +3581,8 @@ class Trading(Page):
 
         # Write the code for when a transaction occurs (e.g., bid >= ask)
 ```
+:::
+
 ⬇ to be continued on the next slide
 
 ---
