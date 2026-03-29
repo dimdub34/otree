@@ -7,7 +7,7 @@ format:
   revealjs:
     theme: default
     css: custom.css
-    # output-file: "index.html"
+    output-file: "index.html"
     highlight-style: github
     navigation-mode: vertical
     slide-level: 2
@@ -26,8 +26,11 @@ execute:
   warning: false
 ---
 
+
 # Content
 
+:::: {.columns}
+::: {.column width="50%"}
 1.  [Introduction](#introduction)
 2.  [Getting started with oTree](#getting-started-with-otree)
 3.  [Building an oTree application](#building-an-otree-application)
@@ -38,12 +41,17 @@ execute:
 8.  [Simulations and tests](#simulations-and-tests)
 9.  [Data Wrangling](#data-wrangling)
 10. [Rooms and Admin Report](#rooms-and-admin-report)
+:::
+
+::: {.column width="50%"}
 11. [Javascript and Real-Time Interactions](#javascript-and-real-time-interactions)
 12. [CSS and Bootstrap](#css-and-bootstrap)
 13. [Graphics with Highcharts](#graphics-with-highcharts)
 14. [Internationalisation](#internationalisation)
 15. [Tips & Tricks](#tips-tricks)
 16. [Appendix](#appendix)
+:::
+::::
 
 ## Slides
 
