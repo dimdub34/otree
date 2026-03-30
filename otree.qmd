@@ -57,7 +57,7 @@ execute:
 
 [**https://www.duboishome.info/dimitri/cours/otree/**](https://www.duboishome.info/dimitri/cours/otree/)
 
-![](img/otree_cours.png "oTree course"){fig-align="center" height="500px"}
+![](img/otree_cours.png "oTree course"){fig-align="center" height="300px"}
 
 
 
