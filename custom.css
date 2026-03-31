@@ -1,0 +1,429 @@
+/*
+ * A simple theme for reveal.js presentations, similar
+ * to the default theme. The accent color is brown.
+ *
+ * This theme is Copyright (C) 2012-2013 Owen Versteeg, http://owenversteeg.com - it is MIT licensed.
+ */
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+body {
+  background: white;
+  background-color: white;
+}
+
+.reveal {
+  font-family: "Liberation Serif", "Liberation Sans", "Liberation Mono", serif;
+  font-size: 24px;
+  font-weight: normal;
+  color: #000;
+}
+
+::selection {
+  color: #fff;
+  background: #26351C;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  color: #fff;
+  background: #26351C;
+  text-shadow: none;
+}
+
+.reveal .slides>section,
+.reveal .slides>section>section {
+  text-align: left;
+  line-height: 1.25;
+  font-weight: inherit;
+}
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  margin: 0 0 20px 0;
+  color: #0B615E;
+  font-family: "Liberation Serif", serif;
+  font-weight: bold;
+  /* Un peu plus de poids pour le h1 */
+  line-height: 1.2;
+  text-transform: none;
+}
+
+/* Utilisation de % ou rem pour stabiliser la taille */
+.reveal h1 {
+  font-size: 2.5em !important;
+  /* Forcé pour éviter l'écrasement par l'héritage */
+  text-align: center;
+  /* Souvent mieux pour les titres de section # */
+}
+
+.reveal h2 {
+  font-size: 1.8em;
+  /* Clairement plus petit que le h1 */
+  border-bottom: 1px solid #0B615E;
+  /* Optionnel : souligne vos titres de slides ## */
+  padding-bottom: 10px;
+}
+
+.reveal h3 {
+  font-size: 1.3em;
+}
+
+/*********************************************
+ * OTHER
+ *********************************************/
+.reveal p {
+  margin: 20px 0;
+  line-height: 1.25;
+}
+
+/* Ensure certain elements are never larger than the slide itself */
+.reveal img,
+.reveal video,
+.reveal iframe {
+  max-width: 95%;
+  max-height: 95%;
+}
+
+.reveal strong,
+.reveal b {
+  font-weight: bold;
+}
+
+.reveal em {
+  font-style: italic;
+}
+
+.reveal ol,
+.reveal dl,
+.reveal ul {
+  display: inline-block;
+  text-align: left;
+  margin: 0 0 0 1em;
+}
+
+.reveal ol {
+  list-style-type: decimal;
+}
+
+.reveal ul {
+  list-style-type: disc;
+}
+
+.reveal ul ul {
+  list-style-type: square;
+}
+
+.reveal ul ul ul {
+  list-style-type: circle;
+}
+
+.reveal ul ul,
+.reveal ul ol,
+.reveal ol ol,
+.reveal ol ul {
+  display: block;
+  margin-left: 30px;
+}
+
+.reveal dt {
+  font-weight: bold;
+}
+
+.reveal dd {
+  margin-left: 10px;
+}
+
+.reveal blockquote {
+  display: block;
+  position: relative;
+  width: 70%;
+  margin: 10px auto;
+  padding: 5px;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+.reveal blockquote p:first-child,
+.reveal blockquote p:last-child {
+  display: inline-block;
+}
+
+.reveal q {
+  font-style: italic;
+}
+
+.reveal code {
+  font-family: "Liberation Mono", monospace;
+  /* Utilise la même que tes blocs pre */
+  font-size: 0.9em;
+  background-color: #f6f8fa;
+  /* Un léger fond pour le code "inline" (dans le texte) */
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.reveal table {
+  margin: 20px auto;
+  font-size: 0.75em;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.reveal table.plain {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.reveal table th {
+  background-color: #0B615E;
+  /* Rappel de ta couleur d'accentuation */
+  color: white;
+  border-bottom: 2px solid #0B615E;
+  font-weight: bold;
+}
+
+.reveal table th,
+.reveal table td {
+  text-align: left;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  border-bottom: 1px solid;
+}
+
+.reveal table.plain td {
+  text-align: left;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  border: 0px;
+  vertical-align: "middle";
+}
+
+.reveal table th[align="center"],
+.reveal table td[align="center"] {
+  text-align: center;
+}
+
+.reveal table th[align="right"],
+.reveal table td[align="right"] {
+  text-align: right;
+}
+
+.reveal table tbody tr:last-child th,
+.reveal table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reveal sup {
+  vertical-align: super;
+}
+
+.reveal sub {
+  vertical-align: sub;
+}
+
+.reveal small {
+  display: inline-block;
+  font-size: 0.6em;
+  line-height: 1.2em;
+  vertical-align: top;
+}
+
+.reveal small * {
+  vertical-align: top;
+}
+
+/*********************************************
+ * LINKS
+ *********************************************/
+.reveal a {
+  line-height: 1.25em;
+  color: #51483D;
+  text-decoration: none;
+  -webkit-transition: color .15s ease;
+  -moz-transition: color .15s ease;
+  transition: color .15s ease;
+}
+
+.reveal a:hover {
+  color: #8b7c69;
+  text-shadow: none;
+  border: none;
+}
+
+.reveal .roll span:after {
+  color: #fff;
+  background: #25211c;
+}
+
+/*********************************************
+ * IMAGES
+ *********************************************/
+.reveal section img {
+  margin: 15px 0px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 0;
+  box-shadow: none;
+}
+
+.reveal a img {
+  -webkit-transition: all .15s linear;
+  -moz-transition: all .15s linear;
+  transition: all .15s linear;
+}
+
+.reveal a:hover img {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #51483D;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+}
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+.reveal .controls {
+  transform: scale(0.6);
+  /* Réduit la taille de 40% */
+  right: 50px;
+  /* Colle un peu plus au bord droit */
+  bottom: 10px;
+  /* Colle un peu plus au bord bas */
+  color: #0B615E;
+  /* Utilise votre couleur de titre pour la cohérence */
+}
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2);
+  color: #51483D;
+  height: 3px;
+}
+
+.reveal .progress span {
+  -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+}
+
+/***********************************************
+ * CUSTOMIZATION
+ ***********************************************/
+.reveal ul.plain {
+  list-style-type: none;
+}
+
+.reveal div.supplementary {
+  margin-top: 1.5rem;
+  font-size: 0.65em;
+  /* Un peu plus petit pour bien marquer la hiérarchie */
+  line-height: 1.4;
+  /* Plus d'espace entre les lignes pour la lisibilité */
+  color: #4a4a4a;
+  /* Un gris foncé plutôt que noir pur */
+  background-color: #f8f9fa;
+  /* Un blanc cassé plus doux que whitesmoke */
+  padding: 15px 20px;
+  border-left: 4px solid #adb5bd;
+  /* Une barre latérale au lieu d'un cadre complet */
+  border-radius: 4px;
+  /* Arrondi plus discret pour un look pro */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  /* Ombre très légère */
+}
+
+.reveal div.lightbulb {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #fff9db;
+  /* Jaune très pâle */
+  border: 1px solid #ffe066;
+  border-radius: 8px;
+  font-size: 0.8em;
+  position: relative;
+  padding-left: 50px;
+}
+
+/* Le conteneur du bloc */
+.reveal pre {
+  display: block;
+  position: relative;
+  width: 100%;
+  /* Prend toute la largeur disponible pour l'alignement */
+  margin: 20px 0;
+  /* Plus d'espace vertical entre le texte et le code */
+  text-align: left;
+  font-size: 0.65em;
+  /* Un peu plus grand que votre 0.55em précédent */
+  line-height: 1.5em;
+  /* Plus d'espace entre les lignes de code */
+  word-wrap: normal;
+  box-shadow: none;
+  /* On enlève l'ombre lourde */
+  border: 1px solid #e1e4e8;
+  /* Bordure fine et discrète style GitHub */
+  border-radius: 8px;
+  /* Coins plus arrondis pour la modernité */
+  background-color: #f6f8fa;
+  /* Gris très clair, plus doux */
+}
+
+/* Le contenu du code lui-même */
+.reveal pre code {
+  display: block;
+  padding: 15px 20px;
+  /* On respire ! Plus d'espace interne */
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 500px;
+  word-wrap: normal;
+  white-space: pre;
+  /* Garde le formatage du code tel quel */
+  background: transparent;
+  /* Utilise le fond du 'pre' */
+  font-family: "Liberation Mono", monospace;
+  /* Cohérent avec vos polices Ubuntu */
+  color: #24292e;
+  /* Texte gris très foncé (mieux que noir pur) */
+}
+
+/* On réactive l'ascenseur horizontal UNIQUEMENT si le code dépasse vraiment */
+.reveal pre code:hover {
+  overflow-x: auto;
+}
+
+/* Style spécifique pour les sorties (Output) de code */
+.reveal .cell-output-display pre,
+.reveal .cell-output-stdout pre {
+  background-color: #ffffff;
+  /* Fond blanc pour différencier la sortie du code */
+  border-style: dashed;
+  /* Bordure pointillée pour marquer que c'est un résultat */
+  margin-top: -15px;
+  /* Colle un peu plus la sortie au bloc de code précédent */
+}
+
+/* On neutralise l'overflow sur les conteneurs parents */
+.reveal div.sourceCode, 
+.reveal pre.sourceCode {
+  overflow: hidden !important;
+}
+
+/* On gère l'ascenseur uniquement sur la balise code */
+.reveal pre.sourceCode code.sourceCode {
+  overflow-x: hidden !important; /* Cache par défaut */
+  overflow-y: auto;
+  display: block;
+}
+
+/* On l'affiche uniquement au survol du bloc de code */
+.reveal pre.sourceCode code.sourceCode:hover {
+  overflow-x: auto !important;
+}
