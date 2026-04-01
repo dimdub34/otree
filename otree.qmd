@@ -3278,7 +3278,8 @@ div {
 
 --- 
 
-### Block Elements (`<div>`, `<p>`, `<h1>`)
+### Block Elements 
+(`<div>`, `<p>`, `<h1>`)
 
 - Take up the **full width** available. 
 - Start on a new line. 
@@ -3296,7 +3297,8 @@ I am a DIV (Block)
 
 ---
 
-### Inline Elements (`<span>`, `<a>`, `<b>`)
+### Inline Elements 
+(`<span>`, `<a>`, `<b>`)
 
 - Take up **only the necessary width**. 
 - Do not start on a new line (they flow with text). 
